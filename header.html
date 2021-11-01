@@ -2,23 +2,13 @@
 <html>
 
 <head>
-  <meta http-equiv="Pragma" content="no-cache"> <!-- ← HTTP 1.0에서 사용하던 방법 -->
- <meta http-equiv="Cache-Control" content="no-cache">
- <meta http-equiv="Expires" content="0"/>
   <link rel="stylesheet" href="css/header_button.css">
   <link rel="stylesheet" href="css/header_common.css">
   <script>
-    let goStories = function () {
-      $("#contents").load("Posts/postMain.html");
-    }
-    let goApps = function () {
-      $("#contents").load("Apps/appsMain.html");
-    }
-    let goabout = function () {
-      $("#contents").load("about/about.html");
-    }
     $(function () {
-      goStories();
+      $.getScript("changeSection.js", function() {
+        changeSection(about);
+      })
     });
   </script>
 </head>
@@ -27,9 +17,11 @@
   <header>
     <div id="title">개발자 이성열</id>
       <nav>
-        <button onclick='goStories()'>Stories</a>
-          <button onclick='goApps()'>Apps</a>
-            <button onclick='goabout()'>About</a>
+        <div class='sectionButton'>
+          <button onclick='changeSection(stories)'>Stories</a></button>
+          <button onclick='changeSection(apps)'>Apps</a></button>
+          <button onclick='changeSection(about)'>About</a></button>
+        </div>
       </nav>
       <div id="divider"></div>
   </header>
