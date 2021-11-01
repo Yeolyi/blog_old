@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 
-* {
-  font-family: 'Gowun Dodum', sans-serif;
-}
-
 header {
   margin: 0px 20px;
 }
@@ -11,6 +7,7 @@ header {
 #title {
   color:black;
   font-size: 30px;
+  font-family: 'Gowun Dodum', sans-serif;
 }
 
 #divider {
