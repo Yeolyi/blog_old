@@ -6,7 +6,7 @@
   <link rel="stylesheet" href="css/header_common.css">
   <script>
     $(function () {
-      $.getScript("changeSection.js", function() {
+      $.getScript("changeSection.js", function () {
         changeSection(apps);
       })
     });
@@ -14,17 +14,18 @@
 </head>
 
 <body>
-  <header>
-    <div id="title">개발자 이성열</id>
-      <nav>
-        <div class='sectionButton'>
-          <button onclick='changeSection(stories)'>Stories</a></button>
-          <button onclick='changeSection(apps)'>Apps</a></button>
-          <button onclick='changeSection(about)'>About</a></button>
-        </div>
-      </nav>
-      <div id="divider"></div>
-  </header>
+  <nav>
+    <div class="header">
+      <div id="title">YeolYi</div>
+      <div class="sectionButton">
+        <button onclick='changeSection(stories)'>Stories</a></button>
+        <button onclick='changeSection(apps)'>Apps</a></button>
+        <button onclick='changeSection(about)'>About</a></button>
+      </div>
+    </div>
+  </nav>
+  <div id="divider"></div>
+  </div>
 </body>
 
 </html>

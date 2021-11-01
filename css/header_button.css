@@ -1,21 +1,19 @@
-nav {
-  color:darkgrey;
-  margin-top: 10px;
-  display: flex auto;
-}
-
 button:hover {
   color:royalblue
 }
 
 button {
   color: dimgray;
-  margin-right: 25px;
+  margin: 0 12px;
   font-size: 20px;
   font-family: 'Gowun Dodum', sans-serif;
   text-decoration: none;
   background: inherit;
   cursor:pointer;
   padding: 0;
-  border: 0
+  border: 0;
+}
+
+.sectionButton {
+  margin-left: auto;
 }
