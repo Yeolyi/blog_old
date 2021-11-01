@@ -19,7 +19,7 @@ nav {
   display: flex;
 }
 
-nav a {
+nav a, button {
   color: dimgray;
   margin-right: 25px;
   font-size: 20px;
@@ -36,3 +36,9 @@ nav a:hover {
   color:royalblue
 }
 
+button {
+  border:none;
+  background: inherit;
+  cursor:pointer;
+  padding: 0;
+}

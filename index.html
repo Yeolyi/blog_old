@@ -7,18 +7,19 @@
   <title>개발자 이성열</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="resetsheet" href="css/reset.css">
+  <script src="jquery.js"></script>
+  <script>
+    $(function () {
+      $("#header").load("header.html");
+    });
+  </script>
 </head>
 
 <body>
-  <header>
-    <div id="title">개발자 이성열</id>
-      <nav>
-        <a href="">Stories</a>
-        <a href="">Apps</a>
-        <a href="">About</a>
-      </nav>
-    <div id="divider"></div>
-  </header>
+  <div id="header"></div>
+  <section>
+    <div id="section"></div>
+  </section>
 </body>
 
 </html>
