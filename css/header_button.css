@@ -1,10 +1,7 @@
 nav {
   color:darkgrey;
   margin-top: 10px;
-  display: flex;
-  flex-grow: 0;
-  flex-shrink: 0;
-  flex-basis: auto;
+  display: flex 0 0 auto;
 }
 
 button:hover {
