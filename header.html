@@ -1,15 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>개발자 이성열</title>
+  <link rel="stylesheet" href="css/header_button.css">
+  <link rel="stylesheet" href="css/header_common.css">
   <script>
-    let goabout = function () {
-      $("#section").load("about/about.html");
-      console.log('asdasd');
+    let goStories = function () {
+      $("#contents").load("Posts/postMain.html");
     }
+    let goApps = function () {
+      $("#contents").load("Apps/appsMain.html");
+    }
+    let goabout = function () {
+      $("#contents").load("about/about.html");
+    }
+    $(function () {
+      goStories();
+    });
   </script>
 </head>
 
@@ -17,9 +24,9 @@
   <header>
     <div id="title">개발자 이성열</id>
       <nav>
-        <a href="">Stories</a>
-        <a href="">Apps</a>
-        <button onclick='goabout()'>About</a>
+        <button onclick='goStories()'>Stories</a>
+          <button onclick='goApps()'>Apps</a>
+            <button onclick='goabout()'>About</a>
       </nav>
       <div id="divider"></div>
   </header>

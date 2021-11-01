@@ -1,0 +1,20 @@
+nav {
+  color:darkgrey;
+  margin-top: 10px;
+  display: flex;
+}
+
+button:hover {
+  color:royalblue
+}
+
+button {
+  color: dimgray;
+  margin-right: 25px;
+  font-size: 20px;
+  text-decoration: none;
+  background: inherit;
+  cursor:pointer;
+  padding: 0;
+  border: 0
+}
