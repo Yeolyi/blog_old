@@ -11,6 +11,17 @@
   margin: 0;
 }
 
+a {
+  text-decoration: none;
+  color: royalblue;
+}
+
+.grayBackground {
+  background: rgb(240, 240, 240);
+  padding: 15px;
+  border-radius: 10px;
+}
+
 body {
   margin: 0;
 }
@@ -70,7 +81,6 @@ nav>ul>*:not(:last-child) {
 }
 
 nav>ul>li>a {
-  text-decoration: none;
   font-size: 20px;
   color: dimgray;
 }
@@ -78,6 +88,17 @@ nav>ul>li>a {
 nav>ul>li>a:hover,
 nav>ul>li .on {
   color: royalblue;
+}
+
+#frontPageImg {
+  margin: 0 auto;
+  max-width: 70%;
+  display: block;
+  padding: 20px;
+}
+
+#fontPageText {
+  text-align: center;
 }
 
 /* app */
@@ -113,8 +134,6 @@ nav>ul>li .on {
 #appSelector .unit .description a {
   font-size: 15px;
   font-weight: 400;
-  color: royalblue;
-  text-decoration: none;
   cursor: pointer;
 }
 
@@ -150,13 +169,39 @@ nav>ul>li .on {
   height: 40px
 }
 
-#appText p{
+#appText p {
   font-size: 14px;
   white-space: pre-line;
 }
 
-#appText strong{
+#appText strong {
   font-family: 'Noto Sans KR', sans-serif;
   font-size: 14px;
   font-weight: 500;
+}
+
+/* introduction */
+
+#introductionText p {
+  white-space: pre-line;
+}
+
+#introductionText #title {
+  font-size: 20px;
+}
+
+#introductionText .grayBackground {
+  margin: 15px 0;
+}
+
+#snsLinks {
+  display: flex;
+  margin: 5px 0;
+  flex-wrap: wrap;
+}
+
+#snsLinks a {
+  font-size: 20px;
+  color: gray;
+  margin: 0px 15px 5px 0px;
 }
