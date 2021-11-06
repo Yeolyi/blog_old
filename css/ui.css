@@ -205,3 +205,57 @@ nav>ul>li .on {
   color: gray;
   margin: 0px 15px 5px 0px;
 }
+
+/* stories */
+
+#postList li {
+  margin-bottom: 20px;
+  display: none;
+}
+
+#postList li:nth-child(-n+3) {
+  display: block;
+}
+
+#postList li a {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+}
+
+#postList li .postTitle {
+  color: black;
+  font-size: 20px;
+}
+
+#postList li .postSubTitle {
+  color: black;
+  font-size: 15px;
+}
+
+#postList li .date {
+  color: dimgray;
+  font-size: 15px;
+  margin-left: auto;
+}
+
+#postList li .tag {
+  font-size: 0;
+}
+
+#postNav {
+  text-align: center;
+}
+
+#postNav * {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: dimgray;
+  padding: 10px;
+}
+
+#postNav *:hover {
+  color: royalblue;
+  cursor: pointer;
+}
