@@ -3,23 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="Pragma" content="no-cache"> <!-- ← HTTP 1.0에서 사용하던 방법 -->
-  <meta http-equiv="Cache-Control" content="no-cache">
-  <meta http-equiv="Expires" content="0" />
-  <link rel="stylesheet" href="css/common.css">
+  <link rel="stylesheet" href="css/ui.css">
   <title>YeolYi</title>
-  <script src="jquery.js"></script>
-  <script>
-    $(function () {
-      $("#header").load("header.html");
-      $("#section").load("section.html")
-    });
-  </script>
 </head>
 
 <body>
-  <div id="header"></div>
-  <div id="section"></div>
+  <section id="wrap">
+    <h1>이성열 블로그</h1>
+    <header>
+      <a href="/" id="logo">YeolYi</a>
+      <nav>
+        <ul>
+          <li><a href="/stories">Stories</a></li>
+          <li><a href="/dev">Dev</a></li>
+          <li><a href="/about">About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section id="container">
+    </section>
+  </section>
 </body>
 
 </html>

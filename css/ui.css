@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
+
+
+* {
+  font-family: 'Gowun Dodum', sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin: 0;
+}
+
+#container {
+  max-width: 700px;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+#wrap {
+  width: 100%;
+  height: 100%;
+}
+
+#wrap>h1 {
+  font-size: 0;
+}
+
+header {
+  margin: 15px 15px;
+  display: flex;
+  align-items: baseline;
+}
+
+header>#logo {
+  font-size: 30px;
+  font-family: 'Ubuntu', sans-serif;
+  text-decoration: none;
+  color: black;
+}
+
+nav {
+  margin-left: auto;
+}
+
+nav>ul {
+  display: inline-flex;
+}
+
+header::after {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: lightgray;
+}
+
+nav>ul>li {
+  display: inline-block;
+}
+
+nav>ul>*:not(:last-child) {
+  margin-right: 20px;
+}
+
+nav>ul>li>a {
+  text-decoration: none;
+  font-size: 20px;
+  color: dimgray;
+}
+
+nav>ul>li>a:hover,
+nav>ul>li .on {
+  color: royalblue;
+}
+
+/* app */
+
+#appSelector>h2 {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 22px;
+  font-weight: 500;
+}
+
+#appSelector .unit img {
+  width: 80px;
+  padding-right: 20px;
+}
+
+#appSelector .unit {
+  display: inline-flex;
+  align-items: center;
+  padding: 15px 15px 15px 0;
+}
+
+#appSelector .unit .description h2 {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+#appSelector .unit .description p {
+  font-size: 15px;
+  padding-bottom: 3px;
+}
+
+#appSelector .unit .description a {
+  font-size: 15px;
+  font-weight: 400;
+  color: royalblue;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* app detail */
+
+#iconBox {
+  padding-bottom: 20px;
+}
+
+.largeIcon {
+  width: 120px;
+  padding-right: 20px;
+}
+
+#iconBox {
+  display: flex;
+  align-items: center;
+}
+
+#description h2 {
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+#description h3 {
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+#description a {
+  content: url(/Media/AppstoreDownload.svg);
+  height: 50px
+}
+
+#appText p{
+  font-size: 14px;
+  white-space: pre-line;
+}
+
+#appText strong{
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
