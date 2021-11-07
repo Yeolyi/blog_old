@@ -1,21 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
 
 @font-face {
-  font-family: SpoqaMedium;
-  src: url(/font/SpoqaHanSansNeo-Medium.ttf);
+  font-family: SpoqaLight;
+  src: url(/font/SpoqaHanSansNeo-Light.woff2);
 }
 
 @font-face {
-  font-family: SpoqaBold;
-  src: url(/font/SpoqaHanSansNeo-Bold.ttf);
+  font-family: SpoqaRegular;
+  src: url(/font/SpoqaHanSansNeo-Regular.woff2);
 }
 
+@font-face {
+  font-family: SpoqaMedium;
+  src: url(/font/SpoqaHanSansNeo-Medium.woff2);
+}
+
+
 * {
-  font-family: 'SpoqaRegular', sans-serif;
-  font-size: 16px;
+  font-family: 'SpoqaLight', sans-serif;
+  font-size: 16.5px;
   padding: 0;
   margin: 0;
-  line-height: 1.5em;
+  line-height: 1.8em;
+  word-break: keep-all;
+  text-align: justify;
 }
 
 a {
@@ -110,9 +118,13 @@ nav>ul>li .on {
 
 /* app */
 
-#appSelector>h2 {
+#container>h2 {
   font-size: 22px;
-  font-family: 'SpoqaBold', sans-serif;
+  font-family: 'SpoqaRegular', sans-serif;
+}
+
+#container>h2:not(:first-child) {
+  margin-top: 10px;
 }
 
 #appSelector .unit img {
@@ -158,7 +170,7 @@ nav>ul>li .on {
 
 #description h2 {
   font-size: 16px;
-  font-family: 'SpoqaBold', sans-serif;
+  font-family: 'SpoqaRegular', sans-serif;
 }
 
 #description h3 {
@@ -178,7 +190,7 @@ nav>ul>li .on {
 
 #appText strong {
   font-size: 14px;
-  font-family: 'SpoqaBold', sans-serif;
+  font-family: 'SpoqaRegular', sans-serif;
 }
 
 /* introduction */
@@ -220,7 +232,7 @@ nav>ul>li .on {
 
 #postList li .postTitle {
   color: black;
-  font-family: 'SpoqaBold', sans-serif;
+  font-family: 'SpoqaRegular', sans-serif;
   font-size: 16px;
 }
 
@@ -256,7 +268,7 @@ nav>ul>li .on {
 }
 
 #postContent strong {
-  font-family: 'SpoqaBold', sans-serif;
+  font-family: 'SpoqaRegular', sans-serif;
 }
 
 #postContent strong::before,
@@ -272,7 +284,7 @@ nav>ul>li .on {
 }
 
 #postContent #title {
-  font-family: 'SpoqaBold', sans-serif;
+  font-family: 'SpoqaRegular', sans-serif;
   font-size: 18px;
 }
 
