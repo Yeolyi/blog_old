@@ -218,20 +218,10 @@ nav>ul>li .on {
   display: block;
 }
 
-#postList li a {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-}
-
 #postList li .postTitle {
   color: black;
-  font-size: 20px;
-}
-
-#postList li .postSubTitle {
-  color: black;
-  font-size: 15px;
+  font-family: 'SpoqaBold', sans-serif;
+  font-size: 16px;
 }
 
 #postList li .date {
@@ -277,17 +267,17 @@ nav>ul>li .on {
 
 #postContent img {
   display: block;
-  max-width: 400px;
+  max-width: 50%;
   margin: 0 auto;
 }
 
 #postContent #title {
   font-family: 'SpoqaBold', sans-serif;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 #postContent #subtitle {
-  font-size: 18px;
+  font-size: 16px;
 }
 
 #postContent #date {
