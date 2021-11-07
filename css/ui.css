@@ -1,14 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap');
 
+@font-face {
+  font-family: SpoqaMedium;
+  src: url(/font/SpoqaHanSansNeo-Medium.ttf);
+}
+
+@font-face {
+  font-family: SpoqaBold;
+  src: url(/font/SpoqaHanSansNeo-Bold.ttf);
+}
 
 * {
-  font-family: 'Gowun Dodum', sans-serif;
-  font-weight: 300;
+  font-family: 'SpoqaRegular', sans-serif;
   font-size: 16px;
   padding: 0;
   margin: 0;
+  line-height: 1.5em;
 }
 
 a {
@@ -28,7 +35,7 @@ body {
 
 #container {
   max-width: 700px;
-  padding: 20px;
+  padding: 20px 30px;
   margin: 0 auto;
 }
 
@@ -104,9 +111,8 @@ nav>ul>li .on {
 /* app */
 
 #appSelector>h2 {
-  font-family: 'Noto Sans KR', sans-serif;
   font-size: 22px;
-  font-weight: 500;
+  font-family: 'SpoqaBold', sans-serif;
 }
 
 #appSelector .unit img {
@@ -121,8 +127,6 @@ nav>ul>li .on {
 }
 
 #appSelector .unit .description h2 {
-  font-family: 'Noto Sans KR', sans-serif;
-  font-weight: 400;
   font-size: 18px;
 }
 
@@ -133,7 +137,6 @@ nav>ul>li .on {
 
 #appSelector .unit .description a {
   font-size: 15px;
-  font-weight: 400;
   cursor: pointer;
 }
 
@@ -154,9 +157,8 @@ nav>ul>li .on {
 }
 
 #description h2 {
-  font-family: 'Noto Sans KR', sans-serif;
   font-size: 16px;
-  font-weight: 500;
+  font-family: 'SpoqaBold', sans-serif;
 }
 
 #description h3 {
@@ -175,9 +177,8 @@ nav>ul>li .on {
 }
 
 #appText strong {
-  font-family: 'Noto Sans KR', sans-serif;
   font-size: 14px;
-  font-weight: 500;
+  font-family: 'SpoqaBold', sans-serif;
 }
 
 /* introduction */
@@ -213,7 +214,7 @@ nav>ul>li .on {
   display: none;
 }
 
-#postList li:nth-child(-n+3) {
+#postList li:nth-child(-n+10) {
   display: block;
 }
 
@@ -258,4 +259,37 @@ nav>ul>li .on {
 #postNav *:hover {
   color: royalblue;
   cursor: pointer;
+}
+
+#postContent p {
+  white-space: pre-line;
+}
+
+#postContent strong {
+  font-family: 'SpoqaBold', sans-serif;
+}
+
+#postContent strong::before,
+#postContent strong::after {
+  content: "\a";
+  white-space: pre-line;
+}
+
+#postContent img {
+  display: block;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+#postContent #title {
+  font-family: 'SpoqaBold', sans-serif;
+  font-size: 22px;
+}
+
+#postContent #subtitle {
+  font-size: 18px;
+}
+
+#postContent #date {
+  color: gray;
 }
