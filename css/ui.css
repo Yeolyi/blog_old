@@ -1,3 +1,7 @@
+/* .stick-man__head__small 
+  형태의미순서_상태 msgbox-toggle-off
+*/
+
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
 
 @font-face {
@@ -15,71 +19,81 @@
   src: url(/font/SpoqaHanSansNeo-Medium.woff2);
 }
 
+/* ---------- common ---------- */
+
 
 * {
-  font-family: 'SpoqaLight', sans-serif;
-  font-size: 16.5px;
   padding: 0;
   margin: 0;
-  line-height: 1.8em;
-  word-break: keep-all;
-  text-align: justify;
+  font-family: 'SpoqaRegular', sans-serif;
 }
 
 a {
   text-decoration: none;
   color: royalblue;
+  font-family: 'SpoqaRegular', sans-serif;
+  font-size: 15px;
 }
 
-.grayBackground {
+#container {
+  max-width: 700px;
+  padding: 20px 20px;
+  margin: 0 auto;
+}
+
+h2,
+p {
+  word-break: keep-all;
+  text-align: justify;
+  white-space: pre-line;
+}
+
+h2 {
+  font-size: 18px;
+  font-family: 'SpoqaRegular', sans-serif;
+  margin-bottom: 5px;
+}
+
+h2:not(:first-child) {
+  margin-top: 20px;
+}
+
+h3 {
+  font-size: 15px;
+  font-family: 'SpoqaRegular', sans-serif;
+  color: dimgray;
+}
+
+p {
+  font-family: 'SpoqaLight', sans-serif;
+  font-size: 15px;
+  line-height: 1.6em;
+}
+
+.text-bg-gray {
   background: rgb(240, 240, 240);
   padding: 15px;
   border-radius: 10px;
 }
 
-body {
-  margin: 0;
-}
+/* ---------- header ---------- */
 
-#container {
-  max-width: 700px;
-  padding: 20px 30px;
-  margin: 0 auto;
-}
-
-#wrap {
-  width: 100%;
-  height: 100%;
-}
-
-#wrap>h1 {
-  font-size: 0;
-}
-
-header {
-  margin: 15px 15px;
-  display: flex;
-  align-items: baseline;
-}
-
-header>#logo {
+#yeolyi-logo {
   font-size: 30px;
   font-family: 'Ubuntu', sans-serif;
   text-decoration: none;
   color: black;
 }
 
-nav {
-  margin-left: auto;
-}
-
-nav>ul {
-  display: inline-flex;
+header {
+  margin: 8px 15px;
+  display: flex;
+  align-items: baseline;
 }
 
 header::after {
   position: absolute;
-  top: 60px;
+  top: 50px;
   left: 0;
   content: "";
   width: 100%;
@@ -87,170 +101,116 @@ header::after {
   background-color: lightgray;
 }
 
-nav>ul>li {
-  display: inline-block;
+nav {
+  margin-left: auto;
 }
 
-nav>ul>*:not(:last-child) {
+.nav__button:not(:last-child) {
   margin-right: 20px;
 }
 
-nav>ul>li>a {
+.nav__button {
   font-size: 20px;
   color: dimgray;
 }
 
-nav>ul>li>a:hover,
-nav>ul>li .on {
+.nav__button:hover,
+.nav__button--on {
   color: royalblue;
 }
 
-#frontPageImg {
+/* ---------- Front Page ---------- */
+
+#frontpage__image {
   margin: 0 auto;
   max-width: 70%;
   display: block;
-  padding: 20px;
+  padding: 0 20px;
 }
 
-#fontPageText {
+#frontpage__text {
   text-align: center;
 }
 
-/* app */
+/* ---------- Dev ---------- */
 
-#container>h2 {
-  font-size: 22px;
-  font-family: 'SpoqaRegular', sans-serif;
-}
-
-#container>h2:not(:first-child) {
-  margin-top: 10px;
-}
-
-#appSelector .unit img {
+.dev-app-row__img {
   width: 80px;
   padding-right: 20px;
 }
 
-#appSelector .unit {
+.dev-app-row {
   display: inline-flex;
   align-items: center;
   padding: 15px 15px 15px 0;
 }
 
-#appSelector .unit .description h2 {
-  font-size: 18px;
+.dev-app-row__text * {
+  margin-bottom: 0px;
 }
 
-#appSelector .unit .description p {
-  font-size: 15px;
-  padding-bottom: 3px;
-}
+/* ---------- Dev App Detail ---------- */
 
-#appSelector .unit .description a {
-  font-size: 15px;
-  cursor: pointer;
-}
-
-/* app detail */
-
-#iconBox {
+#about-app {
   padding-bottom: 20px;
-}
-
-.largeIcon {
-  width: 120px;
-  padding-right: 20px;
-}
-
-#iconBox {
   display: flex;
   align-items: center;
 }
 
-#description h2 {
-  font-size: 16px;
-  font-family: 'SpoqaRegular', sans-serif;
+#about-app__icon {
+  width: 120px;
+  padding-right: 20px;
 }
 
-#description h3 {
-  font-size: 14px;
-  margin-bottom: 10px;
-}
-
-#description a {
+.download-on-the-appstore {
   content: url(/Media/AppstoreDownload.svg);
-  height: 40px
+  height: 40px;
+  margin-top: 10px;
 }
 
-#appText p {
-  font-size: 14px;
-  white-space: pre-line;
-}
+/* ---------- Introduction ---------- */
 
-#appText strong {
-  font-size: 14px;
-  font-family: 'SpoqaRegular', sans-serif;
-}
-
-/* introduction */
-
-#introductionText p {
-  white-space: pre-line;
-}
-
-#introductionText #title {
-  font-size: 20px;
-}
-
-#introductionText .grayBackground {
-  margin: 15px 0;
-}
-
-#snsLinks {
+#links-about-me {
   display: flex;
-  margin: 5px 0;
   flex-wrap: wrap;
+  margin: 20px 0;
 }
 
-#snsLinks a {
-  font-size: 20px;
-  color: gray;
-  margin: 0px 15px 5px 0px;
+#links-about-me * {
+  margin-right: 10px;
 }
 
-/* stories */
+/* ---------- Stories ---------- */
 
-#postList li {
+.post-row {
   margin-bottom: 20px;
   display: none;
 }
 
-#postList li:nth-child(-n+10) {
+.post-row a {
+  color: black;
+}
+
+.post-row:nth-child(-n+10) {
   display: block;
 }
 
-#postList li .postTitle {
-  color: black;
-  font-family: 'SpoqaRegular', sans-serif;
-  font-size: 16px;
-}
-
-#postList li .date {
+.post-row__date {
   color: dimgray;
   font-size: 15px;
   margin-left: auto;
 }
 
-#postList li .tag {
+.post-row__tag {
   font-size: 0;
 }
 
-#postNav {
+#post-nav {
   text-align: center;
 }
 
-#postNav * {
+#post-nav-next,
+#post-nav-prev {
   background: none;
   border: none;
   font-size: 20px;
@@ -258,40 +218,29 @@ nav>ul>li .on {
   padding: 10px;
 }
 
-#postNav *:hover {
+#post-nav *:hover {
   color: royalblue;
   cursor: pointer;
 }
 
-#postContent p {
-  white-space: pre-line;
+/* ---------- Post ---------- */
+
+#post-header__date {
+  color: gray;
 }
 
-#postContent strong {
+#post-content strong {
   font-family: 'SpoqaRegular', sans-serif;
 }
 
-#postContent strong::before,
-#postContent strong::after {
+#post-content strong::before,
+#post-content strong::after {
   content: "\a";
   white-space: pre-line;
 }
 
-#postContent img {
+.post-content__img {
   display: block;
   max-width: 50%;
   margin: 0 auto;
-}
-
-#postContent #title {
-  font-family: 'SpoqaRegular', sans-serif;
-  font-size: 18px;
-}
-
-#postContent #subtitle {
-  font-size: 16px;
-}
-
-#postContent #date {
-  color: gray;
 }

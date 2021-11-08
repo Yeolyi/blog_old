@@ -10,35 +10,28 @@
 </head>
 
 <body>
-  <section id="wrap">
-    <h1>이성열 블로그</h1>
-    <header>
-      <a href="/" id="logo">YeolYi</a>
-      <nav>
-        <ul>
-          <li><a href="/stories" class="on">Stories</a></li>
-          <li><a href="/dev">Dev</a></li>
-          <li><a href="/about">About</a></li>
-        </ul>
-      </nav>
-    </header>
-    <section id="container">
-      <ul id="postList">
-        <li class="grayBackground">
-          <a href="post/SnuyumReview">
-            <div class="postTitle">
-              나는 '왜' 이 앱을 개발하고 있을까?
-            </div>
-            <div class="date"> 2020-03-15 </div>
-            <div class="tag"> 태그1 태그2 태그3 </div>
-          </a>
-        </li>
-      </ul>
-      <div id="postNav">
-        <button id="postPrevPage">&#xE000 Prev</button>
-        <button id="postNextPage">Next &#xE001</button>
-      </div>
-    </section>
+  <header>
+    <a href="/" id="yeolyi-logo">YeolYi</a>
+    <nav>
+      <a href="/stories" class="nav__button">Stories</a>
+      <a href="/dev" class="nav__button">Dev</a>
+      <a href="/about" class="nav__button">About</a>
+    </nav>
+  </header>
+  <section id="container">
+    <ol id="post-list">
+      <li class="post-row text-bg-gray">
+        <a href="post/SnuyumReview">
+          <h2>나는 '왜' 이 앱을 개발하고 있을까?</h2>
+          <p class="post-row__date"> 2020-03-15 </p>
+          <p class="post-row__tag"> 태그1 태그2 태그3 </p>
+        </a>
+      </li>
+    </ol>
+    <div id="post-nav">
+      <button id="post-nav-prev">&#xE000; Prev</button>
+      <button id="post-nav-next">Next &#xE001;</button>
+    </div>
   </section>
 </body>
 
