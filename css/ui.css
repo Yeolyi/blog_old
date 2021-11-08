@@ -21,7 +21,6 @@
 
 /* ---------- common ---------- */
 
-
 * {
   padding: 0;
   margin: 0;
@@ -37,6 +36,7 @@ a {
 
 #container {
   max-width: 700px;
+  height: max-content;
   padding: 20px 20px;
   margin: 0 auto;
 }
@@ -92,14 +92,21 @@ strong {
 }
 
 header {
-  margin: 8px 15px;
+  position: sticky;
+  top: 0; 
+  max-width: 700px;
+  padding: 15px 10px;
+  margin: 0 auto;
   display: flex;
   align-items: baseline;
+  background-color: rgba(231, 231, 231, 0.007); 
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 header::after {
   position: absolute;
-  top: 50px;
+  top: 65px;
   left: 0;
   content: "";
   width: 100%;
@@ -238,6 +245,10 @@ nav {
 }
 
 /* ---------- Post ---------- */
+
+#post-header {
+  margin-bottom: 20px;
+}
 
 #post-header__date {
   color: gray;
