@@ -26,6 +26,7 @@
   padding: 0;
   margin: 0;
   font-family: 'SpoqaRegular', sans-serif;
+  letter-spacing: -0.0375em; 
 }
 
 a {
@@ -45,7 +46,6 @@ h2,
 p {
   word-break: keep-all;
   text-align: justify;
-  white-space: pre-line;
 }
 
 h2 {
@@ -68,6 +68,11 @@ p {
   font-family: 'SpoqaLight', sans-serif;
   font-size: 15px;
   line-height: 1.6em;
+  margin-bottom: 1em;
+}
+
+strong {
+  font-family: 'SpoqaRegular', sans-serif;
 }
 
 .text-bg-gray {
@@ -198,7 +203,7 @@ nav {
 .post-row__date {
   color: dimgray;
   font-size: 15px;
-  margin-left: auto;
+  margin: 0;
 }
 
 .post-row__tag {
@@ -227,20 +232,20 @@ nav {
 
 #post-header__date {
   color: gray;
-}
-
-#post-content strong {
-  font-family: 'SpoqaRegular', sans-serif;
-}
-
-#post-content strong::before,
-#post-content strong::after {
-  content: "\a";
-  white-space: pre-line;
+  margin-bottom: 0;
 }
 
 .post-content__img {
   display: block;
   max-width: 50%;
   margin: 0 auto;
+}
+
+#post-content {
+  margin: 10px 0;
+}
+
+#post-content strong {
+  display: block;
+  margin-bottom: 1em;
 }
