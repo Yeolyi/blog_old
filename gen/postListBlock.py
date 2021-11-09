@@ -1,4 +1,4 @@
-
+postListSrc = """
 <!DOCTYPE html>
 
 <head>
@@ -21,14 +21,6 @@
   </header>
   <section id="container">
     <ol id="post-list">
-<li class="post-row">
-        <a href="post/SnuYumReview">
-          <h2>서울대 학식앱 개발 후기</h2>
-          <div class="post-row__date">2021-03-15</div>
-          <div class="post-row__tag"> 태그1 태그2 태그3 </div>
-        </a>
-      </li>
-
     </ol>
     <div id="post-nav">
       <button id="post-nav-prev">&#xE000; Prev</button>
@@ -37,4 +29,13 @@
   </section>
 </body>
 
-</html>
+</html>"""
+postRowSrc = """
+<li class="post-row">
+        <a href="">
+          <h2></h2>
+          <div class="post-row__date"></div>
+          <div class="post-row__tag"> 태그1 태그2 태그3 </div>
+        </a>
+      </li>
+"""
