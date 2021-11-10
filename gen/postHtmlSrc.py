@@ -1,4 +1,4 @@
-postListSrc = """
+postHtmlSrc = """
 <!DOCTYPE html>
 
 <head>
@@ -6,8 +6,6 @@ postListSrc = """
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/ui.css">
   <title>YeolYi</title>
-  <script src="/js/jquery.js"></script>
-  <script src="/js/ui.js"></script>
 </head>
 
 <body>
@@ -20,22 +18,13 @@ postListSrc = """
     </nav>
   </header>
   <section id="container">
-    <ol id="post-list">
-    </ol>
-    <div id="post-nav">
-      <button id="post-nav-prev">&#xE000; Prev</button>
-      <button id="post-nav-next">Next &#xE001;</button>
+    <div id="post-header">
+      <h2></h2>
+      <h3></h3>
     </div>
+    <div id="post-content"></div>
   </section>
 </body>
 
-</html>"""
-postRowSrc = """
-<li class="post-row">
-        <a href="">
-          <h2></h2>
-          <div class="post-row__date"></div>
-          <div class="post-row__tag"> 태그1 태그2 태그3 </div>
-        </a>
-      </li>
+</html>
 """

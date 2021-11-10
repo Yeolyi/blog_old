@@ -6,17 +6,17 @@
 
 @font-face {
   font-family: SpoqaLight;
-  src: url(/font/SpoqaHanSansNeo-Light.woff2);
+  src: url(font/SpoqaHanSansNeo-Light.woff2);
 }
 
 @font-face {
   font-family: SpoqaRegular;
-  src: url(/font/SpoqaHanSansNeo-Regular.woff2);
+  src: url(font/SpoqaHanSansNeo-Regular.woff2);
 }
 
 @font-face {
   font-family: SpoqaMedium;
-  src: url(/font/SpoqaHanSansNeo-Medium.woff2);
+  src: url(font/SpoqaHanSansNeo-Medium.woff2);
 }
 
 /* ---------- common ---------- */
