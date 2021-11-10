@@ -20,12 +20,18 @@ postListHtmlSrc = """
     </nav>
   </header>
   <section id="container">
+        <nav>
+            <a href="" class="current-link">#Writing</a>
+            <a href="til">#TIL</a>
+        </nav>
     <ol id="post-list">
     </ol>
+    <!--
     <div id="post-nav">
-      <button id="post-nav-prev">&#xE000; Prev</button>
-      <button id="post-nav-next">Next &#xE001;</button>
+      <button id="post-nav-prev">Prev</button>
+      <button id="post-nav-next">Next</button>
     </div>
+    __>
   </section>
 </body>
 
@@ -34,8 +40,8 @@ postRowHtmlSrc = """
 <li class="post-row">
         <a href="">
           <h2></h2>
-          <div class="post-row__date"></div>
-          <div class="post-row__tag"> 태그1 태그2 태그3 </div>
+          <h3 class="post-row__date"></h3>
+          <h3 class="post-row__tag"> 태그1 태그2 태그3 </h3>
         </a>
       </li>
 """

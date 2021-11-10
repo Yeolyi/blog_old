@@ -1,4 +1,4 @@
-const PostNum = 1;
+const PostNum = 2;
 const PageSize = 10;
 
 $(function () {
