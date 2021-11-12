@@ -8,26 +8,76 @@
     <title>YeolYi</title>
     <script src="js/jquery.js"></script>
     <script>
-        $(function () {
-            $(".big-text:nth-child(1)").css({
-                "display": "flex"
-            })
-        })
-        document.addEventListener('scroll', function () {
-            let currentScrollValue = document.documentElement.scrollTop;
-            console.log(currentScrollValue)
-            $(".big-text").css({
-                "display": "none"
-            })
-            if (currentScrollValue > 400) {
-                $(".big-text:nth-child(2)").css({
-                    "display": "flex"
-                })
-            } else {
-                $(".big-text:nth-child(1)").css({
-                    "display": "flex"
-                })
+        function easeInOutQuart(x) {
+            return x < 0.5 ? 8 * x * x * x * x : 1 - Math.pow(-2 * x + 2, 4) / 2;
+        }
+
+        function easeInOut(src, dst, percentage) {
+            return src + (dst - src) * easeInOutQuart(percentage)
+        }
+
+        function scrollPercentage(src, dst, cur) {
+            return Math.min(1, (cur - src) / (dst - src))
+        }
+        const scrollBlockData = [{
+                startScrollPos: 0,
+                endScrollPos: 600,
+                animation: function (height, target) {
+                    ret = 0
+                    popUpProgress = scrollPercentage(0, 200, height)
+                    ret += easeInOut(0, 2.5, popUpProgress)
+                    scrollProgress = scrollPercentage(0, 600, height)
+                    ret += easeInOut(0, 1, scrollProgress)
+                    if (height < 400) {
+                        newOpacity = easeInOut(0.3, 1, popUpProgress) 
+                    } else {
+                        popOutProgress = scrollPercentage(400, 600, height)
+                        newOpacity = easeInOut(1, 0, popOutProgress)
+                    }
+                    target.css({
+                        "padding-bottom": ret + "em",
+                        "opacity": newOpacity
+                    })
+                }
+            },
+            {
+                startScrollPos: 50,
+                endScrollPos: 600,
+                animation: function (height, target) {
+                    scrollMovePercentage = scrollPercentage(0, 600, height)
+                    move = easeInOut(0, 1, scrollMovePercentage)
+                    opacityPercentage = scrollPercentage(50, 400, height)
+                    newOpacity = easeInOut(0, 1, opacityPercentage)
+                    target.css({
+                        "padding-bottom": move + "em",
+                        "opacity": newOpacity
+                    })
+                }
             }
+        ]
+
+        function update() {
+            let curScrollPos = document.documentElement.scrollTop;
+            console.log(curScrollPos)
+            for (let i = 0; i < scrollBlockData.length; i++) {
+                const element = scrollBlockData[i];
+                if (element.startScrollPos <= curScrollPos && curScrollPos <= element.endScrollPos) {
+                    $(".big-text:nth-child(" + (i + 1) + ")").css({
+                        "display": "inline-block"
+                    })
+                    if (element["animation"]) {
+                        element["animation"](curScrollPos, $(".big-text:nth-child(" + (i + 1) + ")"))
+                    }
+                } else {
+                    $(".big-text:nth-child(" + (i + 1) + ")").css({
+                        "display": "none"
+                    })
+                }
+            }
+        }
+        $(update)
+        document.addEventListener('scroll', function () {
+            update()
         });
     </script>
 </head>
@@ -47,12 +97,12 @@
             개발자가 되고싶었던 중3
         </p>
     -->
-        <div id="front-full-frame">
-            <div id="screen-frame">
-                <div class="big-text">안녕하세요,</div>
-                <div class="big-text">개발자<br>이성열입니다.</div>
-            </div>
+    <div id="front-full-frame">
+        <div id="screen-frame">
+            <div class="big-text">안녕하세요,</div>
+            <div class="big-text">개발자 이성열입니다.</div>
         </div>
+    </div>
 </body>
 
 </html>

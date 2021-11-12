@@ -162,11 +162,12 @@ nav {
 }
 
 .big-text {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     font-family: "bold", sans-serif;
+    font-size: 8vw;
     display: none;
-    font-size: 50px;
-    height: 100%;
-    align-items: center;
 }
 
 /* ---------- Dev ---------- */
