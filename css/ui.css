@@ -103,6 +103,7 @@ header {
     background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
+    z-index: 1;
 }
 
 header::after {
@@ -145,6 +146,27 @@ nav {
 
 #frontpage__text {
     text-align: center;
+}
+
+#front-full-frame {
+    height: 1200px;
+}
+
+#screen-frame {
+    position: sticky;
+    top: 0;
+    width: 90vw;
+    height: 100vh;
+    margin-top: -55px;
+    margin-left: 20px;
+}
+
+.big-text {
+    font-family: "bold", sans-serif;
+    display: none;
+    font-size: 50px;
+    height: 100%;
+    align-items: center;
 }
 
 /* ---------- Dev ---------- */

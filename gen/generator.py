@@ -26,8 +26,12 @@ writingSrcFolderNames.sort(key=dateOfWriting, reverse=True)
 
 
 def replaceFile(path, converter):
+    if os.path.isfile(path):
+        with open(path, "r+") as f:
+            converted = converter(f.read())
+    else:
+        converted = converter("")
     with open(path, "w+") as f:
-        converted = converter(f.read())
         f.seek(0)
         f.write(converted)
         f.truncate()
@@ -42,8 +46,7 @@ def storyCntReplacer(js):
     )
 
 
-jsPath = os.path.join("./js/ui.js")
-replaceFile(jsPath, storyCntReplacer)
+replaceFile("./js/ui.js", storyCntReplacer)
 
 
 def findIdxAfter(src, keyword):
