@@ -8,66 +8,83 @@
     <title>YeolYi</title>
     <script src="js/jquery.js"></script>
     <script>
-        function easeInOutQuart(x) {
-            return x < 0.5 ? 8 * x * x * x * x : 1 - Math.pow(-2 * x + 2, 4) / 2;
-        }
-
-        function easeInOut(src, dst, percentage) {
-            return src + (dst - src) * easeInOutQuart(percentage)
-        }
-
-        function scrollPercentage(src, dst, cur) {
-            return Math.min(1, (cur - src) / (dst - src))
-        }
-        const scrollBlockData = [{
-                startScrollPos: 0,
-                endScrollPos: 600,
-                animation: function (height, target) {
-                    ret = 0
-                    popUpProgress = scrollPercentage(0, 200, height)
-                    ret += easeInOut(0, 2.5, popUpProgress)
-                    scrollProgress = scrollPercentage(0, 600, height)
-                    ret += easeInOut(0, 1, scrollProgress)
-                    if (height < 400) {
-                        newOpacity = easeInOut(0.3, 1, popUpProgress) 
+        class ScrollBlock {
+            constructor(startH, fadingH, endH, appearAnim, disappearAnim) {
+                this.startH = startH;
+                this.fadingH = fadingH;
+                this.endH = endH;
+                this.animation = function (height, target) {
+                    if (height <= fadingH) {
+                        appearAnim(height, target)
                     } else {
-                        popOutProgress = scrollPercentage(400, 600, height)
-                        newOpacity = easeInOut(1, 0, popOutProgress)
+                        disappearAnim(height, target)
                     }
-                    target.css({
-                        "padding-bottom": ret + "em",
-                        "opacity": newOpacity
-                    })
-                }
-            },
-            {
-                startScrollPos: 50,
-                endScrollPos: 600,
-                animation: function (height, target) {
-                    scrollMovePercentage = scrollPercentage(0, 600, height)
-                    move = easeInOut(0, 1, scrollMovePercentage)
-                    opacityPercentage = scrollPercentage(50, 400, height)
-                    newOpacity = easeInOut(0, 1, opacityPercentage)
-                    target.css({
-                        "padding-bottom": move + "em",
-                        "opacity": newOpacity
-                    })
                 }
             }
-        ]
+        }
+
+        function easeInOut(startH, endH, curH, startVal, endVal) {
+            const p = Math.min(1, (curH - startH) / (endH - startH))
+
+            function easeInOutQuart(x) {
+                return x < 0.5 ? 8 * x * x * x * x : 1 - Math.pow(-2 * x + 2, 4) / 2;
+            }
+            return startVal + (endVal - startVal) * easeInOutQuart(p)
+        }
+
+        const scrollBlockOne = new ScrollBlock(0, 700, 1000,
+            function (height, target) {
+                popPadding = easeInOut(0, 400, height, 0, 2.5)
+                scrollPadding = this.easeInOut(0, 1000, height, 0, 1.2)
+                newOpacity = easeInOut(0, 600, height, 0.3, 1)
+                target.css({
+                    "padding-bottom": (popPadding + scrollPadding) + "em",
+                    "opacity": newOpacity
+                })
+            },
+            function (height, target) {
+                popPadding = easeInOut(0, 200, 200, 0, 2.5)
+                scrollPadding = this.easeInOut(0, 1000, height, 0, 1.2)
+                newOpacity = easeInOut(700, 1000, height, 1, 0)
+                target.css({
+                    "padding-bottom": (popPadding + scrollPadding) + "em",
+                    "opacity": newOpacity
+                })
+            }
+        )
+
+        const scrollBlockTwo = new ScrollBlock(200, 700, 1000,
+            function (height, target) {
+                scrollPadding = this.easeInOut(0, 1000, height, 0, 1.2)
+                newOpacity = easeInOut(200, 600, height, 0, 1)
+                target.css({
+                    "padding-bottom": scrollPadding + "em",
+                    "opacity": newOpacity
+                })
+            },
+            function (height, target) {
+                scrollPadding = this.easeInOut(0, 1000, height, 0, 1.2)
+                newOpacity = easeInOut(700, 1000, height, 1, 0)
+                target.css({
+                    "padding-bottom": scrollPadding + "em",
+                    "opacity": newOpacity
+                })
+            }
+        )
+
+        scrollBlocks = [scrollBlockOne, scrollBlockTwo]
 
         function update() {
-            let curScrollPos = document.documentElement.scrollTop;
-            console.log(curScrollPos)
-            for (let i = 0; i < scrollBlockData.length; i++) {
-                const element = scrollBlockData[i];
-                if (element.startScrollPos <= curScrollPos && curScrollPos <= element.endScrollPos) {
-                    $(".big-text:nth-child(" + (i + 1) + ")").css({
+            let height = document.documentElement.scrollTop;
+            console.log(height)
+            for (let i = 0; i < scrollBlocks.length; i++) {
+                const element = scrollBlocks[i];
+                if (element.startH <= height && height <= element.endH) {
+                    target = $(".big-text:nth-child(" + (i + 1) + ")")
+                    target.css({
                         "display": "inline-block"
                     })
-                    if (element["animation"]) {
-                        element["animation"](curScrollPos, $(".big-text:nth-child(" + (i + 1) + ")"))
-                    }
+                    element.animation(height, $(".big-text:nth-child(" + (i + 1) + ")"))
                 } else {
                     $(".big-text:nth-child(" + (i + 1) + ")").css({
                         "display": "none"
@@ -99,7 +116,7 @@
     -->
     <div id="front-full-frame">
         <div id="screen-frame">
-            <div class="big-text">안녕하세요,</div>
+            <div class="big-text">안녕하세요👋</div>
             <div class="big-text">개발자 이성열입니다.</div>
         </div>
     </div>
