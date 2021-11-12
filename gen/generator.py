@@ -115,8 +115,11 @@ for fileName in sourceFolderList:
     with open(os.path.join(sourcePath, fileName), "r") as f:
         # Making post html
         post = frontmatter.load(f)
+        postContent = markdowner.convert(post.content) + markdowner.convert(
+            str(post["list"])
+        )
         converted = insertBtwHTML(
-            tilPostSrc, {"<h2>": post["date"], 'post-content">': str(post["list"])}
+            tilPostSrc, {"<h2>": post["date"], 'post-content">': postContent}
         )
         for key, val in post["list"].items():
             print(key, val)
