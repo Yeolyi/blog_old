@@ -58,6 +58,7 @@ h2 {
     background-color: black;
     font-size: 20px;
     color: white;
+    margin-bottom: 10px;
 }
 
 .section-title:not(:first-child) {
@@ -72,6 +73,7 @@ h3 {
 
 p {
     font-size: 16px;
+    font-family: 'regular', sans-serif;
     color: #141414;
     line-height: 1.5;
 }
@@ -159,7 +161,7 @@ nav {
 }
 
 .dev-app-row h3 {
-    margin-bottom: 10px;
+    margin-bottom: 1em;
 }
 
 /* ---------- Dev App Detail ---------- */
@@ -202,12 +204,12 @@ nav {
 #container nav a {
     font-size: 18px;
     margin-right: 10px;
-    color: royalblue;
+    color: black;
 }
 
 #container nav .current-link {
     color: white;
-    background-color: royalblue;
+    background-color: #141414;
 }
 
 .post-row {
@@ -232,8 +234,7 @@ nav {
     width: 100%;
     height: 0.5px;
     background-color: lightgray;
-    margin-top: 10px;
-    margin-bottom: 15px;
+    margin: 10px 0;
 }
 
 #post-nav {
