@@ -12,7 +12,7 @@ class ScrollBlock {
             }
 
             function defaultMove(height) {
-                return easeInOut(startH, endH, height, 0, 0.5);
+                return easeInOut(startH, Math.min(startH+1000, endH), height, 0, 0.5);
             }
             if (ret.hasOwnProperty("padding-bottom")) {
                 ret["padding-bottom"] += defaultMove(height)
@@ -38,37 +38,36 @@ function easeInOut(startH, endH, curH, startVal, endVal) {
     return startVal + (endVal - startVal) * easeInOutQuart(p)
 }
 
-const scrollBlockOne = new ScrollBlock(0, 700, 1000,
-    function (height, target) {
-        popPadding = easeInOut(0, 400, height, 0, 2.2)
-        newOpacity = easeInOut(0, 600, height, 0.3, 1)
+const scrollBlockOne = new ScrollBlock(0, 600, 1000,
+    function (height) {
+        popPadding = easeInOut(0, 300, height, 0, 2.2)
+        newOpacity = easeInOut(0, 300, height, 0.3, 1)
         return {
             "padding-top": "1.25em",
             "padding-bottom": popPadding,
             "opacity": newOpacity
         }
     },
-    function (height, target) {
-        popPadding = easeInOut(0, 200, 200, 0, 2.2)
-        newOpacity = easeInOut(700, 1000, height, 1, 0)
+    function (height) {
+        newOpacity = easeInOut(600, 1000, height, 1, 0)
         return {
             "padding-top": "1.25em",
-            "padding-bottom": popPadding,
+            "padding-bottom": 2.2,
             "opacity": newOpacity
         }
     }
 )
 
-const scrollBlockTwo = new ScrollBlock(0, 700, 1000,
-    function (height, target) {
-        newOpacity = easeInOut(100, 600, height, 0, 1)
+const scrollBlockTwo = new ScrollBlock(0, 600, 1000,
+    function (height) {
+        newOpacity = easeInOut(0, 600, height, 0, 1)
         return {
             "padding-top": "1.25em",
             "opacity": newOpacity
         }
     },
-    function (height, target) {
-        newOpacity = easeInOut(700, 1000, height, 1, 0)
+    function (height) {
+        newOpacity = easeInOut(600, 1000, height, 1, 0)
         return {
             "padding-top": "1.25em",
             "opacity": newOpacity
@@ -76,21 +75,101 @@ const scrollBlockTwo = new ScrollBlock(0, 700, 1000,
     }
 )
 
-const scrollBlocks = [scrollBlockOne, scrollBlockTwo]
+function frontPageTitleObject(startH, endH) {
+    return new ScrollBlock(startH, endH-400, endH,
+        function (height) {
+            popPadding = easeInOut(startH, startH+300, height, 0, 1.8)
+            newOpacity = easeInOut(startH, startH+300, height, 0, 1)
+            return {
+                "padding-bottom": popPadding+2,
+                "opacity": newOpacity
+            }
+        },
+        function (height) {
+            newOpacity = easeInOut(endH-400, endH, height, 1, 0)
+            return {
+                "padding-bottom": 1.8+2,
+                "opacity": newOpacity
+            }
+        }
+    )
+}
+
+const scrollBlockThree = frontPageTitleObject(900, 3000)
+
+/* 앱 */
+
+function frontPageAppTitleObject(startH, offset) {
+    return new ScrollBlock(startH, startH+600, startH+1000,
+        function (height) {
+            newOpacity = easeInOut(startH, startH+300, height, 0, 1)
+            ret =  {
+                "padding-bottom": 2,
+                "opacity": newOpacity
+            }
+            if (offset) {
+                ret["padding-top"] = offset+"em"
+            }
+            return ret
+        },
+        function (height) {
+            newOpacity = easeInOut(startH+600, startH+1000, height, 1, 0)
+            ret = {
+                "padding-bottom": 2,
+                "opacity": newOpacity
+            }
+            if (offset) {
+                ret["padding-top"] = offset+"em"
+            }
+            return ret
+        }
+    )
+}
+
+function frontPageAppIconObject(startH) {
+    return new ScrollBlock(startH, startH+600, startH+1000,
+        function (height) {
+            newOpacity = easeInOut(startH, startH+600, height, 0, 1)
+            return {
+                "padding-top": "15vw",
+                "opacity": newOpacity
+            }
+        },
+        function (height) {
+            newOpacity = easeInOut(startH+600, startH+1000, height, 1, 0)
+            return {
+                "padding-top": "15vw",
+                "opacity": newOpacity
+            }
+        }
+    )
+}
+
+/* 앱 소개 */
+const scrollBlockFour = frontPageAppTitleObject(1000)
+const scrollBlockFive = frontPageAppIconObject(1000)
+const scrollBlock6 = frontPageAppTitleObject(2000)
+const scrollBlock7 = frontPageAppIconObject(2000)
+/* 프론트엔드 */
+const scrollBlock8 = frontPageTitleObject(2900, 3900)
+const scrollBlock9 = frontPageAppTitleObject(3000, 2)
+/* 마무리 */
+const scrollBlock10 = frontPageAppTitleObject(3900, 2)
+
+const scrollBlocks = [scrollBlockOne, scrollBlockTwo, scrollBlockThree, scrollBlockFour, scrollBlockFive, scrollBlock6, scrollBlock7, scrollBlock8, scrollBlock9, scrollBlock10]
 
 function update() {
     let height = Math.max(0, document.documentElement.scrollTop);
-    console.log(height)
     for (let i = 0; i < scrollBlocks.length; i++) {
         const element = scrollBlocks[i];
         if (element.startH <= height && height <= element.endH) {
-            target = $(".big-text:nth-child(" + (i + 1) + ")")
+            target = $(".front-page__object:nth-child(" + (i + 1) + ")")
             target.css({
                 "display": "inline-block"
             })
-            element.animation(height, $(".big-text:nth-child(" + (i + 1) + ")"))
+            element.animation(height, $(".front-page__object:nth-child(" + (i + 1) + ")"))
         } else {
-            $(".big-text:nth-child(" + (i + 1) + ")").css({
+            $(".front-page__object:nth-child(" + (i + 1) + ")").css({
                 "display": "none"
             })
         }

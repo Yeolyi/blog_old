@@ -148,11 +148,11 @@ nav {
     text-align: center;
 }
 
-#front-full-frame {
-    height: 2000px;
+#front-page__full-frame {
+    height: 5200px;
 }
 
-#screen-frame {
+#front-page__screen-frame {
     position: sticky;
     top: 0;
     width: 90vw;
@@ -161,13 +161,27 @@ nav {
     margin-left: 20px;
 }
 
-.big-text {
+.front-page__object {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
+    display: none;
+}
+
+.big-text {
     font-family: "bold", sans-serif;
     font-size: 8vw;
-    display: none;
+}
+
+.small-text {
+    font-family: "bold", sans-serif;
+    font-size: 6vw;
+    color: dimgray;
+    white-space: nowrap;
+}
+
+.badge {
+    width: 16vw;
 }
 
 /* ---------- Dev ---------- */
