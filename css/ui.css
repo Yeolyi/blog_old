@@ -2,84 +2,76 @@
   형태의미순서_상태 msgbox-toggle-off
 */
 
-@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
-
 @font-face {
-    font-family: bold;
-    src: url(font/NotoSansKR-Bold.otf);
+    font-family: 'bold';
+    src: url(font/SpoqaHanSansNeo-Bold.woff2);
 }
 
 @font-face {
-    font-family: bold;
+    font-family: 'bold';
     src: url(font/OpenSans-Bold.ttf);
-    unicode-range: U+0020-007E;
+    unicode-range: U+0041-005A, U+0061-007A;
 }
 
 @font-face {
-    font-family: regular;
-    src: url(font/NotoSansKR-Regular.otf);
+    font-family: 'regular';
+    src: url(font/SpoqaHanSansNeo-Regular.woff2);
 }
 
 @font-face {
-    font-family: regular;
+    font-family: 'regular';
     src: url(font/OpenSans-Regular.ttf);
-    unicode-range: U+0020-007E;
+    unicode-range: U+0041-005A, U+0061-007A;
 }
 
 /* ---------- common ---------- */
 
 * {
+    font-family: 'regular', sans-serif;
     padding: 0;
     margin: 0;
     -webkit-text-size-adjust: 100%;
 }
 
 a {
-    font-family: 'regular', sans-serif;
-    font-size: 15px;
     text-decoration: none;
     color: royalblue;
 }
 
 #container {
-    max-width: 700px;
-    height: max-content;
-    padding: 20px 20px;
+    max-width: 600px;
+    padding: 20px;
     margin: 0 auto;
 }
 
 h2 {
-    font-size: 20px;
+    font-size: 1.5rem;
     font-family: 'bold', sans-serif;
-    color: #141414;
 }
 
 .section-title {
-    background-color: black;
-    font-size: 20px;
-    color: white;
-    margin-bottom: 10px;
+    font-family: 'regular', sans-serif;
+    font-size: 1.5rem;
 }
 
 .section-title:not(:first-child) {
-    margin-top: 2em;
+    margin-top: 30px;
 }
 
 h3 {
-    font-size: 16px;
+    font-size: 1rem;
     font-family: 'regular', sans-serif;
     color: dimgray;
 }
 
 p {
-    font-size: 16px;
+    font-size: 1rem;
     font-family: 'regular', sans-serif;
-    color: #141414;
-    line-height: 1.5;
+    line-height: 1.8;
 }
 
 strong {
-    font-size: 15px;
+    font-size: 1rem;
     font-family: 'bold', sans-serif;
 }
 
@@ -87,18 +79,19 @@ strong {
 /* ---------- header ---------- */
 
 #yeolyi-logo {
-    font-size: 30px;
-    font-family: 'Ubuntu', sans-serif;
+    font-size: 1.5rem;
+    font-family: 'Bold', sans-serif;
     text-decoration: none;
-    color: #141414;
+    color: black;
 }
 
 header {
     position: sticky;
     top: 0;
-    padding: 10px 10px;
+    height: 50px;
+    padding: 0 10px;
     display: flex;
-    align-items: baseline;
+    align-items: center;
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(20px);
@@ -108,7 +101,7 @@ header {
 
 header::after {
     position: absolute;
-    top: 55px;
+    top: 50px;
     left: 0;
     content: "";
     width: 100%;
@@ -122,17 +115,12 @@ nav {
 }
 
 .nav__button:not(:last-child) {
-    margin-right: 20px;
+    margin-right: 1rem;
 }
 
 .nav__button {
-    font-size: 20px;
+    font-size: 1rem;
     color: dimgray;
-}
-
-.nav__button:hover,
-.nav__button--on {
-    color: royalblue;
 }
 
 /* ---------- Front Page ---------- */
@@ -155,10 +143,9 @@ nav {
 #front-page__screen-frame {
     position: sticky;
     top: 0;
-    width: 90vw;
     height: 100vh;
     margin-top: -55px;
-    margin-left: 20px;
+    margin-left: 2rem;
 }
 
 .front-page__object {
@@ -170,43 +157,42 @@ nav {
 
 .big-text {
     font-family: "bold", sans-serif;
-    font-size: 8vw;
+    font-size: 2rem;
 }
 
 .small-text {
     font-family: "bold", sans-serif;
-    font-size: 6vw;
+    font-size: 1.5rem;
     color: dimgray;
     white-space: nowrap;
 }
 
 .badge {
-    width: 16vw;
+    width: 4rem;
 }
 
 /* ---------- Dev ---------- */
 
 .dev-app-row__img {
-    width: 80px;
-    padding-right: 20px;
+    width: 5rem;
+    padding-right: 1rem;
 }
 
 .dev-app-row {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    padding: 10px;
+    padding: 0.5rem 0;
 }
 
 .dev-app-row h3 {
-    margin-bottom: 1em;
+    margin-bottom: 0.5rem;
 }
 
 /* ---------- Dev App Detail ---------- */
 
 #about-app {
-    padding-bottom: 20px;
+    padding-bottom: 40px;
     display: flex;
-    align-items: center;
 }
 
 #about-app__icon {
@@ -216,7 +202,7 @@ nav {
 
 .download-on-the-appstore {
     content: url(/Media/AppstoreDownload.svg);
-    height: 45px;
+    height: 3rem;
     margin-top: 10px;
 }
 
@@ -235,26 +221,29 @@ nav {
 /* ---------- Stories ---------- */
 
 #container nav {
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
 }
 
 #container nav a {
-    font-size: 18px;
-    margin-right: 10px;
+    margin-right: 1rem;
     color: black;
 }
 
 #container nav .current-link {
     color: white;
-    background-color: #141414;
+    background-color: black;
 }
 
 .post-row {
     display: none;
 }
 
+.post-row:not(:last-child) {
+    margin-bottom: 1rem;
+}
+
 .post-row a {
-    color: #141414;
+    color: black;
 }
 
 .post-row:nth-child(-n+10) {
@@ -263,15 +252,6 @@ nav {
 
 .post-row__tag {
     font-size: 0;
-}
-
-.post-row::after {
-    display: block;
-    content: "";
-    width: 100%;
-    height: 0.5px;
-    background-color: lightgray;
-    margin: 10px 0;
 }
 
 #post-nav {
@@ -297,13 +277,6 @@ nav {
     margin-bottom: 20px;
 }
 
-#post-header h2 {
-    font-size: 25px;
-}
-
-#post-header__date {
-    margin-bottom: 0;
-}
 
 /* ---------- Long Text ---------- */
 
@@ -313,8 +286,13 @@ nav {
     margin: 0 auto;
 }
 
+#post-content h2 {
+    font-family: 'regular';
+    margin-bottom: 0.5rem;
+}
+
 #post-content h2:not(:first-child) {
-    margin-top: 2em;
+    margin-top: 2rem;
 }
 
 #post-content ol {
@@ -326,16 +304,12 @@ nav {
 }
 
 #post-content li {
-    font-size: 16px;
-    font-family: 'regular', sans-serif;
-    line-height: 1.5;
+    line-height: 2;
     margin-left: 20px;
 }
 
-#post-content p+p,
-#post-content :not(p)+p,
-#post-content>:not(p)+:not(p) {
-    margin-top: 1em;
+#post-content p+p {
+    margin-top: 1rem;
 }
 
 /* ---------- TIL ---------- */

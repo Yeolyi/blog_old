@@ -74,6 +74,7 @@ const scrollBlockTwo = new ScrollBlock(0, 600, 1000,
         }
     }
 )
+  
 
 function frontPageTitleObject(startH, endH) {
     return new ScrollBlock(startH, endH-400, endH,
