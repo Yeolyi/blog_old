@@ -135,14 +135,14 @@ const thirdIntro = frontPageNoPopup(1600, 0.15, undefined, 0.3);
 const fourthIntro = frontPageNoPopup(2100, 0.15, undefined, 0.3);
 
 /* 앱 소개 */
-const iOSStudying = frontPageTitleObject(2800, 4400, 8)
-const snuyum = frontPageNoPopup(3000, 0, 3)
-const scrollBlockFive = frontPageNoPopup(3000, 4, 0)
-const scrollBlock6 = frontPageNoPopup(3600, 0, 3)
-const scrollBlock7 = frontPageNoPopup(3600, 4, 0)
+const iOSStudying = frontPageTitleObject(2800, 4400, 5)
+const snuyum = frontPageNoPopup(3000, 0, 2)
+const scrollBlockFive = frontPageNoPopup(3000, 5, 0)
+const scrollBlock6 = frontPageNoPopup(3600, 0, 2)
+const scrollBlock7 = frontPageNoPopup(3600, 5, 0)
 /* 프론트엔드 */
-const scrollBlock8 = frontPageTitleObject(4200, 5000, 8)
-const scrollBlock9 = frontPageNoPopup(4200)
+const scrollBlock8 = frontPageTitleObject(4200, 5000, 4)
+const scrollBlock9 = frontPageNoPopup(4200, 2 , 0)
 /* 마무리 */
 const scrollBlock10 = new ScrollBlock(5000, 100000, 100000,
     function (height) {
