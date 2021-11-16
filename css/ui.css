@@ -134,8 +134,9 @@ nav {
     text-align: center;
 }
 
+/* 화면 높이를 더해야되는듯? 일단 1080*/
 #front-page__full-frame {
-    height: 5200px;
+    height: 6080px;
 }
 
 #front-page__screen-frame {
@@ -251,7 +252,8 @@ nav {
 }
 
 .post-row h2 {
-    font-family: 'regular';
+    font-family: 'bold';
+    font-size: 1.2rem;
 }
 
 .post-row a {
