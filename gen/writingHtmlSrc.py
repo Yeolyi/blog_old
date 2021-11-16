@@ -54,6 +54,7 @@ writingListSrc = """
             <a href="" class="current-link">#Writing</a>
             <a href="til">#TIL</a>
         </nav>
+        <div id="nav-explanation">기록할 가치가 있는 경험들의 모음</div>
     <ol id="post-list">
     </ol>
     <!--

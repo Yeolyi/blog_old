@@ -39,9 +39,8 @@ a {
 }
 
 #container {
-    max-width: 600px;
-    padding: 20px;
-    margin: 0 auto;
+    max-width: 550px;
+    padding: 2vw 4vw;
 }
 
 h2 {
@@ -50,8 +49,8 @@ h2 {
 }
 
 .section-title {
-    font-family: 'regular', sans-serif;
-    font-size: 1.5rem;
+    font-family: 'bold', sans-serif;
+    font-size: 2rem;
 }
 
 .section-title:not(:first-child) {
@@ -67,7 +66,8 @@ h3 {
 p {
     font-size: 1rem;
     font-family: 'regular', sans-serif;
-    line-height: 1.8;
+    line-height: 2;
+    letter-spacing: -0.3px;
 }
 
 strong {
@@ -93,9 +93,7 @@ header {
     display: flex;
     align-items: center;
     margin: 0 auto;
-    background-color: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background-color: rgba(255, 255, 255, 0.95);
     z-index: 1;
 }
 
@@ -174,14 +172,19 @@ nav {
 /* ---------- Dev ---------- */
 
 .dev-app-row__img {
-    width: 5rem;
+    width: 4rem;
     padding-right: 1rem;
 }
 
 .dev-app-row {
     display: flex;
+    color: black;
     align-items: center;
-    padding: 0.5rem 0;
+    padding: 8px 0;
+}
+
+.dev-app-row h2 {
+    font-size: 1rem;
 }
 
 .dev-app-row h3 {
@@ -220,18 +223,23 @@ nav {
 
 /* ---------- Stories ---------- */
 
-#container nav {
-    margin-bottom: 1rem;
-}
-
 #container nav a {
-    margin-right: 1rem;
+    font-family: 'bold', sans-serif;
+    font-size: 1rem;
+    margin-right: 8px;
     color: black;
 }
 
 #container nav .current-link {
-    color: white;
-    background-color: black;
+    font-family: 'bold', sans-serif;
+    font-size: 3rem;
+}
+
+#nav-explanation {
+    font-family: 'bold', sans-serif;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    color: dimgray;
 }
 
 .post-row {
@@ -240,6 +248,10 @@ nav {
 
 .post-row:not(:last-child) {
     margin-bottom: 1rem;
+}
+
+.post-row h2 {
+    font-family: 'regular';
 }
 
 .post-row a {
@@ -274,9 +286,14 @@ nav {
 /* ---------- Post ---------- */
 
 #post-header {
-    margin-bottom: 20px;
+    margin-bottom: 2rem;
 }
 
+#post-header h2 {
+    font-size: 2rem;
+    word-spacing: 100vw;
+    margin-top: 2vw;
+}
 
 /* ---------- Long Text ---------- */
 
@@ -287,8 +304,8 @@ nav {
 }
 
 #post-content h2 {
-    font-family: 'regular';
     margin-bottom: 0.5rem;
+    word-break: keep-all;
 }
 
 #post-content h2:not(:first-child) {
@@ -320,5 +337,6 @@ nav {
 }
 
 .til-row h2 {
+    color: black;
     text-decoration: underline;
 }
