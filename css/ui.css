@@ -238,17 +238,17 @@ nav {
 }
 
 #container nav a {
-    display: block;
     font-family: 'bold', sans-serif;
     font-size: 1rem;
-    line-height: 1.5rem;
+    margin-right: 16px;
     color: black;
 }
 
 #container nav .current-link {
+    display: block;
     font-family: 'bold', sans-serif;
     font-size: 3rem;
-    margin-top: 1rem;
+    margin-top: .8rem;
     line-height: 3rem;
 }
 
@@ -256,7 +256,6 @@ nav {
     font-family: 'bold', sans-serif;
     font-size: 1rem;
     color: dimgray;
-    margin-bottom: 0.5rem;
 }
 
 .post-row {
@@ -367,5 +366,5 @@ nav {
 }
 
 .archieve-row h2 {
-    color: dimgray;
+    color: black;
 }
