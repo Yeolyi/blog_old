@@ -85,7 +85,7 @@ function frontPageNoPopup(startH, topPadding=0, bottomPadding=0, move=true) {
     )
 }
 
-const hello = new ScrollBlock(0, 2700, 3000,
+const hello = new ScrollBlock(0, 2400, 2700,
     function (height) {
         popPadding = easeInOut(0, 300, height, 0, 5)
         newOpacity = easeInOut(0, 300, height, 0.3, 1)
@@ -95,7 +95,7 @@ const hello = new ScrollBlock(0, 2700, 3000,
         }
     },
     function (height) {
-        newOpacity = easeInOut(2700, 3000, height, 1, 0)
+        newOpacity = easeInOut(2400, 2700, height, 1, 0)
         return {
             "padding-bottom": 5,
             "opacity": newOpacity
@@ -103,25 +103,25 @@ const hello = new ScrollBlock(0, 2700, 3000,
     },
     false
 )
-const iamSY = new ScrollBlock(0, 2700, 3000,
+const iamSY = new ScrollBlock(0, 2400, 2700,
     function (height) {
         newOpacity = easeInOut(0, 300, height, 0, 1)
         if (height < 300) {
             return {
                 "opacity": newOpacity
             }
-        } else if (height < 2400) {
+        } else if (height < 2100) {
             return {
                 "padding-top": easeInOut(300, 600, height, 0, 5)
             }
         } else {
             return {
-                "padding-top": 5 - easeInOut(2400, 2700, height, 0, 5)
+                "padding-top": 5 - easeInOut(2100, 2400, height, 0, 5)
             }
         }
     },
     function (height) {
-        newOpacity = easeInOut(2700, 3000, height, 1, 0)
+        newOpacity = easeInOut(2400, 2700, height, 1, 0)
         return {
             "opacity": newOpacity
         }
@@ -132,21 +132,20 @@ const iamSY = new ScrollBlock(0, 2700, 3000,
 const firstIntro = frontPageNoPopup(600, 0.15, undefined, 0.3);
 const secondIntro = frontPageNoPopup(1100, 0.15, undefined, 0.3);
 const thirdIntro = frontPageNoPopup(1600, 0.15, undefined, 0.3);
-const fourthIntro = frontPageNoPopup(2100, 0.15, undefined, 0.3);
 
 /* 앱 소개 */
-const iOSStudying = frontPageTitleObject(2800, 4400, 5)
-const snuyum = frontPageNoPopup(3000, 0, 2)
-const scrollBlockFive = frontPageNoPopup(3000, 5, 0)
-const scrollBlock6 = frontPageNoPopup(3600, 0, 2)
-const scrollBlock7 = frontPageNoPopup(3600, 5, 0)
+const iOSStudying = frontPageTitleObject(2500, 4100, 5)
+const snuyum = frontPageNoPopup(2700, 0, 2)
+const scrollBlockFive = frontPageNoPopup(2700, 5, 0)
+const scrollBlock6 = frontPageNoPopup(3300, 0, 2)
+const scrollBlock7 = frontPageNoPopup(3300, 5, 0)
 /* 프론트엔드 */
-const scrollBlock8 = frontPageTitleObject(4200, 5000, 4)
-const scrollBlock9 = frontPageNoPopup(4200, 2 , 0)
+const scrollBlock8 = frontPageTitleObject(3900, 4700, 4)
+const scrollBlock9 = frontPageNoPopup(3900, 2 , 0)
 /* 마무리 */
-const scrollBlock10 = new ScrollBlock(5000, 100000, 100000,
+const scrollBlock10 = new ScrollBlock(4700, 100000, 100000,
     function (height) {
-        newOpacity = easeInOut(5000, 5300, height, 0.3, 1)
+        newOpacity = easeInOut(4700, 5000, height, 0.3, 1)
         return {
             "opacity": newOpacity
         }
@@ -155,7 +154,7 @@ const scrollBlock10 = new ScrollBlock(5000, 100000, 100000,
     false
 )
 
-const scrollBlocks = [hello, iamSY, firstIntro, secondIntro, thirdIntro, fourthIntro, iOSStudying, snuyum, scrollBlockFive, scrollBlock6, scrollBlock7, scrollBlock8, scrollBlock9, scrollBlock10]
+const scrollBlocks = [hello, iamSY, firstIntro, secondIntro, thirdIntro, iOSStudying, snuyum, scrollBlockFive, scrollBlock6, scrollBlock7, scrollBlock8, scrollBlock9, scrollBlock10]
 
 function update() {
     let height = Math.max(0, document.documentElement.scrollTop);

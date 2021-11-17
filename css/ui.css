@@ -136,7 +136,7 @@ nav {
 
 /* 화면 높이를 더해야되는듯? 일단 1080*/
 #front-page__full-frame {
-    height: 6080px;
+    height: 7000px;
 }
 
 #front-page__screen-frame {
@@ -231,6 +231,10 @@ nav {
     margin: 20px 0;
 }
 
+#about-me__links a {
+    margin-right: 16px;
+}
+
 /* ---------- Stories ---------- */
 
 #container nav {
@@ -248,7 +252,7 @@ nav {
     display: block;
     font-family: 'bold', sans-serif;
     font-size: 3rem;
-    margin-top: .8rem;
+    margin-top: .5rem;
     line-height: 3rem;
 }
 
@@ -365,6 +369,16 @@ nav {
     list-style: none;
 }
 
+.archieve-row {
+    margin-bottom: .5rem;
+}
+
+.archieve-row::before {
+    content: "---"
+
+}
+
 .archieve-row h2 {
+    font-size: 1.2rem;
     color: black;
 }
