@@ -23,9 +23,9 @@ tilListSrc = """
         <nav>
             <a href="../">#Writing</a>
             <a href="" class="current-link">#TIL</a>
+            <div id="nav-explanation">Today I Learned; 매일 꾸준히 천천히</div>
             <a href="../archieve">#Archieve</a>
         </nav>
-        <div id="nav-explanation">Today I Learned; 매일 꾸준히 천천히</div>
         <ol id="til-list">
         </ol>
     </section>

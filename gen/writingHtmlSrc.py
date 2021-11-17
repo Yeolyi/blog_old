@@ -52,10 +52,10 @@ writingListSrc = """
   <section id="container">
         <nav>
             <a href="" class="current-link">#Writing</a>
+            <div id="nav-explanation">기록할만한 지난 경험들</div>
             <a href="til">#TIL</a>
             <a href="archieve">#Archieve</a>
         </nav>
-        <div id="nav-explanation">기록할만한 지난 경험들</div>
     <ol id="post-list">
     </ol>
     <!--

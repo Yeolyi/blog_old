@@ -233,7 +233,12 @@ nav {
 
 /* ---------- Stories ---------- */
 
+#container nav {
+    margin-bottom: 2rem;
+}
+
 #container nav a {
+    display: block;
     font-family: 'bold', sans-serif;
     font-size: 1rem;
     margin-right: 8px;
@@ -247,9 +252,9 @@ nav {
 
 #nav-explanation {
     font-family: 'bold', sans-serif;
-    margin-bottom: 2rem;
     font-size: 1rem;
     color: dimgray;
+    margin-bottom: 0.5rem;
 }
 
 .post-row {
