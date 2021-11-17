@@ -195,13 +195,22 @@ nav {
 /* ---------- Dev App Detail ---------- */
 
 #about-app {
+    padding-top: 10px;
     padding-bottom: 40px;
+}
+
+#about-app__title {
     display: flex;
+    align-items: center;
+}
+
+#about-app h2 {
+    font-size: 3rem;
 }
 
 #about-app__icon {
-    width: 120px;
-    padding-right: 20px;
+    width: 3rem;
+    height: 3rem;
 }
 
 .download-on-the-appstore {
@@ -212,14 +221,14 @@ nav {
 
 /* ---------- Introduction ---------- */
 
-#links-about-me {
+#about-me {
+    padding-top: 10px;
+}
+
+#about-me__links {
     display: flex;
     flex-wrap: wrap;
     margin: 20px 0;
-}
-
-#links-about-me * {
-    margin-right: 15px;
 }
 
 /* ---------- Stories ---------- */
