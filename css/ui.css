@@ -147,6 +147,28 @@ nav {
     margin-left: 2rem;
 }
 
+#scroll-helper {
+    position: absolute;
+    font-family: 'bold', sans-serif;
+    color: lightgray;
+    margin: 20px auto auto 20px;
+    animation-name: pop;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes pop {
+    from {
+        top: 50px;
+    }
+
+    to {
+        top: 60px;
+    }
+}
+
 .front-page__object {
     position: absolute;
     top: 50%;
