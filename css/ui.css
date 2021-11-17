@@ -349,5 +349,16 @@ nav {
 
 .til-row h2 {
     color: black;
+    font-size: 1rem;
     text-decoration: underline;
+}
+
+/* Archieve */
+
+#archieve-list {
+    list-style: none;
+}
+
+.archieve-row h2 {
+    color: dimgray;
 }

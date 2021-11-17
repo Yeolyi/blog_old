@@ -22,9 +22,10 @@ tilListSrc = """
     <section id="container">
         <nav>
             <a href="../">#Writing</a>
-            <a href="/til" class="current-link">#TIL</a>
+            <a href="" class="current-link">#TIL</a>
+            <a href="../archieve">#Archieve</a>
         </nav>
-        <div id="nav-explanation">Today I Learned; 매일의 꾸준한 기록</div>
+        <div id="nav-explanation">Today I Learned; 매일 꾸준히 천천히</div>
         <ol id="til-list">
         </ol>
     </section>

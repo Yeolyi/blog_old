@@ -8,7 +8,8 @@ from shutil import copy2
 writingSrcPath = "./src/writing/"
 writingDstPath = "./stories/writing/"
 
-shutil.rmtree("./stories", ignore_errors=True)
+shutil.rmtree("./stories/writing", ignore_errors=True)
+shutil.rmtree("./stories/til", ignore_errors=True)
 
 Path("./stories/writing").mkdir(parents=True, exist_ok=True)
 Path("./stories/til").mkdir(parents=True, exist_ok=True)
