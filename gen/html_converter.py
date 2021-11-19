@@ -110,8 +110,9 @@ def til_transform(markdown_with_yaml_divided, writing_src_file_name):
             title=time_table_title, time=list[time_table_title]
         )
     markdown_converted = markdowner.convert(markdown_with_yaml_divided.content)
+    inner_title = "\n".join(date.split("-"))
     writing_post = til_post_template.format(
-        date=date, time_table=time_table, content=markdown_converted
+        date=inner_title, time_table=time_table, content=markdown_converted
     )
     global til_rows
     til_rows += til_row_template.format(link=f"{writing_src_file_name}", date=str(date))
