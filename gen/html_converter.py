@@ -1,6 +1,7 @@
 import os
 import shutil
 import frontmatter
+import json
 from pathlib import Path
 from shutil import copy2
 from markdown2 import Markdown
@@ -29,6 +30,9 @@ til_post_template = f.read()
 f.close()
 f = open(os.path.join(root_path, "gen/template/til/row.html"), "r")
 til_row_template = f.read()
+f.close()
+f = open(os.path.join(root_path, "gen/template/til/time_table.html"), "r")
+til_time_table_template = f.read()
 f.close()
 
 
@@ -100,9 +104,14 @@ til_rows = ""
 def til_transform(markdown_with_yaml_divided, writing_src_file_name):
     date = markdown_with_yaml_divided["date"]
     list = markdown_with_yaml_divided["list"]
+    time_table = ""
+    for time_table_title in list:
+        time_table += til_time_table_template.format(
+            title=time_table_title, time=list[time_table_title]
+        )
     markdown_converted = markdowner.convert(markdown_with_yaml_divided.content)
     writing_post = til_post_template.format(
-        date=date, list=list, content=markdown_converted
+        date=date, time_table=time_table, content=markdown_converted
     )
     global til_rows
     til_rows += til_row_template.format(link=f"{writing_src_file_name}", date=str(date))
