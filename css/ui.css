@@ -270,11 +270,18 @@ nav {
     color: black;
 }
 
+#container nav p {
+    font-family: 'bold', sans-serif;
+    font-size: 1rem;
+    color: dimgray;
+    line-height: 1.5rem;
+}
+
 #container nav .current-link {
     display: block;
     font-family: 'bold', sans-serif;
     font-size: 3rem;
-    margin-top: .5rem;
+    margin-top: 24px;
     line-height: 3rem;
 }
 
@@ -282,6 +289,7 @@ nav {
     font-family: 'bold', sans-serif;
     font-size: 1rem;
     color: dimgray;
+    margin-bottom: 24px;
 }
 
 .post-row {
