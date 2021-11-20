@@ -9,6 +9,7 @@ from markdown2 import Markdown
 # 기존 파일 삭제
 shutil.rmtree("./stories/writing", ignore_errors=True)
 shutil.rmtree("./stories/til", ignore_errors=True)
+shutil.rmtree("./stories/archieve", ignore_errors=True)
 
 markdowner = Markdown()
 root_path = Path(__file__).parent.parent
@@ -33,6 +34,15 @@ til_row_template = f.read()
 f.close()
 f = open(os.path.join(root_path, "gen/template/til/time_table.html"), "r")
 til_time_table_template = f.read()
+f.close()
+f = open(os.path.join(root_path, "gen/template/archieve/post.html"), "r")
+archieve_post_template = f.read()
+f.close()
+f = open(os.path.join(root_path, "gen/template/archieve/row.html"), "r")
+archieve_row_template = f.read()
+f.close()
+f = open(os.path.join(root_path, "gen/template/archieve/list.html"), "r")
+archieve_list_template = f.read()
 f.close()
 
 
@@ -98,6 +108,8 @@ generate_post("src/writing", "stories/writing", writing_transform, date_of_story
 with open(os.path.join("./stories/index.html"), "w") as f:
     f.write(writing_list_template.format(rows=writing_rows))
 
+# ---------- TIL ----------
+
 til_rows = ""
 
 
@@ -123,3 +135,26 @@ generate_post("src/til", "stories/til", til_transform)
 
 with open(os.path.join("./stories/til/index.html"), "w") as f:
     f.write(til_list_template.format(rows=til_rows))
+
+
+# ---------- Archieve ----------
+
+archieve_rows = ""
+
+
+def archieve_transform(markdown_with_yaml_divided, src_file_name):
+    title = markdown_with_yaml_divided["title"]
+    markdown_converted = markdowner.convert(markdown_with_yaml_divided.content)
+
+    writing_post = archieve_post_template.format(
+        title=title, content=markdown_converted
+    )
+    global archieve_rows
+    archieve_rows += archieve_row_template.format(link=src_file_name, title=title)
+    return writing_post
+
+
+generate_post("src/archieve", "stories/archieve", archieve_transform)
+
+with open(os.path.join("./stories/archieve/index.html"), "w") as f:
+    f.write(archieve_list_template.format(rows=archieve_rows))

@@ -376,8 +376,15 @@ nav {
     margin-left: 20px;
 }
 
-#post-content p+p {
+#post-content p+p,
+#post-content ul+p,
+#post-content ol+p {
     margin-top: 1rem;
+}
+
+hr {
+    margin: 24px 0;
+    color: dimgray;
 }
 
 /* ---------- TIL ---------- */
@@ -421,12 +428,7 @@ nav {
 }
 
 .archieve-row {
-    margin-bottom: .5rem;
-}
-
-.archieve-row::before {
-    content: "---"
-
+    margin-bottom: 16px;
 }
 
 .archieve-row h2 {
