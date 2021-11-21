@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'code';
+    src: url(font/FiraCode-VF.woff2)
+}
+
+/* 이게 최선이니,,,? */
+#post-content pre code {
+    font-family: 'code', monospace;
+}
+
+#post-content pre code * {
+    font-family: 'code', monospace;
+}
+
 pre code.hljs {
     display: block;
     overflow-x: auto;
