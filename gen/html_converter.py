@@ -4,14 +4,14 @@ import frontmatter
 import json
 from pathlib import Path
 from shutil import copy2
-from markdown2 import Markdown
+import markdown
 
 # 기존 파일 삭제
 shutil.rmtree("./stories/writing", ignore_errors=True)
 shutil.rmtree("./stories/til", ignore_errors=True)
 shutil.rmtree("./stories/archieve", ignore_errors=True)
 
-markdowner = Markdown()
+markdowner = markdown.markdown
 root_path = Path(__file__).parent.parent
 
 f = open(os.path.join(root_path, "gen/template/writing/post.html"), "r")
@@ -82,7 +82,10 @@ writing_rows = ""
 def writing_transform(markdown_with_yaml_divided, writing_src_file_name):
     title = markdown_with_yaml_divided["title"]
     date = markdown_with_yaml_divided["date"]
-    markdown_converted = markdowner.convert(markdown_with_yaml_divided.content)
+    markdown_converted = markdowner(
+        markdown_with_yaml_divided.content,
+        extensions=["markdown.extensions.fenced_code", "markdown.extensions.attr_list"],
+    )
     writing_post = writing_post_template.format(
         title=title, date=date, content=markdown_converted
     )
@@ -121,7 +124,10 @@ def til_transform(markdown_with_yaml_divided, writing_src_file_name):
         time_table += til_time_table_template.format(
             title=time_table_title, time=list[time_table_title]
         )
-    markdown_converted = markdowner.convert(markdown_with_yaml_divided.content)
+    markdown_converted = markdowner(
+        markdown_with_yaml_divided.content,
+        extensions=["markdown.extensions.fenced_code", "markdown.extensions.attr_list"],
+    )
     inner_title = "\n".join(date.split("-"))
     writing_post = til_post_template.format(
         date=inner_title, time_table=time_table, content=markdown_converted
@@ -144,7 +150,10 @@ archieve_rows = ""
 
 def archieve_transform(markdown_with_yaml_divided, src_file_name):
     title = markdown_with_yaml_divided["title"]
-    markdown_converted = markdowner.convert(markdown_with_yaml_divided.content)
+    markdown_converted = markdowner(
+        markdown_with_yaml_divided.content,
+        extensions=["markdown.extensions.fenced_code", "markdown.extensions.attr_list"],
+    )
 
     writing_post = archieve_post_template.format(
         title=title, content=markdown_converted
@@ -166,7 +175,13 @@ for path in glob.iglob(str(root_path) + "/src/dict/**/*.md", recursive=True):
     with open(path, "r") as f:
         htmlSrc = frontmatter.load(f)
         title = htmlSrc["title"]
-        markdown_converted = markdowner.convert(htmlSrc.content)
+        markdown_converted = markdowner(
+            htmlSrc.content,
+            extensions=[
+                "markdown.extensions.fenced_code",
+                "markdown.extensions.attr_list",
+            ],
+        )
         converted = archieve_post_template.format(
             title=title, content=markdown_converted
         )
