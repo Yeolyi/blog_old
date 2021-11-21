@@ -435,3 +435,9 @@ hr {
     font-size: 1.2rem;
     color: black;
 }
+
+/* Dict ------------------ */
+
+#dict-header {
+    margin-bottom: 24px;
+}

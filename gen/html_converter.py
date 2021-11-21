@@ -158,3 +158,20 @@ generate_post("src/archieve", "stories/archieve", archieve_transform)
 
 with open(os.path.join("./stories/archieve/index.html"), "w") as f:
     f.write(archieve_list_template.format(rows=archieve_rows))
+
+
+import glob
+
+for path in glob.iglob(str(root_path) + "/src/dict/**/*.md", recursive=True):
+    with open(path, "r") as f:
+        htmlSrc = frontmatter.load(f)
+        title = htmlSrc["title"]
+        markdown_converted = markdowner.convert(htmlSrc.content)
+        converted = archieve_post_template.format(
+            title=title, content=markdown_converted
+        )
+        new_path = str(Path(path).parent).replace("/src", "")
+        Path(new_path).mkdir(parents=True, exist_ok=True)
+        new_path += "/" + os.path.basename(path)[:-2] + "html"
+        with open(new_path, "w") as f2:
+            f2.write(converted)

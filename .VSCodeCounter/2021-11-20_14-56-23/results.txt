@@ -1,0 +1,101 @@
+Date : 2021-11-20 14:56:23
+Directory : /Users/seongyeolyi/Desktop/yeolyi.github.io
+Total : 40 files,  9352 codes, 1950 comments, 2917 blanks, all 14219 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |          4 |      7,089 |      1,918 |      2,093 |     11,100 |
+| HTML       |         26 |      1,339 |         12 |        374 |      1,725 |
+| Markdown   |          7 |        430 |          0 |        330 |        760 |
+| CSS        |          1 |        335 |         15 |         87 |        437 |
+| Python     |          1 |        124 |          5 |         32 |        161 |
+| XML        |          1 |         35 |          0 |          1 |         36 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                    | files      | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                       |         40 |      9,352 |      1,950 |      2,917 |     14,219 |
+| Media                                                                                   |          1 |         35 |          0 |          1 |         36 |
+| about                                                                                   |          1 |         41 |          0 |          3 |         44 |
+| css                                                                                     |          1 |        335 |         15 |         87 |        437 |
+| dev                                                                                     |          4 |        259 |          0 |         12 |        271 |
+| gen                                                                                     |         11 |        325 |         11 |         48 |        384 |
+| gen/template                                                                            |         10 |        201 |          6 |         16 |        223 |
+| gen/template/archieve                                                                   |          3 |         65 |          0 |          6 |         71 |
+| gen/template/til                                                                        |          4 |         71 |          0 |          5 |         76 |
+| gen/template/writing                                                                    |          3 |         65 |          6 |          5 |         76 |
+| js                                                                                      |          3 |      7,089 |      1,918 |      2,092 |     11,099 |
+| src                                                                                     |          7 |        430 |          0 |        330 |        760 |
+| src/archieve                                                                            |          4 |        383 |          0 |        289 |        672 |
+| src/archieve/GoodDesign10                                                               |          1 |         24 |          0 |         21 |         45 |
+| src/archieve/HowBaeminWork                                                              |          1 |         72 |          0 |         69 |        141 |
+| src/archieve/ThisIsMarketing                                                            |          1 |        275 |          0 |        190 |        465 |
+| src/archieve/WhyZero                                                                    |          1 |         12 |          0 |          9 |         21 |
+| src/til                                                                                 |          1 |          8 |          0 |          1 |          9 |
+| src/til/2021-11-10                                                                      |          1 |          8 |          0 |          1 |          9 |
+| src/writing                                                                             |          2 |         39 |          0 |         40 |         79 |
+| src/writing/SnuYumReview                                                                |          1 |         22 |          0 |         33 |         55 |
+| src/writing/WhyIWrite                                                                   |          1 |         17 |          0 |          7 |         24 |
+| stories                                                                                 |         10 |        795 |          6 |        339 |      1,140 |
+| stories/archieve                                                                        |          5 |        588 |          0 |        304 |        892 |
+| stories/archieve/GoodDesign10                                                           |          1 |         47 |          0 |         24 |         71 |
+| stories/archieve/HowBaeminWork                                                          |          1 |         95 |          0 |         72 |        167 |
+| stories/archieve/ThisIsMarketing                                                        |          1 |        362 |          0 |        193 |        555 |
+| stories/archieve/WhyZero                                                                |          1 |         35 |          0 |         12 |         47 |
+| stories/til                                                                             |          2 |         76 |          0 |          6 |         82 |
+| stories/til/2021-11-10                                                                  |          1 |         39 |          0 |          4 |         43 |
+| stories/writing                                                                         |          2 |         87 |          0 |         26 |        113 |
+| stories/writing/SnuYumReview                                                            |          1 |         44 |          0 |         17 |         61 |
+| stories/writing/WhyIWrite                                                               |          1 |         43 |          0 |          9 |         52 |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                | language   | code       | comment    | blank      | total      |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/Media/appstoreDownload.svg                  | XML        |         35 |          0 |          1 |         36 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/about/index.html                            | HTML       |         41 |          0 |          3 |         44 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/css/ui.css                                  | CSS        |        335 |         15 |         87 |        437 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dev/daystack.html                           | HTML       |         71 |          0 |          3 |         74 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dev/filin.html                              | HTML       |         75 |          0 |          3 |         78 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dev/index.html                              | HTML       |         50 |          0 |          3 |         53 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dev/snuyum.html                             | HTML       |         63 |          0 |          3 |         66 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/html_converter.py                       | Python     |        124 |          5 |         32 |        161 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/archieve/list.html             | HTML       |         33 |          0 |          3 |         36 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/archieve/post.html             | HTML       |         27 |          0 |          3 |         30 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/archieve/row.html              | HTML       |          5 |          0 |          0 |          5 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/til/list.html                  | HTML       |         33 |          0 |          2 |         35 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/til/post.html                  | HTML       |         29 |          0 |          3 |         32 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/til/row.html                   | HTML       |          5 |          0 |          0 |          5 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/til/time_table.html            | HTML       |          4 |          0 |          0 |          4 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/writing/list.html              | HTML       |         32 |          6 |          3 |         41 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/writing/post.html              | HTML       |         26 |          0 |          2 |         28 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/writing/row.html               | HTML       |          7 |          0 |          0 |          7 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/index.html                                  | HTML       |         43 |          0 |          4 |         47 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/jquery.js                                   | JavaScript |          0 |          0 |          1 |          1 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/js/frontScroll.js                           | JavaScript |        162 |          5 |         13 |        180 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/js/jquery.js                                | JavaScript |      6,895 |      1,911 |      2,076 |     10,882 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/js/ui.js                                    | JavaScript |         32 |          2 |          3 |         37 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/archieve/GoodDesign10/content.md        | Markdown   |         24 |          0 |         21 |         45 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/archieve/HowBaeminWork/content.md       | Markdown   |         72 |          0 |         69 |        141 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/archieve/ThisIsMarketing/content.md     | Markdown   |        275 |          0 |        190 |        465 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/archieve/WhyZero/content.md             | Markdown   |         12 |          0 |          9 |         21 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/til/2021-11-10/content.md               | Markdown   |          8 |          0 |          1 |          9 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/writing/SnuYumReview/content.md         | Markdown   |         22 |          0 |         33 |         55 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/writing/WhyIWrite/content.md            | Markdown   |         17 |          0 |          7 |         24 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/archieve/GoodDesign10/index.html    | HTML       |         47 |          0 |         24 |         71 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/archieve/HowBaeminWork/index.html   | HTML       |         95 |          0 |         72 |        167 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/archieve/ThisIsMarketing/index.html | HTML       |        362 |          0 |        193 |        555 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/archieve/WhyZero/index.html         | HTML       |         35 |          0 |         12 |         47 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/archieve/index.html                 | HTML       |         49 |          0 |          3 |         52 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/index.html                          | HTML       |         44 |          6 |          3 |         53 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/til/2021-11-10/index.html           | HTML       |         39 |          0 |          4 |         43 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/til/index.html                      | HTML       |         37 |          0 |          2 |         39 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/writing/SnuYumReview/index.html     | HTML       |         44 |          0 |         17 |         61 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/writing/WhyIWrite/index.html        | HTML       |         43 |          0 |          9 |         52 |
+| Total                                                                                   |            |      9,352 |      1,950 |      2,917 |     14,219 |
++-----------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
