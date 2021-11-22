@@ -40,7 +40,7 @@ a {
 }
 
 #container {
-    max-width: 550px;
+    max-width: 600px;
     padding: 2vw 4vw;
 }
 
@@ -69,6 +69,7 @@ p {
     font-family: 'regular', sans-serif;
     line-height: 2;
     letter-spacing: -0.3px;
+    white-space: pre-wrap;
 }
 
 strong {
@@ -124,6 +125,28 @@ nav {
 
 /* ---------- Front Page ---------- */
 
+#front-page__nav {
+    margin-top: 32px;
+    margin-left: 16px;
+    height: 40vh;
+}
+
+#front-page__nav a h2 {
+    color: royalblue;
+    font-size: 3rem;
+}
+
+#front-page__nav h3 {
+    margin-bottom: 16px;
+}
+
+#front-page__nav>h2 {
+    margin-top: 64px;
+    font-size: 3rem;
+    color: black;
+    line-height: 3rem;
+}
+
 #frontpage__image {
     margin: 0 auto;
     max-width: 70%;
@@ -137,7 +160,7 @@ nav {
 
 /* 화면 높이를 더해야되는듯? */
 #front-page__full-frame {
-    height: 6000px;
+    height: 6500px;
 }
 
 #front-page__screen-frame {
@@ -149,10 +172,7 @@ nav {
 }
 
 #scroll-helper {
-    position: absolute;
-    font-family: 'bold', sans-serif;
-    color: lightgray;
-    margin: 20px auto auto 20px;
+    position: relative;
     animation-name: pop;
     animation-duration: 1s;
     animation-timing-function: ease-in-out;
@@ -162,11 +182,11 @@ nav {
 
 @keyframes pop {
     from {
-        top: 50px;
+        top: 0px;
     }
 
     to {
-        top: 60px;
+        top: 5px;
     }
 }
 
