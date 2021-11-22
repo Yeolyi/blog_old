@@ -1,6 +1,6 @@
 ---
 title: 백준에서 사용한 Swift 함수와 구문들
-date: 1970-01-01
+date: 2021-10-21
 ---
 
 ``` {class="language-swift"}

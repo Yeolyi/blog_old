@@ -114,10 +114,12 @@ const iamSY = new ScrollBlock(500, 2900, 3200,
             }
         } else if (height < 2600) {
             return {
+                "opacity": 100,
                 "padding-top": easeInOut(800, 1100, height, 0, 5)
             }
         } else {
             return {
+                "opacity": 100,
                 "padding-top": 5 - easeInOut(2600, 2900, height, 0, 5)
             }
         }

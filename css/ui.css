@@ -401,10 +401,17 @@ nav {
     margin-left: 20px;
 }
 
+#post-content blockquote {
+    border-left: 4px solid black;
+    padding-left: 8px;
+}
+
 #post-content p+p,
 #post-content ul+p,
 #post-content ol+p,
-#post-content p+pre {
+#post-content p+pre,
+#post-content p+blockquote,
+#post-content blockquote+p {
     margin-top: 1rem;
 }
 
