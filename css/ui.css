@@ -349,6 +349,10 @@ nav {
 
 /* ---------- Long Text ---------- */
 
+#post-content {
+    padding-bottom: 128px;
+}
+
 #post-content img {
     display: block;
     max-width: 50%;
@@ -391,12 +395,10 @@ hr {
 
 code {
     margin-top: 32px;
-    margin-bottom: 8px;
 }
 
 #post-content pre+p>em {
     color: dimgray;
-
 }
 
 /* ---------- TIL ---------- */
