@@ -47,6 +47,7 @@ a {
 h2 {
     font-size: 1.5rem;
     font-family: 'bold', sans-serif;
+    color: #333
 }
 
 .section-title {
@@ -70,6 +71,7 @@ p {
     line-height: 2;
     letter-spacing: -0.3px;
     white-space: pre-wrap;
+    color: #333
 }
 
 strong {
@@ -131,7 +133,7 @@ nav {
     height: 40vh;
 }
 
-#front-page__nav a h2 {
+#front-page__nav h2 {
     color: royalblue;
     font-size: 3rem;
 }
@@ -144,7 +146,6 @@ nav {
     margin-top: 64px;
     font-size: 3rem;
     color: black;
-    line-height: 3rem;
 }
 
 #frontpage__image {
@@ -169,25 +170,6 @@ nav {
     height: 100vh;
     margin-top: -55px;
     margin-left: 2rem;
-}
-
-#scroll-helper {
-    position: relative;
-    animation-name: pop;
-    animation-duration: 1s;
-    animation-timing-function: ease-in-out;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-@keyframes pop {
-    from {
-        top: 0px;
-    }
-
-    to {
-        top: 5px;
-    }
 }
 
 .front-page__object {
@@ -281,7 +263,7 @@ nav {
 /* ---------- Stories ---------- */
 
 #container nav {
-    margin-bottom: 2rem;
+    margin-bottom: 64px;
 }
 
 #container nav a {
@@ -304,6 +286,7 @@ nav {
     font-size: 3rem;
     margin-top: 24px;
     line-height: 3rem;
+    color: black;
 }
 
 #nav-explanation {
@@ -358,13 +341,14 @@ nav {
 /* ---------- Post ---------- */
 
 #post-header {
-    margin-bottom: 2rem;
+    margin-bottom: 64px;
 }
 
 #post-header h2 {
+    color: black;
     font-size: 2rem;
     word-spacing: 100vw;
-    margin-top: 2vw;
+    margin-top: 32px;
 }
 
 /* ---------- Long Text ---------- */
@@ -413,8 +397,13 @@ nav {
 #post-content p+pre,
 #post-content p+blockquote,
 #post-content blockquote+p {
-    margin-top: 1rem;
+    margin-top: 16px;
 }
+
+#post-content blockquote+blockquote {
+    margin-top: 24px;
+}
+
 
 hr {
     margin: 24px 0;
@@ -422,7 +411,7 @@ hr {
 }
 
 code {
-    margin-top: 32px;
+    margin-top: 24px;
 }
 
 #post-content pre+p>em {
@@ -476,6 +465,19 @@ code {
 .archieve-row h2 {
     font-size: 1.2rem;
     color: black;
+}
+
+.archieve__link-block {
+    margin-bottom: 24px;
+}
+
+.archieve__link-block>a {
+    display: block;
+    font-family: 'bold';
+}
+
+.archieve__link-block p {
+    font-size: 0.9rem;
 }
 
 /* Dict ------------------ */
