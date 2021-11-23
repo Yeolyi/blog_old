@@ -423,6 +423,7 @@ code {
 .til-row {
     list-style: none;
     list-style-position: inside;
+    margin-bottom: 8px;
 }
 
 .til-row h2 {
