@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>YeolYi</title>
+    <link rel="stylesheet" href="/css/googlecode.min.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="yeolyi-logo">YeolYi</a>
+        <nav>
+            <a href="/dev" class="nav__button">Dev</a>
+            <a href="/dict" class="nav__button">Dict</a>
+            <a href="/stories" class="nav__button">Stories</a>
+        </nav>
+    </header>
+    <section id="container">
+        <div id="post-header">
+            <h2>배열 기반 리스트 구현</h2>
+        </div>
+        <div id="post-content">
+            <p>장점</p>
+<ul>
+<li>데이터의 참조가 쉽다. 인덱스 값을 기준으로 어디든 한 번에 참조가 가능하다. </li>
+</ul>
+<p>단점</p>
+<ul>
+<li>
+<p>배열의 길이가 초기에 결정되어야 한다. 변경이 불가능하다??</p>
+</li>
+<li>
+<p>삭제의 과정에서 데이터의 이동(복사)가 매우 빈번히 일어난다. </p>
+</li>
+</ul>
+<p>윤성우님 책에 있는 내용인데, 연결리스트와 비교해서 위와 같이 말할 수 있는 듯. 변경이 불가능하다고 하기는 힘들지 않을까?</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdbool.h&gt;
+
+#define LIST_LEN 100
+typedef int LData;
+
+typedef struct __ArrayList
+{
+    LData arr[LIST_LEN];
+    int numOfData;
+    int curPos;
+} ArrayList;
+
+typedef ArrayList List;
+
+void ListInit(List *plist)
+{
+    plist-&gt;numOfData = 0;
+    plist-&gt;curPos = -1;
+}
+
+void LInsert(List *plist, LData data)
+{
+    if (plist-&gt;numOfData &gt;= LIST_LEN)
+    {
+        puts(&quot;저장할 공간이 없습니다&quot;);
+        return;
+    }
+    plist-&gt;arr[plist-&gt;numOfData] = data;
+    plist-&gt;numOfData++;
+}
+
+bool LFirst(List *plist, LData *pdata)
+{
+    if (plist-&gt;numOfData == 0)
+        return false;
+    plist-&gt;curPos = 0;
+    *pdata = plist-&gt;arr[plist-&gt;curPos];
+    return true;
+}
+
+bool LNext(List *plist, LData *pdata)
+{
+    if (plist-&gt;curPos &gt;= (plist-&gt;numOfData) - 1)
+        return false;
+    (plist-&gt;curPos)++;
+    *pdata = plist-&gt;arr[plist-&gt;curPos];
+    return true;
+}
+
+int LCount(List *plist)
+{
+    return plist-&gt;numOfData;
+}
+
+LData LRemove(List *plist)
+{
+    int ret = plist-&gt;arr[plist-&gt;curPos];
+    for (int i = plist-&gt;curPos; i &lt; (plist-&gt;numOfData) - 1; i++)
+    {
+        plist-&gt;arr[i] = plist-&gt;arr[i + 1];
+    }
+    (plist-&gt;numOfData)--;
+    (plist-&gt;curPos)--;
+    return ret;
+}
+
+
+int main()
+{
+    List list;
+    int data;
+    ListInit(&amp;list);
+
+    LInsert(&amp;list, 11);
+    LInsert(&amp;list, 11);
+    LInsert(&amp;list, 22);
+    LInsert(&amp;list, 22);
+    LInsert(&amp;list, 33);
+
+    printf(&quot;현재 데이터의 수: %d\n&quot;, LCount(&amp;list));
+
+    if (LFirst(&amp;list, &amp;data))
+    {
+        printf(&quot;%d &quot;, data);
+        while (LNext(&amp;list, &amp;data))
+            printf(&quot;%d &quot;, data);
+    }
+    if (LFirst(&amp;list, &amp;data))
+    {
+        if (data == 11)
+        {
+            LRemove(&amp;list);
+        }
+        while (LNext(&amp;list, &amp;data))
+            if (data == 11)
+            {
+                LRemove(&amp;list);
+            }
+    }
+    puts(&quot;&quot;);
+    if (LFirst(&amp;list, &amp;data))
+    {
+        printf(&quot;%d &quot;, data);
+        while (LNext(&amp;list, &amp;data))
+            printf(&quot;%d &quot;, data);
+    }
+}
+
+</code></pre>
+            <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
+                crossorigin="anonymous" async></script>
+        </div>
+    </section>
+</body>
+
+</html>
