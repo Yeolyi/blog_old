@@ -83,46 +83,4 @@ LData LRemove(List *plist)
     return ret;
 }
 
-
-int main()
-{
-    List list;
-    int data;
-    ListInit(&list);
-
-    LInsert(&list, 11);
-    LInsert(&list, 11);
-    LInsert(&list, 22);
-    LInsert(&list, 22);
-    LInsert(&list, 33);
-
-    printf("현재 데이터의 수: %d\n", LCount(&list));
-
-    if (LFirst(&list, &data))
-    {
-        printf("%d ", data);
-        while (LNext(&list, &data))
-            printf("%d ", data);
-    }
-    if (LFirst(&list, &data))
-    {
-        if (data == 11)
-        {
-            LRemove(&list);
-        }
-        while (LNext(&list, &data))
-            if (data == 11)
-            {
-                LRemove(&list);
-            }
-    }
-    puts("");
-    if (LFirst(&list, &data))
-    {
-        printf("%d ", data);
-        while (LNext(&list, &data))
-            printf("%d ", data);
-    }
-}
-
 ```

@@ -1,0 +1,179 @@
+Date : 2021-11-25 01:00:40
+Directory : /Users/seongyeolyi/Desktop/yeolyi.github.io
+Total : 80 files,  5297 codes, 63 comments, 785 blanks, all 6145 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| HTML       |         46 |      2,614 |         15 |        139 |      2,768 |
+| JavaScript |          3 |      1,018 |         12 |         16 |      1,046 |
+| Markdown   |         24 |        798 |          3 |        453 |      1,254 |
+| CSS        |          2 |        482 |         27 |        123 |        632 |
+| Python     |          2 |        172 |          5 |         38 |        215 |
+| XML        |          2 |        152 |          1 |          5 |        158 |
+| C          |          1 |         61 |          0 |         11 |         72 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| path                                                                                                    | files      | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| .                                                                                                       |         80 |      5,297 |         63 |        785 |      6,145 |
+| Media                                                                                                   |          1 |         35 |          0 |          1 |         36 |
+| about                                                                                                   |          1 |         41 |          0 |          3 |         44 |
+| css                                                                                                     |          2 |        482 |         27 |        123 |        632 |
+| dev                                                                                                     |          4 |        259 |          0 |         12 |        271 |
+| dict                                                                                                    |         14 |        758 |          0 |         59 |        817 |
+| dict/algorithm                                                                                          |          3 |        159 |          0 |         11 |        170 |
+| dict/algorithm/binary_search                                                                            |          1 |         62 |          0 |          3 |         65 |
+| dict/algorithm/hanoi_tower                                                                              |          1 |         54 |          0 |          5 |         59 |
+| dict/computer-architecture                                                                              |          1 |         38 |          0 |          3 |         41 |
+| dict/curriculum                                                                                         |          1 |         54 |          0 |          3 |         57 |
+| dict/data-structure                                                                                     |          4 |        277 |          0 |         27 |        304 |
+| dict/data-structure/adt                                                                                 |          1 |         40 |          0 |          3 |         43 |
+| dict/data-structure/list                                                                                |          2 |        194 |          0 |         21 |        215 |
+| dict/data-structure/list/array-based                                                                    |          1 |        144 |          0 |         18 |        162 |
+| dict/database                                                                                           |          1 |         38 |          0 |          3 |         41 |
+| dict/network                                                                                            |          1 |         38 |          0 |          3 |         41 |
+| dict/os                                                                                                 |          1 |         38 |          0 |          3 |         41 |
+| dict/roadmap                                                                                            |          1 |         54 |          0 |          3 |         57 |
+| gen                                                                                                     |         13 |        444 |         11 |         55 |        510 |
+| gen/template                                                                                            |         11 |        272 |          6 |         17 |        295 |
+| gen/template/archieve                                                                                   |          3 |         99 |          0 |          6 |        105 |
+| gen/template/til                                                                                        |          4 |         88 |          0 |          5 |         93 |
+| gen/template/writing                                                                                    |          3 |         77 |          6 |          6 |         89 |
+| js                                                                                                      |          3 |      1,018 |         12 |         16 |      1,046 |
+| src                                                                                                     |         25 |        859 |          3 |        464 |      1,326 |
+| src/archieve                                                                                            |          5 |        405 |          3 |        301 |        709 |
+| src/archieve/good-design-10                                                                             |          1 |         24 |          0 |         21 |         45 |
+| src/archieve/how-baemin-work                                                                            |          1 |         72 |          0 |         69 |        141 |
+| src/archieve/this-is-marketing                                                                          |          1 |        275 |          0 |        190 |        465 |
+| src/archieve/who-baemin-ceo-wants                                                                       |          1 |         22 |          3 |         12 |         37 |
+| src/archieve/why-zero-start                                                                             |          1 |         12 |          0 |          9 |         21 |
+| src/dict                                                                                                |         13 |        294 |          0 |         74 |        368 |
+| src/dict/algorithm                                                                                      |          3 |         63 |          0 |         10 |         73 |
+| src/dict/algorithm/binary_search                                                                        |          1 |         31 |          0 |          1 |         32 |
+| src/dict/algorithm/hanoi_tower                                                                          |          1 |         23 |          0 |          3 |         26 |
+| src/dict/computer-architecture                                                                          |          1 |          4 |          0 |          1 |          5 |
+| src/dict/data-structure                                                                                 |          4 |        134 |          0 |         42 |        176 |
+| src/dict/data-structure/adt                                                                             |          1 |          8 |          0 |          4 |         12 |
+| src/dict/data-structure/list                                                                            |          2 |        117 |          0 |         32 |        149 |
+| src/dict/data-structure/list/array-based                                                                |          1 |        105 |          0 |         23 |        128 |
+| src/dict/database                                                                                       |          1 |          4 |          0 |          1 |          5 |
+| src/dict/network                                                                                        |          1 |          4 |          0 |          1 |          5 |
+| src/dict/os                                                                                             |          1 |          4 |          0 |          1 |          5 |
+| src/dict/roadmap                                                                                        |          1 |         20 |          0 |          7 |         27 |
+| src/til                                                                                                 |          2 |         18 |          0 |          8 |         26 |
+| src/til/2021-11-22                                                                                      |          1 |         10 |          0 |          3 |         13 |
+| src/til/2021-11-23                                                                                      |          1 |          8 |          0 |          5 |         13 |
+| src/writing                                                                                             |          5 |        142 |          0 |         81 |        223 |
+| src/writing/baekjoon-short-circuit-valuation                                                            |          1 |         30 |          0 |         18 |         48 |
+| src/writing/snuyum-review                                                                               |          1 |         22 |          0 |         33 |         55 |
+| src/writing/swift-for-for-each                                                                          |          1 |         15 |          0 |          9 |         24 |
+| src/writing/swift-good-to-know                                                                          |          1 |         58 |          0 |         14 |         72 |
+| src/writing/why-i-write                                                                                 |          1 |         17 |          0 |          7 |         24 |
+| stories                                                                                                 |         15 |      1,232 |          9 |         44 |      1,285 |
+| stories/archieve                                                                                        |          6 |        715 |          3 |         18 |        736 |
+| stories/archieve/good-design-10                                                                         |          1 |         56 |          0 |          3 |         59 |
+| stories/archieve/how-baemin-work                                                                        |          1 |        104 |          0 |          3 |        107 |
+| stories/archieve/this-is-marketing                                                                      |          1 |        371 |          0 |          3 |        374 |
+| stories/archieve/who-baemin-ceo-wants                                                                   |          1 |         62 |          3 |          3 |         68 |
+| stories/archieve/why-zero-start                                                                         |          1 |         44 |          0 |          3 |         47 |
+| stories/til                                                                                             |          3 |        148 |          0 |          8 |        156 |
+| stories/til/2021-11-22                                                                                  |          1 |         54 |          0 |          3 |         57 |
+| stories/til/2021-11-23                                                                                  |          1 |         48 |          0 |          3 |         51 |
+| stories/writing                                                                                         |          5 |        307 |          0 |         15 |        322 |
+| stories/writing/baekjoon-short-circuit-valuation                                                        |          1 |         62 |          0 |          3 |         65 |
+| stories/writing/snuyum-review                                                                           |          1 |         55 |          0 |          3 |         58 |
+| stories/writing/swift-for-for-each                                                                      |          1 |         53 |          0 |          3 |         56 |
+| stories/writing/swift-good-to-know                                                                      |          1 |         83 |          0 |          3 |         86 |
+| stories/writing/why-i-write                                                                             |          1 |         54 |          0 |          3 |         57 |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| filename                                                                                                | language   | code       | comment    | blank      | total      |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/Media/appstoreDownload.svg                                  | XML        |         35 |          0 |          1 |         36 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/about/index.html                                            | HTML       |         41 |          0 |          3 |         44 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/css/googlecode.min.css                                      | CSS        |        105 |         11 |         22 |        138 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/css/ui.css                                                  | CSS        |        377 |         16 |        101 |        494 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dev/daystack.html                                           | HTML       |         71 |          0 |          3 |         74 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dev/filin.html                                              | HTML       |         75 |          0 |          3 |         78 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dev/index.html                                              | HTML       |         50 |          0 |          3 |         53 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dev/snuyum.html                                             | HTML       |         63 |          0 |          3 |         66 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/algorithm/binary_search/index.html                     | HTML       |         62 |          0 |          3 |         65 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/algorithm/hanoi_tower/index.html                       | HTML       |         54 |          0 |          5 |         59 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/algorithm/index.html                                   | HTML       |         43 |          0 |          3 |         46 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/computer-architecture/index.html                       | HTML       |         38 |          0 |          3 |         41 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/curriculum/index.html                                  | HTML       |         54 |          0 |          3 |         57 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/data-structure/adt/index.html                          | HTML       |         40 |          0 |          3 |         43 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/data-structure/index.html                              | HTML       |         43 |          0 |          3 |         46 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/data-structure/list/array-based/index.html             | HTML       |        144 |          0 |         18 |        162 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/data-structure/list/index.html                         | HTML       |         50 |          0 |          3 |         53 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/database/index.html                                    | HTML       |         38 |          0 |          3 |         41 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/index.html                                             | HTML       |         62 |          0 |          3 |         65 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/network/index.html                                     | HTML       |         38 |          0 |          3 |         41 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/os/index.html                                          | HTML       |         38 |          0 |          3 |         41 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/dict/roadmap/index.html                                     | HTML       |         54 |          0 |          3 |         57 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/html_converter.py                                       | Python     |        153 |          5 |         35 |        193 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/replacer.py                                             | Python     |         19 |          0 |          3 |         22 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/archieve/list.html                             | HTML       |         58 |          0 |          3 |         61 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/archieve/post.html                             | HTML       |         36 |          0 |          3 |         39 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/archieve/row.html                              | HTML       |          5 |          0 |          0 |          5 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/header.html                                    | HTML       |          8 |          0 |          0 |          8 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/til/list.html                                  | HTML       |         38 |          0 |          2 |         40 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/til/post.html                                  | HTML       |         41 |          0 |          3 |         44 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/til/row.html                                   | HTML       |          5 |          0 |          0 |          5 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/til/time_table.html                            | HTML       |          4 |          0 |          0 |          4 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/writing/list.html                              | HTML       |         32 |          6 |          3 |         41 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/writing/post.html                              | HTML       |         38 |          0 |          3 |         41 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/gen/template/writing/row.html                               | HTML       |          7 |          0 |          0 |          7 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/index.html                                                  | HTML       |         52 |          0 |          4 |         56 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/js/frontScroll.js                                           | JavaScript |        167 |          5 |         13 |        185 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/js/highlight.min.js                                         | JavaScript |        819 |          5 |          0 |        824 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/js/ui.js                                                    | JavaScript |         32 |          2 |          3 |         37 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/sitemap.xml                                                 | XML        |        117 |          1 |          4 |        122 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/archieve/good-design-10/content.md                      | Markdown   |         24 |          0 |         21 |         45 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/archieve/how-baemin-work/content.md                     | Markdown   |         72 |          0 |         69 |        141 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/archieve/this-is-marketing/content.md                   | Markdown   |        275 |          0 |        190 |        465 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/archieve/who-baemin-ceo-wants/content.md                | Markdown   |         22 |          3 |         12 |         37 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/archieve/why-zero-start/content.md                      | Markdown   |         12 |          0 |          9 |         21 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/algorithm/binary_search/index.md                   | Markdown   |         31 |          0 |          1 |         32 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/algorithm/hanoi_tower/index.md                     | Markdown   |         23 |          0 |          3 |         26 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/algorithm/index.md                                 | Markdown   |          9 |          0 |          6 |         15 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/computer-architecture/index.md                     | Markdown   |          4 |          0 |          1 |          5 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/data-structure/adt/index.md                        | Markdown   |          8 |          0 |          4 |         12 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/data-structure/index.md                            | Markdown   |          9 |          0 |          6 |         15 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/data-structure/list/array-based/index.md           | Markdown   |        105 |          0 |         23 |        128 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/data-structure/list/index.md                       | Markdown   |         12 |          0 |          9 |         21 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/database/index.md                                  | Markdown   |          4 |          0 |          1 |          5 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/network/index.md                                   | Markdown   |          4 |          0 |          1 |          5 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/os/index.md                                        | Markdown   |          4 |          0 |          1 |          5 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/roadmap/index.md                                   | Markdown   |         20 |          0 |          7 |         27 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/dict/test.c                                             | C          |         61 |          0 |         11 |         72 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/til/2021-11-22/content.md                               | Markdown   |         10 |          0 |          3 |         13 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/til/2021-11-23/content.md                               | Markdown   |          8 |          0 |          5 |         13 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/writing/baekjoon-short-circuit-valuation/content.md     | Markdown   |         30 |          0 |         18 |         48 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/writing/snuyum-review/content.md                        | Markdown   |         22 |          0 |         33 |         55 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/writing/swift-for-for-each/content.md                   | Markdown   |         15 |          0 |          9 |         24 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/writing/swift-good-to-know/content.md                   | Markdown   |         58 |          0 |         14 |         72 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/src/writing/why-i-write/content.md                          | Markdown   |         17 |          0 |          7 |         24 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/archieve/good-design-10/index.html                  | HTML       |         56 |          0 |          3 |         59 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/archieve/how-baemin-work/index.html                 | HTML       |        104 |          0 |          3 |        107 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/archieve/index.html                                 | HTML       |         78 |          0 |          3 |         81 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/archieve/this-is-marketing/index.html               | HTML       |        371 |          0 |          3 |        374 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/archieve/who-baemin-ceo-wants/index.html            | HTML       |         62 |          3 |          3 |         68 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/archieve/why-zero-start/index.html                  | HTML       |         44 |          0 |          3 |         47 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/index.html                                          | HTML       |         62 |          6 |          3 |         71 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/til/2021-11-22/index.html                           | HTML       |         54 |          0 |          3 |         57 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/til/2021-11-23/index.html                           | HTML       |         48 |          0 |          3 |         51 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/til/index.html                                      | HTML       |         46 |          0 |          2 |         48 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/writing/baekjoon-short-circuit-valuation/index.html | HTML       |         62 |          0 |          3 |         65 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/writing/snuyum-review/index.html                    | HTML       |         55 |          0 |          3 |         58 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/writing/swift-for-for-each/index.html               | HTML       |         53 |          0 |          3 |         56 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/writing/swift-good-to-know/index.html               | HTML       |         83 |          0 |          3 |         86 |
+| /Users/seongyeolyi/Desktop/yeolyi.github.io/stories/writing/why-i-write/index.html                      | HTML       |         54 |          0 |          3 |         57 |
+| Total                                                                                                   |            |      5,297 |         63 |        785 |      6,145 |
++---------------------------------------------------------------------------------------------------------+------------+------------+------------+------------+------------+

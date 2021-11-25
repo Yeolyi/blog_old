@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>YeolYi</title>
+    <link rel="stylesheet" href="/css/googlecode.min.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="yeolyi-logo">YeolYi</a>
+        <nav>
+            <a href="/dev" class="nav__button">Dev</a>
+            <a href="/dict" class="nav__button">Dict</a>
+            <a href="/stories" class="nav__button">Stories</a>
+        </nav>
+    </header>
+    <section id="container">
+        <div id="post-header">
+            <h2>꼬리 없는 연결 리스트 구현</h2>
+        </div>
+        <div id="post-content">
+            <h2>더미 노드가 없는 끔찍한 구현</h2>
+<pre><code class="language-c">void ListInit(List *plist)
+{
+    plist-&gt;head = NULL;
+    plist-&gt;size = 0;
+    plist-&gt;AreInIncreasingOrder = NULL;
+}
+
+void LInsert(List *plist, LData data)
+{
+    Node *node = malloc(sizeof(Node));
+    node-&gt;data = data;
+    (plist-&gt;size)++;
+    if (!plist-&gt;head)
+    {
+        node-&gt;next = NULL;
+        plist-&gt;head = node;
+        return;
+    }
+    if (plist-&gt;AreInIncreasingOrder)
+    {
+        if (plist-&gt;AreInIncreasingOrder(&amp;data, &amp;(plist-&gt;head-&gt;data)))
+        {
+            node-&gt;next = plist-&gt;head;
+            plist-&gt;head = node;
+            return;
+        }
+        Node *cur = plist-&gt;head;
+        while (cur-&gt;next &amp;&amp; plist-&gt;AreInIncreasingOrder(&amp;cur-&gt;next-&gt;data, &amp;data))
+            cur = cur-&gt;next;
+        node-&gt;next = cur-&gt;next;
+        cur-&gt;next = node;
+    }
+    else
+    {
+        node-&gt;next = plist-&gt;head-&gt;next;
+        plist-&gt;head = node;
+    }
+}
+
+bool LFirst(List *plist, LData *data)
+{
+    if (!LCount(plist))
+        return false;
+    plist-&gt;prev = NULL;
+    plist-&gt;cur = plist-&gt;head;
+    if (data)
+        *data = plist-&gt;cur-&gt;data;
+    return true;
+}
+
+bool LNext(List *plist, LData *data)
+{
+    if (!(plist-&gt;cur-&gt;next))
+        return false;
+    plist-&gt;prev = plist-&gt;cur;
+    plist-&gt;cur = plist-&gt;cur-&gt;next;
+    if (data)
+        *data = plist-&gt;cur-&gt;data;
+    return true;
+}
+
+int LCount(List *plist) { return plist-&gt;size; }
+
+void LRemove(List *plist)
+{
+    (plist-&gt;size)--;
+    if (!plist-&gt;prev)
+    {
+        plist-&gt;head = plist-&gt;head-&gt;next;
+        free(plist-&gt;cur);
+        plist-&gt;cur = plist-&gt;head;
+        return;
+    }
+    plist-&gt;prev-&gt;next = plist-&gt;cur-&gt;next;
+    free(plist-&gt;cur);
+    plist-&gt;cur = plist-&gt;prev;
+}
+
+void LClear(List *plist)
+{
+    while (LFirst(plist, NULL))
+    {
+        LRemove(plist);
+    }
+}
+
+void SetSortRule(List *plist, bool (*AreInIncreasingOrder)(LData *a, LData *b))
+{
+    plist-&gt;AreInIncreasingOrder = AreInIncreasingOrder;
+}
+</code></pre>
+<h2>더미 노드가 있는 구현</h2>
+<pre><code class="language-c">typedef Point LData;
+
+typedef struct _node
+{
+    LData data;
+    struct _node *next;
+} Node;
+
+typedef struct _linkedList
+{
+    Node *head;
+    Node *cur;
+    Node *prev;
+    int len;
+    bool (*areInIncreasingOrder)(LData *a, LData *b);
+} LinkedList;
+
+typedef LinkedList List;
+
+void ListInit(List *plist)
+{
+    Node *dummy = malloc(sizeof(Node));
+    plist-&gt;head = dummy;
+    plist-&gt;cur = dummy;
+    plist-&gt;len = 0;
+    plist-&gt;areInIncreasingOrder = NULL;
+}
+
+void LInsertSorted(List *plist, LData data)
+{
+    Node *node = malloc(sizeof(Node));
+    node-&gt;data = data;
+    Node *cur = plist-&gt;head;
+    while (cur-&gt;next != NULL &amp;&amp; plist-&gt;areInIncreasingOrder(&amp;cur-&gt;next-&gt;data, &amp;data))
+        cur = cur-&gt;next;
+    node-&gt;next = cur-&gt;next;
+    cur-&gt;next = node;
+    (plist-&gt;len)++;
+}
+
+void LInsert(List *plist, LData data)
+{
+    Node *node = malloc(sizeof(Node));
+    node-&gt;data = data;
+    if (plist-&gt;areInIncreasingOrder)
+    {
+        LInsertSorted(plist, data);
+    }
+    else
+    {
+        node-&gt;next = plist-&gt;head-&gt;next;
+        plist-&gt;head-&gt;next = node;
+        (plist-&gt;len)++;
+    }
+}
+
+bool LFirst(List *plist, LData *data)
+{
+    if ((plist-&gt;len) == 0)
+    {
+        return false;
+    }
+    plist-&gt;prev = plist-&gt;head;
+    plist-&gt;cur = plist-&gt;head-&gt;next;
+    *data = plist-&gt;cur-&gt;data;
+    return true;
+}
+
+bool LNext(List *plist, LData *data)
+{
+    if (plist-&gt;cur-&gt;next == NULL)
+    {
+        return false;
+    }
+    plist-&gt;prev = plist-&gt;cur;
+    plist-&gt;cur = plist-&gt;cur-&gt;next;
+    *data = plist-&gt;cur-&gt;data;
+    return true;
+}
+
+int LCount(List *plist)
+{
+    return plist-&gt;len;
+}
+
+LData LRemove(List *plist)
+{
+    plist-&gt;prev-&gt;next = plist-&gt;cur-&gt;next;
+    LData ret = plist-&gt;cur-&gt;data;
+    free(plist-&gt;cur);
+    plist-&gt;cur = plist-&gt;prev;
+    return ret;
+}
+
+void SetSortRule(List *plist, bool (*areInIncreasingOrder)(LData *a, LData *b))
+{
+    plist-&gt;areInIncreasingOrder = areInIncreasingOrder;
+}
+
+</code></pre>
+            <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
+                crossorigin="anonymous" async></script>
+        </div>
+    </section>
+</body>
+
+</html>

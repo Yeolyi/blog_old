@@ -30,11 +30,11 @@
         </div>
         <div id="post-content">
             <h2>구현 방법에 따른 리스트의 분류</h2>
-<p><a href="array-based">순차 리스트</a></p>
+<p><a href="array-list">순차 리스트</a></p>
 <ul>
 <li>배열을 기반으로 구현된 리스트</li>
 </ul>
-<p>연결 리스트</p>
+<p><a href="linked-list">연결 리스트</a></p>
 <ul>
 <li>메모리의 동적 할당을 기반으로 구현된 리스트</li>
 </ul>
@@ -44,6 +44,93 @@
 <p>In computer science, a list or sequence is an abstract data type that represents a finite number of ordered values, where the same value may occur more than once.
 - Wikipedia</p>
 </blockquote>
+<p>원소의 추가 순서가 보존될 필요는 없는 것 같다. </p>
+<h2>실습</h2>
+<p>구현하려는 리스트의 기본적인 ADT는 다음과 같다. 리스트의 종류에 따라 추가적인 기능이 있을 수 있다. </p>
+<pre><code class="language-c">void ListInit(List *plist);
+// 리스트 생성 후 가장 먼저 호출되어야 하는 함수
+
+void LInsert(List *plist, LData *pdata);
+
+bool LFirst(List *plist, LData *pdata);
+// 데이터의 참조를 위한 초기화가 진행된다.
+// 성공 여부를 반환한다.
+
+bool LNext(List *plist, LData *pdata);
+// 다음 데이터를 참조한다. 
+// 순차적 참조를 위한 반복 호출이 가능하다.
+
+LData LRemove(List *plist);
+// LFirst 혹은 LNext의 마지막 반환 데이터를 삭제한다. 
+
+int LCount(List *plist);
+</code></pre>
+<p>테스트를 위해 다음과 같은 구조체와 함수를 정의했다. 자연수 배열에서 자연수를 찾는 것은 웃기니까 ^^;</p>
+<pre><code class="language-c">typedef struct __Point
+{
+    int x;
+    int y;
+    int level;
+} Point;
+
+void printPoint(Point *a)
+{
+    printf(&quot;(%d, %d, level: %d) &quot;, a-&gt;x, a-&gt;y, a-&gt;level);
+}
+</code></pre>
+<p>테스트를 위한 코드는 다음과 같다. </p>
+<pre><code class="language-c">int main(void)
+{
+    int testDataSize = 7;
+    int xList[] = {3, 1, 4, 1, 5, 9, 2};
+    int yList[] = {6, 5, 3, 5, 8, 9, 7};
+    int level[] = {3, 2, 3, 8, 4, 6, 2};
+
+    Point *testData = malloc(sizeof(Point) * testDataSize);
+
+    for (int i = 0; i &lt; testDataSize; i++)
+    {
+        testData[i].x = xList[i];
+        testData[i].y = yList[i];
+        testData[i].level = level[i];
+    }
+
+    List list;
+    Point data;
+    ListInit(&amp;list);
+
+    for (int i = 0; i &lt; testDataSize; i++)
+    {
+        LInsert(&amp;list, testData[i]);
+    }
+
+    printf(&quot;Data Count: %d\n&quot;, LCount(&amp;list));
+
+    if (LFirst(&amp;list, &amp;data))
+    {
+        printPoint(&amp;data);
+        while (LNext(&amp;list, &amp;data))
+        {
+            printPoint(&amp;data);
+        }
+    }
+    puts(&quot;&quot;);
+    if (LFirst(&amp;list, &amp;data))
+    {
+        if (data.level == 2)
+            LRemove(&amp;list);
+        while (LNext(&amp;list, &amp;data))
+            if (data.level == 2)
+                LRemove(&amp;list);
+    }
+    if (LFirst(&amp;list, &amp;data))
+    {
+        printPoint(&amp;data);
+        while (LNext(&amp;list, &amp;data))
+            printPoint(&amp;data);
+    }
+}
+</code></pre>
             <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
                 crossorigin="anonymous" async></script>
         </div>

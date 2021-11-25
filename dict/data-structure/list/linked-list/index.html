@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>YeolYi</title>
+    <link rel="stylesheet" href="/css/googlecode.min.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="yeolyi-logo">YeolYi</a>
+        <nav>
+            <a href="/dev" class="nav__button">Dev</a>
+            <a href="/dict" class="nav__button">Dict</a>
+            <a href="/stories" class="nav__button">Stories</a>
+        </nav>
+    </header>
+    <section id="container">
+        <div id="post-header">
+            <h2>연결 리스트 구현</h2>
+        </div>
+        <div id="post-content">
+            <p>ADT를 다음과 같이 추가/수정한다. 윤성우님 자료구조 책에 따른 것인데, 연결 리스트가 배열 기반 리스트보다 뒤쪽에 있어서 정렬 기능을 추가한 것인지 삽입 위치 뒤쪽에 있는 모든 원소를 옮겨야 하는 배열과 다르게 연결리스트는 포인터만 바꿔주면 되니 추가한 것인지는 모르겠다 ㅎㅎ.</p>
+<pre><code class="language-c">void SetSortRule(List *plist, int (*comparator)(LData d1, LData d2));
+// 리스트에 정렬의 기준이 되는 함수를 등록한다. 
+
+bool IsPointIncreasingOrder(Point *a, Point *b)
+{
+    if (a-&gt;x == b-&gt;x)
+        return a-&gt;y &lt; b-&gt;y;
+    return a-&gt;x &lt; b-&gt;x;
+}
+</code></pre>
+<p>지금까지 배운 범위에서는 새 노드의 추가 위치에 따라, 더미 노드의 유무에 따라 구현의 형태가 달라지는데 전자가 자료 구조의 특성을 더 바꾸는 것 같아서(순회할 때의 순서가 바뀐다) 우선 이를 기준으로 나누어보았다. 더미 노드는 테크닉? 느낌이라서. </p>
+<p>책에 따르면, 머리에 새 노드를 추가하는 것과 꼬리에 하는 것의 장단점은 다음과 같다. </p>
+<p>머리 추가</p>
+<ul>
+<li>장점: 포인터 변수 tail이 불필요하다.</li>
+<li>단점: 저장된 순서를 유지하지 않는다. </li>
+</ul>
+<p>꼬리 추가</p>
+<ul>
+<li>장점: 저장된 순서가 유지된다. </li>
+<li>단점: 포인터 변수 tail이 필요하다. </li>
+</ul>
+<p><a href="with-tail">꼬리가 있는 구현</a></p>
+<p><a href="without-tail">꼬리가 없는 구현</a></p>
+            <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
+                crossorigin="anonymous" async></script>
+        </div>
+    </section>
+</body>
+
+</html>
