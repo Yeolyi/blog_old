@@ -8,8 +8,10 @@ title: 자료구조
 
 [리스트](list)
 
+[스택](stack)
+
 ## 비선형 자료구조
 
 ---
 
-## [Abstract Data Type](adt)
+[Abstract Data Type](adt)

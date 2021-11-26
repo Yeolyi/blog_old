@@ -26,18 +26,32 @@
     </header>
     <section id="container">
         <div id="post-header">
-            <h2>자료구조</h2>
+            <h2>스택</h2>
         </div>
         <div id="post-content">
             <blockquote>
-<p>In computer science, a data structure is a data organization, management, and storage format that enables efficient access and modification. _Wikipedia</p>
+<p>In computer science, a stack is an abstract data type that serves as a collection of elements, with two main principal operations:</p>
+<ul>
+<li>Push, which adds an element to the collection, and</li>
+<li>Pop, which removes the most recently added element that was not yet removed.</li>
+</ul>
+<p>-wikipedia</p>
 </blockquote>
-<h2>선형 자료구조</h2>
-<p><a href="list">리스트</a></p>
-<p><a href="stack">스택</a></p>
-<h2>비선형 자료구조</h2>
-<hr />
-<p><a href="adt">Abstract Data Type</a></p>
+<p><strong>LIFO (last in, first out)</strong></p>
+<h2>ADT</h2>
+<pre><code class="language-c">
+void StackInit(Stack *pstack);
+
+bool SIsEmpty(Stack *pstack);
+
+void SPush(Stack *pstack, Data data);
+
+Data SPop(Stack *pstack);
+// 데이터가 하나 이상 존재함이 보장되어야 한다. 
+
+Data SPeek(Stack *pstack);
+// 데이터가 하나 이상 존재함이 보장되어야 한다. 
+</code></pre>
             <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
                 crossorigin="anonymous" async></script>
         </div>
