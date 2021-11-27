@@ -39,8 +39,7 @@
 </blockquote>
 <p><strong>LIFO (last in, first out)</strong></p>
 <h2>ADT</h2>
-<pre><code class="language-c">
-void StackInit(Stack *pstack);
+<pre><code class="language-c">void StackInit(Stack *pstack);
 
 bool SIsEmpty(Stack *pstack);
 
@@ -51,6 +50,72 @@ Data SPop(Stack *pstack);
 
 Data SPeek(Stack *pstack);
 // 데이터가 하나 이상 존재함이 보장되어야 한다. 
+</code></pre>
+<p>배열 기반이면 몰라도 연결리스트 기반 스택이면 size 변수가 굳이 필요하지 않음. </p>
+<p>exit 함수의 사용도 눈여겨보자. </p>
+<p>중위연산자 변환 문제 풀어보기,,,</p>
+<h2>연결 리스트 기반 스택 구현</h2>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdbool.h&gt;
+
+typedef int LData;
+
+typedef struct _Node
+{
+    struct _Node *next;
+    LData data;
+} Node;
+
+typedef struct _Stack
+{
+    Node *head;
+} Stack;
+
+void StackInit(Stack *pstack)
+{
+    pstack-&gt;head = malloc(sizeof(Node));
+    pstack-&gt;head-&gt;next = NULL;
+}
+
+bool SIsEmpty(Stack *pstack)
+{
+    return !(pstack-&gt;head-&gt;next);
+}
+
+void SPush(Stack *pstack, LData data)
+{
+    Node *node = malloc(sizeof(Node));
+    node-&gt;data = data;
+    node-&gt;next = pstack-&gt;head-&gt;next;
+    pstack-&gt;head-&gt;next = node;
+}
+
+LData SPop(Stack *pstack)
+{
+    if (!(pstack-&gt;head-&gt;next))
+    {
+        printf(&quot;Stack Memory Error&quot;);
+        exit(-1);
+    }
+    Node *toRemove = pstack-&gt;head-&gt;next;
+    pstack-&gt;head-&gt;next = pstack-&gt;head-&gt;next-&gt;next;
+    LData ret = toRemove-&gt;data;
+    free(toRemove);
+    return ret;
+}
+
+int main()
+{
+    Stack stack;
+    LData data;
+    StackInit(&amp;stack);
+    for (int i = 0; i &lt; 10; i++)
+        SPush(&amp;stack, i);
+    while (!SIsEmpty(&amp;stack))
+        printf(&quot;%d &quot;, SPop(&amp;stack));
+    return 0;
+}
 </code></pre>
             <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
                 crossorigin="anonymous" async></script>
