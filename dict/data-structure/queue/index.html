@@ -26,26 +26,26 @@
     </header>
     <section id="container">
         <div id="post-header">
-            <h2>자료구조</h2>
+            <h2>큐</h2>
         </div>
         <div id="post-content">
             <blockquote>
-<p>In computer science, a data structure is a data organization, management, and storage format that enables efficient access and modification. _Wikipedia</p>
+<p>In computer science, a queue is a collection of entities that are maintained in a sequence and can be modified by the addition of entities at one end of the sequence and the removal of entities from the other end of the sequence.
+- Wikipedia</p>
 </blockquote>
-<p>윤성우님의 '열혈 자료구조' 책으로 공부를 진행했다. 다만 예제에 내 생각을 담아 몇몇 부분을 수정했다. </p>
-<ul>
-<li>참거짓을 반환하는 함수는 int 대신 bool을 반환한다. </li>
-<li>effective c++(맞나?)와 <a href="https://stackoverflow.com/questions/180401/placement-of-the-asterisk-in-pointer-declarations">stackoverflow 글</a>을 참고해 포인터 표시를 위한 asterick는 변수 부분에 붙여서 썼다. </li>
-<li>생성한 구조체를 free하는 함수가 없어 따로 정의했다. </li>
-</ul>
-<h2>선형 자료구조</h2>
-<p><a href="list">리스트</a></p>
-<p><a href="stack">스택</a></p>
-<p><a href="queue">큐</a></p>
-<h2>비선형 자료구조</h2>
-<p><a href="tree">트리</a></p>
-<hr />
-<p><a href="adt">Abstract Data Type</a></p>
+<h2>ADT</h2>
+<pre><code class="language-c">void QueueInit(Queue *pq);
+
+bool QIsEmpty(Queue *pq);
+
+void Enqueue(Queue *pq, Data data);
+
+Data Dequeue(Queue *pq);
+// 데이터가 하나 이상 존재함이 보장되어야 한다. 
+
+Data Qpeek(Queue *pq);
+// 데이터가 하나 이상 존재함이 보장되어야 한다. 
+</code></pre>
             <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
                 crossorigin="anonymous" async></script>
         </div>
