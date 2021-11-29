@@ -2,13 +2,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct _PersonInfo
+typedef struct _Color
 {
     int key;
     char *name;
-} PersonInfo;
+} Color;
 
-typedef PersonInfo Data;
+typedef Color Data;
 
 typedef struct _BTreeNode
 {
@@ -132,38 +132,95 @@ BTreeNode *BSTSearch(BTreeNode *cur, int key)
     }
 }
 
-void PrintContent(BTreeNode *node)
-{
-    printf("%s ", node->data.name);
-}
-
-void InorderTraverse(BTreeNode *node, void (*Transform)(BTreeNode *))
+void InorderTraverse(BTreeNode *node)
 {
     if (node->left)
-        InorderTraverse(node->left, Transform);
-    Transform(node);
+        InorderTraverse(node->left);
+    printf("%s\n", node->data.name);
     if (node->right)
-        InorderTraverse(node->right, Transform);
+        InorderTraverse(node->right);
+}
+
+void BSTRemove(BTreeNode **pRoot, int key)
+{
+    BTreeNode *tempNode = MakeBTreeNode();
+    BTreeNode *parent = tempNode;
+    BTreeNode *cur = *pRoot;
+
+    tempNode->right = *pRoot;
+
+    while (cur && (cur->data.key != key))
+    {
+        parent = cur;
+        if (cur->data.key < key)
+            cur = cur->right;
+        else
+            cur = cur->left;
+    }
+
+    if (!cur)
+        return;
+
+    if (cur->left && cur->right)
+    {
+        BTreeNode *altNode = cur->right;
+        BTreeNode *altNodeParent = cur;
+        while (altNode->left)
+        {
+            altNodeParent = altNode;
+            altNode = altNode->left;
+        }
+        cur->data = altNode->data;
+        if (altNodeParent->left == altNode)
+            altNodeParent->left = altNode->right;
+        else
+            altNodeParent->right = altNode->right;
+        free(altNode);
+    }
+    else if (cur->left || cur->right)
+    {
+        BTreeNode *curChild;
+        if (cur->left)
+            curChild = cur->left;
+        else
+            curChild = cur->right;
+        if (parent->left == cur)
+            parent->left = curChild;
+        else
+            parent->right = curChild;
+        free(cur);
+    }
+    else
+    {
+        if (parent->left == cur)
+            parent->left = NULL;
+        else
+            parent->right = NULL;
+        free(cur);
+    }
+    if (tempNode->right != *pRoot)
+        *pRoot = tempNode->right;
+    free(tempNode);
+    // free(cur); 애는 지우면 안되지,,,^^
 }
 
 int main()
 {
+    char *colorList[] = {"Red", "Orange", "Yellow", "Green", "Blue"};
+    int insertOrder[] = {3, 2, 0, 4, 1};
     BTreeNode *bstRoot;
     BSTInit(&bstRoot);
-    Data dataList[5];
-    char *colorNames[5] = {"RED", "ORANGE", "YELLOW", "GREEN", "BLUE"};
+    Data data;
     for (int i = 0; i < 5; i++)
     {
-        dataList[i].key = i;
-        dataList[i].name = colorNames[i];
-        BSTInsert(&bstRoot, dataList[i]);
+        int order = insertOrder[i];
+        data.key = order;
+        data.name = colorList[order];
+        BSTInsert(&bstRoot, data);
     }
-    printf("%s ", BSTSearch(bstRoot, 0)->data.name);
-    printf("%s ", BSTSearch(bstRoot, 2)->data.name);
-    printf("%s ", BSTSearch(bstRoot, 3)->data.name);
-    printf("%s ", BSTSearch(bstRoot, 1)->data.name);
-    printf("%s ", BSTSearch(bstRoot, 4)->data.name);
-    puts("");
-    InorderTraverse(bstRoot, PrintContent);
+    BSTRemove(&bstRoot, 4);
+    BSTRemove(&bstRoot, 0);
+    BSTRemove(&bstRoot, 1);
+    InorderTraverse(bstRoot);
     return 0;
 }

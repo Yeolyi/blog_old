@@ -56,9 +56,97 @@
             cur = cur-&gt;right;
     }
 </code></pre>
+<p>이것도 첫 if문 필요 없음</p>
+<pre><code>while (cur &amp;&amp; (cur-&gt;data.key != key))
+    {
+        parent = cur;
+        if (cur-&gt;data.key == key)
+            break;
+        else if (cur-&gt;data.key &lt; key)
+            cur = cur-&gt;right;
+        else
+            cur = cur-&gt;left;
+    }
+</code></pre>
 <h2>구현</h2>
 <p>이진 트리에서 함수 만들어놓고 왜 쓰지를 못하니,,,</p>
-<pre><code class="language-c">void BSTInit(BTreeNode **pRoot)
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdbool.h&gt;
+
+typedef struct _Color
+{
+    int key;
+    char *name;
+} Color;
+
+typedef Color Data;
+
+typedef struct _BTreeNode
+{
+    Data data;
+    struct _BTreeNode *left;
+    struct _BTreeNode *right;
+} BTreeNode;
+
+BTreeNode *MakeBTreeNode()
+{
+    BTreeNode *node = malloc(sizeof(BTreeNode));
+    node-&gt;left = NULL;
+    node-&gt;right = NULL;
+    return node;
+}
+
+Data GetData(BTreeNode *bt)
+{
+    return bt-&gt;data;
+}
+
+void SetData(BTreeNode *bt, Data data)
+{
+    bt-&gt;data = data;
+}
+
+BTreeNode *GetLeftSubTree(BTreeNode *bt)
+{
+    return bt-&gt;left;
+}
+
+BTreeNode *GetRightSubTree(BTreeNode *bt)
+{
+    return bt-&gt;right;
+}
+
+void PostOrderTraverse(BTreeNode *main, void (*Transform)(BTreeNode *))
+{
+    if (!(main))
+        return;
+    PostOrderTraverse(main-&gt;left, Transform);
+    PostOrderTraverse(main-&gt;right, Transform);
+    Transform(main);
+}
+
+void FreeTreeNode(BTreeNode *main)
+{
+    free(main);
+}
+
+void DeleteTree(BTreeNode *main)
+{
+    PostOrderTraverse(main, FreeTreeNode);
+}
+
+void MakeLeftSubTree(BTreeNode *main, BTreeNode *sub)
+{
+    main-&gt;left = sub;
+}
+
+void MakeRightSubTree(BTreeNode *main, BTreeNode *sub)
+{
+    main-&gt;right = sub;
+}
+
+void BSTInit(BTreeNode **pRoot)
 {
     *pRoot = NULL;
 }
@@ -116,35 +204,94 @@ BTreeNode *BSTSearch(BTreeNode *cur, int key)
     }
 }
 
+void InorderTraverse(BTreeNode *node)
+{
+    if (node-&gt;left)
+        InorderTraverse(node-&gt;left);
+    printf(&quot;%s\n&quot;, node-&gt;data.name);
+    if (node-&gt;right)
+        InorderTraverse(node-&gt;right);
+}
+
+void BSTRemove(BTreeNode **pRoot, int key)
+{
+    BTreeNode *tempNode = MakeBTreeNode();
+    BTreeNode *parent = tempNode;
+    BTreeNode *cur = *pRoot;
+
+    tempNode-&gt;right = *pRoot;
+
+    while (cur &amp;&amp; (cur-&gt;data.key != key))
+    {
+        parent = cur;
+        if (cur-&gt;data.key &lt; key)
+            cur = cur-&gt;right;
+        else
+            cur = cur-&gt;left;
+    }
+
+    if (!cur)
+        return;
+
+    if (cur-&gt;left &amp;&amp; cur-&gt;right)
+    {
+        BTreeNode *altNode = cur-&gt;right;
+        BTreeNode *altNodeParent = cur;
+        while (altNode-&gt;left)
+        {
+            altNodeParent = altNode;
+            altNode = altNode-&gt;left;
+        }
+        cur-&gt;data = altNode-&gt;data;
+        if (altNodeParent-&gt;left == altNode)
+            altNodeParent-&gt;left = altNode-&gt;right;
+        else
+            altNodeParent-&gt;right = altNode-&gt;right;
+        free(altNode);
+    }
+    else if (cur-&gt;left || cur-&gt;right)
+    {
+        BTreeNode *curChild;
+        if (cur-&gt;left)
+            curChild = cur-&gt;left;
+        else
+            curChild = cur-&gt;right;
+        if (parent-&gt;left == cur)
+            parent-&gt;left = curChild;
+        else
+            parent-&gt;right = curChild;
+        free(cur);
+    }
+    else
+    {
+        if (parent-&gt;left == cur)
+            parent-&gt;left = NULL;
+        else
+            parent-&gt;right = NULL;
+        free(cur);
+    }
+    if (tempNode-&gt;right != *pRoot)
+        *pRoot = tempNode-&gt;right;
+    free(tempNode);
+    // free(cur); 애는 지우면 안되지,,,^^
+}
+
 int main()
 {
+    char *colorList[] = {&quot;Red&quot;, &quot;Orange&quot;, &quot;Yellow&quot;, &quot;Green&quot;, &quot;Blue&quot;};
+    int insertOrder[] = {3, 2, 0, 4, 1};
     BTreeNode *bstRoot;
     BSTInit(&amp;bstRoot);
-    Data data1;
-    data1.key = 1;
-    data1.name = &quot;RED&quot;;
-    Data data2;
-    data2.key = 2;
-    data2.name = &quot;ORANGE&quot;;
-    Data data3;
-    data3.key = 3;
-    data3.name = &quot;YELLOW&quot;;
-    Data data4;
-    data4.key = 4;
-    data4.name = &quot;GREEN&quot;;
-    Data data5;
-    data5.key = 5;
-    data5.name = &quot;BLUE&quot;;
-    BSTInsert(&amp;bstRoot, data1);
-    BSTInsert(&amp;bstRoot, data4);
-    BSTInsert(&amp;bstRoot, data5);
-    BSTInsert(&amp;bstRoot, data3);
-    BSTInsert(&amp;bstRoot, data2);
-    printf(&quot;%s &quot;, BSTSearch(bstRoot, 5)-&gt;data.name);
-    printf(&quot;%s &quot;, BSTSearch(bstRoot, 2)-&gt;data.name);
-    printf(&quot;%s &quot;, BSTSearch(bstRoot, 3)-&gt;data.name);
-    printf(&quot;%s &quot;, BSTSearch(bstRoot, 1)-&gt;data.name);
-    printf(&quot;%s &quot;, BSTSearch(bstRoot, 4)-&gt;data.name);
+    Data data;
+    for (int i = 0; i &lt; 5; i++)
+    {
+        int order = insertOrder[i];
+        data.key = order;
+        data.name = colorList[order];
+        BSTInsert(&amp;bstRoot, data);
+    }
+    BSTRemove(&amp;bstRoot, 4);
+    InorderTraverse(bstRoot);
     return 0;
 }
 </code></pre>
