@@ -1,12 +1,11 @@
 <!DOCTYPE html>
+<html>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/ui.css">
     <title>YeolYi</title>
-    <script src="/js/jquery.js"></script>
-    <script src="/js/ui.js"></script>
     <link rel="stylesheet" href="/css/googlecode.min.css">
     <script src="/js/highlight.min.js"></script>
     <script>
@@ -14,7 +13,6 @@
     </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
     crossorigin="anonymous"></script>
-</script>
 </head>
 
 <body>
@@ -27,22 +25,37 @@
         </nav>
     </header>
     <section id="container">
-        <div id="til-header">
-            <h2>2021
-11
-27</h2>
-        </div>
-        <div id="time-table">
-            <div class="time-table__element">
-    <h2>블로그 개발</h2>
-    <h3>83</h3>
-</div><div class="time-table__element">
-    <h2>자료구조</h2>
-    <h3>287</h3>
-</div>
+        <div id="post-header">
+            <h2>이진 탐색</h2>
         </div>
         <div id="post-content">
-            
+            <pre><code class="language-c">int binary_search(int arr[], int len, int target)
+{
+    int lo = 0;
+    int hi = len - 1;
+    int mid;
+    while (lo &lt;= hi)
+    {
+        mid = (lo + hi) / 2;
+        if (target == arr[mid])
+        {
+            return mid;
+        }
+        else
+        {
+            if (target &lt; arr[mid])
+            {
+                hi = mid - 1;
+            }
+            else
+            {
+                lo = mid + 1;
+            }
+        }
+    }
+    return -1;
+}
+</code></pre>
             <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
                 crossorigin="anonymous" async></script>
         </div>

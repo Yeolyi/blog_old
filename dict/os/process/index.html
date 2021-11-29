@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>YeolYi</title>
+    <link rel="stylesheet" href="/css/googlecode.min.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="yeolyi-logo">YeolYi</a>
+        <nav>
+            <a href="/dev" class="nav__button">Dev</a>
+            <a href="/dict" class="nav__button">Dict</a>
+            <a href="/stories" class="nav__button">Stories</a>
+        </nav>
+    </header>
+    <section id="container">
+        <div id="post-header">
+            <h2>프로세스</h2>
+        </div>
+        <div id="post-content">
+            <h2>프로세스의 이해</h2>
+<p>실행중인 프로그램을 프로세스라고 한다. Program in execution. 운영체제 작업의 단위. 프로세스는 그 일을 하기 위해 특정 자원들을 필요로 한다. </p>
+<p>하드 디스크에서 메모리로 로드돼서 CPU가 fetch해서 실행할 수 있는 상태의 프로그램을 프로세스라고 한다. </p>
+<p>프로세스의 메모리 레이아웃은 다음과 같은 섹션들로 나뉜다. </p>
+<ul>
+<li>Text section: 실행 가능한 코드</li>
+<li>Data section: 전역 변수. </li>
+<li>Heap section: 런타임에 동적으로 할당된 메모리</li>
+<li>Stack section: 함수 호출시의 임시 저장 공간. 매개변수, 리턴 주소, 지역 변수 등등</li>
+</ul>
+<p>프로세스는 다섯개의 life cycle을 가진다. </p>
+<ul>
+<li>New: 프로세스 생성</li>
+<li>Running: 명령어 실행</li>
+<li>Waiting: 특정 이벤트를 기다림</li>
+<li>Ready: 프로세서에 맡겨지기를 기다림. Waiting에서 시그널 왔다고 바로 CPU 점유할 수 있는게 아님. </li>
+<li>Terminated: 실행이 끝남</li>
+</ul>
+<p>I/O 기다리는 애는 ready가 아니라 waiting으로 감!!</p>
+<p><img alt="" src="life_cycle.png" /></p>
+<p>PCB(Process Control Block)이라는 구조체를 만들어서 프로세스를 관리. 프로세스에게 필요한 모든 정보를 여기 담자! 각 프로세스가 가져야 할 정보는 PCB로 handling된다. </p>
+<ul>
+<li>Process state</li>
+<li>Program counter</li>
+<li>CPU registers</li>
+</ul>
+<p>프로그램 카운터와 레지스터를 문맥, context라고 한다. </p>
+<p>여기서 우리가 살펴본 프로세스는 single thread of execution을 실행한다. 한 번에 한 task밖에 못하니 multiprocessing(운영체제의 핵심 기능, 이거때매 있음!)을 위해서는 여러 쓰레드가 필요하다. </p>
+<p>위에 thread에서 용어를 따 와 하나의 프로세스에서 lightweight process인 thread(Chapter4)를 할 수 있게 함. 이게 유리해서 대부분 multithreading 위주 병렬 처리, concurrency를 함. </p>
+<p>Multiprogramming의 목적은 동시에 여러 프로세스를 실행시키는 것. At the same time, simultaneously, concurrently 등등 같은 말들이 있지만 parallel한 것과는 의미가 다름. 아무튼 CPU 사용량을 늘리기 위해 이 짓을 함. </p>
+<h2>프로세스의 생성</h2>
+<h2>프로세스간 통신</h2>
+<h2>프로세스간 통신의 실제</h2>
+            <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
+                crossorigin="anonymous" async></script>
+        </div>
+    </section>
+</body>
+
+</html>

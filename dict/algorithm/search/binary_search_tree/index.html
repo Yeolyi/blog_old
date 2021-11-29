@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>YeolYi</title>
+    <link rel="stylesheet" href="/css/googlecode.min.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="yeolyi-logo">YeolYi</a>
+        <nav>
+            <a href="/dev" class="nav__button">Dev</a>
+            <a href="/dict" class="nav__button">Dict</a>
+            <a href="/stories" class="nav__button">Stories</a>
+        </nav>
+    </header>
+    <section id="container">
+        <div id="post-header">
+            <h2>이진 탐색 트리</h2>
+        </div>
+        <div id="post-content">
+            <blockquote>
+<p>In computer science, a binary search tree (BST), also called an ordered or sorted binary tree, is a rooted binary tree data structure whose internal nodes each store a key greater than all the keys in the node’s left subtree and less than those in its right subtree.</p>
+</blockquote>
+<p>이중 포인터 쓰는 것 익숙해지기!</p>
+<p>아래처럼 바꾸기</p>
+<pre><code class="language-c">while (true)
+    {
+        if (!cur)
+            return NULL;
+        if (cur-&gt;data.key == key)
+            return cur;
+        if (cur-&gt;data.key &gt; key)
+            cur = cur-&gt;left;
+        else
+            cur = cur-&gt;right;
+    }
+</code></pre>
+<pre><code class="language-c">while (!cur)
+    {
+        if (cur-&gt;data.key == key)
+            return cur;
+        if (cur-&gt;data.key &gt; key)
+            cur = cur-&gt;left;
+        else
+            cur = cur-&gt;right;
+    }
+</code></pre>
+<h2>구현</h2>
+<p>이진 트리에서 함수 만들어놓고 왜 쓰지를 못하니,,,</p>
+<pre><code class="language-c">void BSTInit(BTreeNode **pRoot)
+{
+    *pRoot = NULL;
+}
+
+void BSTInsert(BTreeNode **pRoot, Data data)
+{
+    BTreeNode *cur = *pRoot;
+    BTreeNode *newNode = MakeBTreeNode();
+    newNode-&gt;data = data;
+
+    if (!cur)
+    {
+        *pRoot = MakeBTreeNode();
+        (*pRoot)-&gt;data = data;
+        return;
+    }
+    while (true)
+    {
+        if (data.key &lt; cur-&gt;data.key)
+        {
+            if (cur-&gt;left)
+                cur = cur-&gt;left;
+            else
+            {
+                MakeLeftSubTree(cur, newNode);
+                return;
+            }
+        }
+        else
+        {
+            if (cur-&gt;right)
+                cur = cur-&gt;right;
+            else
+            {
+                MakeRightSubTree(cur, newNode);
+                return;
+            }
+        }
+    }
+}
+
+//NULL때문에 포인터 쓰는 것도 있는건가
+BTreeNode *BSTSearch(BTreeNode *cur, int key)
+{
+    while (true)
+    {
+        if (!cur)
+            return NULL;
+        if (cur-&gt;data.key == key)
+            return cur;
+        if (cur-&gt;data.key &gt; key)
+            cur = cur-&gt;left;
+        else
+            cur = cur-&gt;right;
+    }
+}
+
+int main()
+{
+    BTreeNode *bstRoot;
+    BSTInit(&amp;bstRoot);
+    Data data1;
+    data1.key = 1;
+    data1.name = &quot;RED&quot;;
+    Data data2;
+    data2.key = 2;
+    data2.name = &quot;ORANGE&quot;;
+    Data data3;
+    data3.key = 3;
+    data3.name = &quot;YELLOW&quot;;
+    Data data4;
+    data4.key = 4;
+    data4.name = &quot;GREEN&quot;;
+    Data data5;
+    data5.key = 5;
+    data5.name = &quot;BLUE&quot;;
+    BSTInsert(&amp;bstRoot, data1);
+    BSTInsert(&amp;bstRoot, data4);
+    BSTInsert(&amp;bstRoot, data5);
+    BSTInsert(&amp;bstRoot, data3);
+    BSTInsert(&amp;bstRoot, data2);
+    printf(&quot;%s &quot;, BSTSearch(bstRoot, 5)-&gt;data.name);
+    printf(&quot;%s &quot;, BSTSearch(bstRoot, 2)-&gt;data.name);
+    printf(&quot;%s &quot;, BSTSearch(bstRoot, 3)-&gt;data.name);
+    printf(&quot;%s &quot;, BSTSearch(bstRoot, 1)-&gt;data.name);
+    printf(&quot;%s &quot;, BSTSearch(bstRoot, 4)-&gt;data.name);
+    return 0;
+}
+</code></pre>
+            <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
+                crossorigin="anonymous" async></script>
+        </div>
+    </section>
+</body>
+
+</html>
