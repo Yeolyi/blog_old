@@ -344,7 +344,91 @@ int main()
 }
 </code></pre>
 <p>세마포. n개짜리. 신호기라는 뜻. 세마포 S는 두개의 표준 atomic operation으로만 접근 가능한 정수 변수. wait()와 signal(). 열쇠꾸러미가 있다고 생각하자. 열쇠가 있으면 하나 가져가고 다시 돌려놓고. </p>
+<p>Binary Semaphore: mutex lock과 비슷. 0과 1에서 왔다갔다함. </p>
+<p>Counting Semaphore: 가능한 리소스 수대로 초기화시킴. 리소스를 사용할 때 wait로 카운트 값을 감소시킴. 리소스 release할때는 카운트 들림. 카운트 0이면 기다리기. </p>
+<p>얘도 물론 busy waiting함. Busy waiting 대신에 waiting queue에 감으로써 해결할 수 있음. </p>
+<p>세마포 값이 음수일 때, 그 절댓값은 세마포를 대기하고 있는 프로세스들의 수이다</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;semaphore.h&gt;
+
+int sum = 0;
+
+sem_t sem;
+
+void *counter(void *param)
+{
+    for (int k = 0; k &lt; 10000; k++)
+    {
+        // entry section
+        sem_wait(&amp;sem);
+        // critical section
+        sum++;
+        // exit section
+        sem_post(&amp;sem);
+        // remainder section
+    }
+    pthread_exit(0);
+}
+
+int main()
+{
+    pthread_t tid1, tid2;
+    sem_init(&amp;sem, 0, 1);
+    pthread_create(&amp;tid1, NULL, counter, NULL);
+    pthread_create(&amp;tid2, NULL, counter, NULL);
+    pthread_join(tid1, NULL);
+    pthread_join(tid2, NULL);
+    printf(&quot;sum = %d&quot;, sum);
+}
+</code></pre>
+<p><a href="https://stackoverflow.com/questions/27736618/why-are-sem-init-sem-getvalue-sem-destroy-deprecated-on-mac-os-x-and-w">Deprecated?</a></p>
+<p><a href="https://medium.com/helderco/semaphores-in-mac-os-x-fd7a7418e13b">참고</a></p>
+<p>sem_init. 0은 프로세스를 어떻게 공유할 것인가. 리눅스에서는 0밖에 못씀. 1은 s=1.</p>
+<p>sem_init을 5로 하고 5개의 쓰레드를 만들면 각자 열쇠가 있으니 진입해서 sum++을 함. Race condition이 그대로 발생. sum[5]인 배열이고 각각 접근한다면 5개를 동시에 진입시켜도 됨. </p>
 <h2>모니터와 자바 동기화</h2>
+<p>세마포가 편하긴하지만 timing errors가 발생할 수 있다. 디버깅하기 매우 어려움.</p>
+<p>wait -&gt; signal 순서를 지키지 않으면 문제가 생김. 따라서 higher-level language construct인 모니터 타입을 사용. </p>
+<p>Conditional Variables. 동기화 매커니즘을 제공해줌. </p>
+<p>자바에서는 moniter-lock, intrinsic-lock을 제공해줌. 쓰레드 동기화를 위한 concurrency mechanism. 
+synchronized keyword: 임계영역에 해당하는 코드 블록을 선언할 떄 사용하는 자바 키워드. 해당 코드 블록에는 모니터락을 획득해야 진입 가능. 모니터락을 가진 객체 인스턴스를 지정할 수 있음.</p>
+<p>wait() and notify(): 각각 wait와 signal. 쓰레드가 어떤 객체의 wait 메소드를 호출하면 해당 객체의 모니터락을 획득하기 위해 대기 상태로 진입함. notify를 호출하면 해당 객체 모니터에 대기중인 쓰레드 하나를 깨움. notifyAll()은 대기중인 쓰레드 전부를 깨움. </p>
+<pre><code>package test;
+
+public class SyncExample1 {
+    static class Counter {
+        public static int count = 0;
+
+        synchronized public static void increment() {
+            count++;
+        }
+    }
+
+    static class MyRunnable implements Runnable {
+        @Override
+        public void run() {
+            for (int i = 0; i &lt; 10000; i++)
+                Counter.increment();
+        }
+    }
+
+    public static void main(String[] args) throws Exception {
+        Thread[] threads = new Thread[5];
+        for (int i = 0; i &lt; threads.length; i++) {
+            threads[i] = new Thread(new MyRunnable());
+            threads[i].start();
+        }
+        for (int i = 0; i &lt; threads.length; i++)
+            threads[i].join();
+        System.out.println(&quot;counter = &quot; + Counter.count);
+    }
+}
+</code></pre>
+<p>모니터에 선언된 모든 메소드들은 모니터 안에 있는 변수의 동기화를 의미한다. 객체가 달라지면 모니터가 따로 있는거라서 지들끼리만 동기화됨. </p>
+<p>Liveness. 지금까지 본 애들은 데드락과 bounded-waiting문제를 해결하지 못함. 그것도 해결하는게 Liveness. </p>
+<p>Deadlock. 두개 이상의 프로세스가 영원히 기다리는 것. Waiting queue에 있는 프로세스가 일으킬 수 있는 이벤트를 기다리는 것. P0은 wait(S), wait(Q) P1은 wait(Q), wait(S)일 떄. </p>
+<p>Priority Inversion. 높은 우선순위가 낮은 것에게 밀리는 것. 낮은 우선순위 프로세스가 높은 것에게 필요한 자원을 쓰고있으면(커널 데이터 rw) 기다릴 수밖에 없음. 
+Priority inheritance protocol로 회피. H가 소유하고자하는 R1을 L가 가지고 있으면 H의 우선순위를 상속함.</p>
             <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
                 crossorigin="anonymous" async></script>
         </div>
