@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>YeolYi</title>
+    <link rel="stylesheet" href="/css/googlecode.min.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="yeolyi-logo">YeolYi</a>
+        <nav>
+            <a href="/dev" class="nav__button">Dev</a>
+            <a href="/dict" class="nav__button">Dict</a>
+            <a href="/stories" class="nav__button">Stories</a>
+        </nav>
+    </header>
+    <section id="container">
+        <div id="post-header">
+            <h2>프로세스 동기화</h2>
+        </div>
+        <div id="post-content">
+            <h2>프로세스 동기화</h2>
+<p>Concurrent access to shared data -&gt; data inconsistency
+실행 순서대로 실행되게 보장해야 data consistency를 유지할 수 있다. </p>
+<p>생산자-소비자 문제에서 각각은 버퍼를 사용한다. 각자 쓰고 읽고 싶을 때 하는 비동기적으로 작동. parallel하게 돈다면 문제가 발생하지 않지만 concurrent하면??? 반대 아닌가,,,?  </p>
+<p>count로 버퍼에 있는 원소의 개수를 센다고 하자. 제대로 동작 안함. </p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;pthread.h&gt;
+
+// 전역변수면 무조건 0이었나~?
+int sum;
+
+void *run1(void *param)
+{
+    for (int i = 0; i &lt; 10000; i++)
+        sum++;
+    pthread_exit(0);
+}
+
+void *run2(void *param)
+{
+    for (int i = 0; i &lt; 10000; i++)
+        sum--;
+    pthread_exit(0);
+}
+
+int main()
+{
+    pthread_t tid1, tid2;
+    pthread_create(&amp;tid1, NULL, run1, NULL);
+    pthread_create(&amp;tid2, NULL, run2, NULL);
+    pthread_join(tid1, NULL);
+    pthread_join(tid2, NULL);
+    printf(&quot;%d&quot;, sum);
+}
+</code></pre>
+<p>c언어로 보니 ++ -- 문장 하나지만 실제로는 레지스터에 count값 옮기고 계산하고 다시 저장하는 과정으로 이루어져있음. 이 사이에서 context switching이 일어날 수 있음. </p>
+<p>Race Condition: 경쟁 상황. 여러 개의 프로세스(쓰레드)가 공유하는 데이터를 concurrent하게 접근/수정하면 결과가 실행 순서에 따라 달라질 수 있다. </p>
+<ul>
+<li>Synchronization: 특정 시간에 하나의 프로세스만 다룰 수 있게 하기. </li>
+</ul>
+<pre><code>package test;
+
+public class RaceCondition {
+    public static void main(String[] args) throws Exception {
+        RunnableOne run1 = new RunnableOne();
+        RunnableOne run2 = new RunnableOne();
+        Thread t1 = new Thread(run1);
+        Thread t2 = new Thread(run2);
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        System.out.println(&quot;Result: &quot; + RunnableOne.count);
+    }
+}
+
+package test;
+
+public class RunnableOne implements Runnable {
+
+    // int count = 0;
+    static int count = 0;
+
+    public void run() {
+        for (int i = 0; i &lt; 10000; i++)
+            count++;
+    }
+}
+</code></pre>
+<p>The Critical Section Problem: 임계 영역 문제. N개의 프로세스가 있을 때 각각은 다른 프로세스와 공유되며 임계 영역이라 불리는 코드 segment가 있다. 한 코드가 임계 영역을 실행할 때 다른 애들이 스스로의 임계 영역을 실행하지 못하도록 하자! </p>
+<p>그러면 코드 영역을 다음과 같이 나눌 수 있다. </p>
+<ul>
+<li>Entry section: 임계 영역에 진입하는 코드. 허가를 요청.  </li>
+<li>Critical section</li>
+<li>Exit section: 허가를 반납. </li>
+<li>Remainder section: 남는거. </li>
+</ul>
+<p><img alt="" src="code_section.png" /></p>
+<p>이 해결책의 세가지 조건. 현실적으로 다 풀기는 어렵다. 아래 두개는 발생하면 피해보자 느낌??</p>
+<ul>
+<li>Mutual Exclusion: 상호배제, 다른 애들 못들어옴. 얘가 제일 기본적인 조건. </li>
+<li>Progress: 데드락 피하기. </li>
+<li>Bounded Waiting: 기아 피하기. </li>
+</ul>
+<p>싱글 코어에서 가장 간단한 해결책은 shared variable에 접근 중일때는 인터럽트가 발생하지 않도록 하는 것. 하지만 멀티프로세서 환경에서는 쓸 수 없는 방법이다. </p>
+<p>멀티- 환경에서는 두가지 일반적인 접근법. </p>
+<ul>
+<li>비선점형 커널에서는 일단 진입을 하면 자발적 반환 전까지 CPU에서 나오지 않으니 문제가 발생하지 않는다. 근데 비선점형은 요즘 안씀. </li>
+<li>선점형 커널은 다루기 어렵지만 훨씬 responsive하기 때문에 사용한다. </li>
+</ul>
+<h2>동기화 문제의 해결책</h2>
+<p>소프트웨어적 해결책. </p>
+<p>Dekker's Algorithm. 두 개의 프로세스로 해결
+Eisenberg and McGuire's Alrogithm. n개의 프로세스, n-1 turns의 대기 하한선을 가짐. 
+Bakery Algorithm. Ramport. 책에서는 안다룸. </p>
+<p>우리가 본격적으로 다룰 Peterson's Algorithm. 고전적임. </p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;stdbool.h&gt;
+
+int sum = 0;
+
+int turn;
+int flag[2];
+
+void *producer(void *param)
+{
+    for (int i = 0; i &lt; 10000; i++)
+    {
+        // entry section
+        flag[0] = true;
+        turn = 1;
+        while (flag[1] &amp;&amp; turn == 1)
+            ;
+
+        // critical section
+        sum++;
+
+        //exit section
+        flag[0] = false;
+    }
+    pthread_exit(0);
+}
+
+void *consumer(void *param)
+{
+    for (int i = 0; i &lt; 10000; i++)
+    {
+        // entry section
+        flag[1] = true;
+        turn = 0;
+        while (flag[0] &amp;&amp; turn == 0)
+            ;
+
+        // critical section
+        sum--;
+
+        //exit section
+        flag[1] = false;
+    }
+    pthread_exit(0);
+}
+
+int main()
+{
+    pthread_t tid1, tid2;
+    pthread_create(&amp;tid1, NULL, producer, NULL);
+    pthread_create(&amp;tid2, NULL, consumer, NULL);
+    pthread_join(tid1, NULL);
+    pthread_join(tid2, NULL);
+    printf(&quot;sum= %d\n&quot;, sum);
+}
+</code></pre>
+<p>동기화가 대부분 일어나지만, 실패하는 경우가 생김. Peterson's solution은 no guarantee! 기계어 레벨로 생각해봐야한다. while 조건을 확인하는 과정에서 context switching이 일어나면?
+그래도 algorithmic desciprtion으로 살펴보기에는 좋다. 개념적으로 완벽하다~. 위에 세가지 조건을 다 만족시킴. </p>
+<p><a href="https://stackoverflow.com/questions/4849077/unable-to-understand-correctness-of-peterson-algorithm">출처</a></p>
+<p>1) Mutual exclusion - flag[0] and flag[1] can both be true, but turn can only be 0 or 1. Therefore only one of the two critical sections can be executed. The other will spin wait.</p>
+<p>2) Progress - If process 0 is in the critical section, then turn = 0 and flag[0] is true. Once it has completed it's critical section (even if something catastrophic happens), it must set flag[0] to false. If process 1 was spin waiting, it will now free as flag[0] != true.</p>
+<p>3) Bound-waiting - If Process 1 is waiting, Process 0 can only enter it's critical section once, before process 1 is given the green light, as explained in #2.</p>
+<p>n개로 확장할수는 있지만 굳이~. 이론적으로 세가지를 동시에 만족시키는 것에 의미가 있다. </p>
+<p>Hardware-based Solution. </p>
+<p>Atomicity. atomic operation이란 인터럽트 할 수 없는 operation.  </p>
+<ul>
+<li>test_and_set()</li>
+<li>compare_and_swap()</li>
+</ul>
+<p>얘네 쓴 구현은 적어도 상호 배제는 해결된다. </p>
+<p>Atomic variable. Compare_and_swap 명령어를 atomic variable을 위한 도구로 사용 가능. Single variable에 대한 race condition을 뭐?</p>
+<pre><code>package test;
+
+public class Peterson1 {
+    static int count = 0;
+    static int turn = 0;
+    static boolean[] flag = new boolean[2];
+
+    public static void main(String[] args) throws Exception {
+        Thread t1 = new Thread(new Producer());
+        Thread t2 = new Thread(new Consumer());
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        System.out.println(Peterson1.count);
+    }
+
+    static class Producer implements Runnable {
+        public void run() {
+            for (int i = 0; i &lt; 10000; i++) {
+                flag[0] = true;
+                turn = 1;
+                while (flag[1] &amp;&amp; turn == 1)
+                    ;
+                count++;
+                flag[0] = false;
+            }
+        }
+    }
+
+    static class Consumer implements Runnable {
+        public void run() {
+            for (int i = 0; i &lt; 10000; i++) {
+                flag[1] = true;
+                turn = 0;
+                while (flag[0] &amp;&amp; turn == 0)
+                    ;
+                count--;
+                flag[1] = false;
+            }
+        }
+    }
+}
+
+</code></pre>
+<p>Atomic 사용 버전. 아까 100000번 할 때 안되던게 여기서는 되는데, 데드락 문제가 해결되었기 때문인듯. 데드락이 일어난건 어떻게 알지?</p>
+<pre><code>package test;
+
+import java.util.concurrent.atomic.AtomicBoolean;
+
+public class Peterson2 {
+    static int count = 0;
+    static int turn = 0;
+    static AtomicBoolean[] flag;
+    static {
+        flag = new AtomicBoolean[2];
+        for (int i = 0; i &lt; flag.length; i++)
+            flag[i] = new AtomicBoolean();
+    }
+
+    public static void main(String[] args) throws Exception {
+        Thread t1 = new Thread(new Producer());
+        Thread t2 = new Thread(new Consumer());
+        t1.start();
+        t2.start();
+        t1.join();
+        t2.join();
+        System.out.println(Peterson1.count);
+    }
+
+    static class Producer implements Runnable {
+        public void run() {
+            for (int i = 0; i &lt; 100000; i++) {
+                flag[0].set(true);
+                turn = 1;
+                while (flag[1].get() &amp;&amp; turn == 1)
+                    ;
+                count++;
+                flag[0].set(false);
+            }
+        }
+    }
+
+    static class Consumer implements Runnable {
+        public void run() {
+            for (int i = 0; i &lt; 100000; i++) {
+                flag[1].set(true);
+                turn = 0;
+                while (flag[0].get() &amp;&amp; turn == 0)
+                    ;
+                count--;
+                flag[1].set(false);
+            }
+        }
+    }
+
+}
+
+</code></pre>
+<p>상호배제 해결책 세가지 뮤텍스, 세마포어, 모니터</p>
+<h2>뮤텍스와 세마포어</h2>
+<p>Higher-level software tools to solve CSP</p>
+<ul>
+<li>Mutex Locks: 동기화를 위한 가장 간단한 도구. 열쇠로 쓰고 열쇠를 반납해라. </li>
+<li>Semaphore: 가장 보편적. 뮤텍스와 달리 n개도 가능. </li>
+<li>Monitor: 위 도구의 문제점 해결. Java에서 notify 사용. </li>
+<li>Linveness: 데드락도 해결</li>
+</ul>
+<p>Mutex Lock</p>
+<p>mutex: mutual exclusion. 프로세스는 lock을 얻어 임계 영역에 들어가야 한다. 나올때는 lock을 release해야한다. 
+acquire(), release(). available: 열쇠가 있는가. 두 함수 모두 atomically 작동되어야한다. compare_and_swap 사용해서 구현 가능.</p>
+<p>하지만 Busy waiting 문제가 생김. 멀티프로세싱 시스템에서 다른 프로세스가 잘 쓸 수 있었던 CPU 사이클을 낭비하게 된다. </p>
+<p>Spinlock. Busy waiting을 하는 Mutex lock. 위의 단점에도 불구하고 장점이 있는데, lock을 기다리는 과정에서 context switching이 없다. switching 시간을 아낄 수 있음. 멀티코어에서는 좋은 점도 있음. </p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;pthread.h&gt;
+
+int sum = 0; // a shared variable
+
+pthread_mutex_t mutex;
+
+void *counter(void *param)
+{
+    for (int i = 0; i &lt; 100000; i++)
+    {
+        // entry section
+        pthread_mutex_lock(&amp;mutex);
+        // critical section
+        sum++;
+        // exit section
+        pthread_mutex_unlock(&amp;mutex);
+        //remainder section
+    }
+    pthread_exit(0);
+}
+
+int main()
+{
+    pthread_t tid1, tid2;
+    pthread_mutex_init(&amp;mutex, NULL);
+    pthread_create(&amp;tid1, NULL, counter, NULL);
+    pthread_create(&amp;tid2, NULL, counter, NULL);
+    pthread_join(tid1, NULL);
+    pthread_join(tid2, NULL);
+    printf(&quot;sum = %d\n&quot;, sum);
+}
+</code></pre>
+<h2>모니터와 자바 동기화</h2>
+            <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
+                crossorigin="anonymous" async></script>
+        </div>
+    </section>
+</body>
+
+</html>
