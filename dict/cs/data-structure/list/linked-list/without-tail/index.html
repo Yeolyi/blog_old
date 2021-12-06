@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>YeolYi</title>
+    <link rel="stylesheet" href="/css/googlecode.min.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="yeolyi-logo">YeolYi</a>
+        <nav>
+            <a href="/dev" class="nav__button">Dev</a>
+            <a href="/dict" class="nav__button">Dict</a>
+            <a href="/stories" class="nav__button">Stories</a>
+        </nav>
+    </header>
+    <section id="container">
+        <div id="post-header">
+            <h2>꼬리 없는 연결 리스트 구현</h2>
+        </div>
+        <div id="post-content">
+            <h2>구조체 선언</h2>
+<pre><code class="language-c">typedef struct _node
+{
+    LData data;
+    struct _node *next;
+} Node;
+
+typedef struct _linkedList
+{
+    Node *head;
+    Node *cur;
+    Node *prev;
+    int size;
+    bool (*AreInIncreasingOrder)(LData *a, LData *b);
+} LinkedList;
+</code></pre>
+<h2>더미 노드가 없는 끔찍한 구현</h2>
+<p>숨 쉴 때마다 head에 대한 예외를 생각해야한다. 정렬 때문에 head에 원소를 삽입해야되는 경우 예외처리를 해줘야하는데 정말 끔찍하다. cur가 아무리 앞에 있어도 head에 위치해있는데 이러면 head 뒤에만 원소를 이을 수밖에 없기 때문. </p>
+<pre><code class="language-c">void ListInit(List *plist)
+{
+    plist-&gt;head = NULL;
+    plist-&gt;size = 0;
+    plist-&gt;AreInIncreasingOrder = NULL;
+}
+
+void LInsert(List *plist, LData data)
+{
+    Node *node = malloc(sizeof(Node));
+    node-&gt;data = data;
+    (plist-&gt;size)++;
+    if (!plist-&gt;head)
+    {
+        node-&gt;next = NULL;
+        plist-&gt;head = node;
+        return;
+    }
+    if (plist-&gt;AreInIncreasingOrder)
+    {
+        if (plist-&gt;AreInIncreasingOrder(&amp;data, &amp;(plist-&gt;head-&gt;data)))
+        {
+            node-&gt;next = plist-&gt;head;
+            plist-&gt;head = node;
+            return;
+        }
+        Node *cur = plist-&gt;head;
+        while (cur-&gt;next &amp;&amp; plist-&gt;AreInIncreasingOrder(&amp;cur-&gt;next-&gt;data, &amp;data))
+            cur = cur-&gt;next;
+        node-&gt;next = cur-&gt;next;
+        cur-&gt;next = node;
+    }
+    else
+    {
+        node-&gt;next = plist-&gt;head-&gt;next;
+        plist-&gt;head = node;
+    }
+}
+
+bool LFirst(List *plist, LData *data)
+{
+    if (!(plist-&gt;size))
+        return false;
+    plist-&gt;prev = NULL;
+    plist-&gt;cur = plist-&gt;head;
+    if (data)
+        *data = plist-&gt;cur-&gt;data;
+    return true;
+}
+
+bool LNext(List *plist, LData *data)
+{
+    if (!(plist-&gt;cur-&gt;next))
+        return false;
+    plist-&gt;prev = plist-&gt;cur;
+    plist-&gt;cur = plist-&gt;cur-&gt;next;
+    if (data)
+        *data = plist-&gt;cur-&gt;data;
+    return true;
+}
+
+int LCount(List *plist) { return plist-&gt;size; }
+
+void LRemove(List *plist)
+{
+    (plist-&gt;size)--;
+    if (!plist-&gt;prev)
+    {
+        plist-&gt;head = plist-&gt;head-&gt;next;
+        free(plist-&gt;cur);
+        plist-&gt;cur = plist-&gt;head;
+        return;
+    }
+    plist-&gt;prev-&gt;next = plist-&gt;cur-&gt;next;
+    free(plist-&gt;cur);
+    plist-&gt;cur = plist-&gt;prev;
+}
+
+void LClear(List *plist)
+{
+    while (LFirst(plist, NULL))
+    {
+        LRemove(plist);
+    }
+}
+
+void SetSortRule(List *plist, bool (*AreInIncreasingOrder)(LData *a, LData *b))
+{
+    plist-&gt;AreInIncreasingOrder = AreInIncreasingOrder;
+}
+</code></pre>
+<h2>더미 노드가 있는 구현</h2>
+<blockquote>
+<p>Since every position you want to insert at (and every node you're allowed to delete) has a prev and next node, the code is simplified.</p>
+</blockquote>
+<p><a href="https://stackoverflow.com/questions/9103577/what-is-the-difference-between-the-head-node-and-starting-node-of-link-list">출처</a></p>
+<ul>
+<li>LInit에서 head에 더미 노드를 붙인다. 더미의 data는 상관 없지만 next는 NULL이어야 한다. </li>
+<li>LInsert에서 초반 head가 NULL일 경우의 예외 처리 삭제. </li>
+<li>정렬 삽입일 때 맨 앞에 삽입되는 경우의 예외 처리 삭제. </li>
+<li>정렬 없는 삽입에서 plist-&gt;head = node;를 plist-&gt;head-&gt;next = node;로 변경</li>
+<li>LFirst에서 이제 prev가 더미 노드를 가르킴. </li>
+<li>LRemove에서 prev가 NULL인지 확인하지 않음. </li>
+<li>더미가 있어서 head 노드가 삭제될 걱정을 하지 않아도 된다. </li>
+</ul>
+<pre><code class="language-c">void ListInit(List *plist)
+{
+    plist-&gt;head = malloc(sizeof(Node));
+    plist-&gt;head-&gt;next = NULL;
+    plist-&gt;size = 0;
+    plist-&gt;AreInIncreasingOrder = NULL;
+}
+
+void LInsert(List *plist, LData data)
+{
+    Node *node = malloc(sizeof(Node));
+    node-&gt;data = data;
+    (plist-&gt;size)++;
+    if (plist-&gt;AreInIncreasingOrder)
+    {
+        Node *cur = plist-&gt;head;
+        while (cur-&gt;next &amp;&amp; plist-&gt;AreInIncreasingOrder(&amp;cur-&gt;next-&gt;data, &amp;data))
+            cur = cur-&gt;next;
+        node-&gt;next = cur-&gt;next;
+        cur-&gt;next = node;
+    }
+    else
+    {
+        node-&gt;next = plist-&gt;head-&gt;next;
+        plist-&gt;head-&gt;next = node;
+    }
+}
+
+bool LFirst(List *plist, LData *data)
+{
+    if (!(plist-&gt;size))
+        return false;
+    plist-&gt;prev = plist-&gt;head;
+    plist-&gt;cur = plist-&gt;head-&gt;next;
+    if (data)
+        *data = plist-&gt;cur-&gt;data;
+    return true;
+}
+
+bool LNext(List *plist, LData *data)
+{
+    if (!(plist-&gt;cur-&gt;next))
+        return false;
+    plist-&gt;prev = plist-&gt;cur;
+    plist-&gt;cur = plist-&gt;cur-&gt;next;
+    if (data)
+        *data = plist-&gt;cur-&gt;data;
+    return true;
+}
+
+int LCount(List *plist) { return plist-&gt;size; }
+
+void LRemove(List *plist)
+{
+    (plist-&gt;size)--;
+    plist-&gt;prev-&gt;next = plist-&gt;cur-&gt;next;
+    free(plist-&gt;cur);
+    plist-&gt;cur = plist-&gt;prev;
+}
+
+void LClear(List *plist)
+{
+    while (LFirst(plist, NULL))
+        LRemove(plist);
+}
+
+void SetSortRule(List *plist, bool (*AreInIncreasingOrder)(LData *a, LData *b))
+{
+    plist-&gt;AreInIncreasingOrder = AreInIncreasingOrder;
+}
+</code></pre>
+            <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
+                crossorigin="anonymous" async></script>
+        </div>
+    </section>
+</body>
+
+</html>

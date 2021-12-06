@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>YeolYi</title>
+    <link rel="stylesheet" href="/css/googlecode.min.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="yeolyi-logo">YeolYi</a>
+        <nav>
+            <a href="/dev" class="nav__button">Dev</a>
+            <a href="/dict" class="nav__button">Dict</a>
+            <a href="/stories" class="nav__button">Stories</a>
+        </nav>
+    </header>
+    <section id="container">
+        <div id="post-header">
+            <h2>재귀를 활용한 하노이의 탑 풀이</h2>
+        </div>
+        <div id="post-content">
+            <pre><code class="language-c">#include &lt;stdio.h&gt;
+
+void Hanoi(char from, char through, char to, int num)
+{
+    if (num == 1)
+    {
+        printf(&quot;%c에서 %c로 %d번 원반을 이동\n&quot;, from, to, num);
+    }
+    else
+    {
+        Hanoi(from, to, through, num - 1);
+        printf(&quot;%c에서 %c로 %d번 원반을 이동\n&quot;, from, to, num);
+        Hanoi(through, from, to, num - 1);
+    }
+}
+
+int main()
+{
+    Hanoi('A', 'B', 'C', 3);
+}
+</code></pre>
+            <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
+                crossorigin="anonymous" async></script>
+        </div>
+    </section>
+</body>
+
+</html>
