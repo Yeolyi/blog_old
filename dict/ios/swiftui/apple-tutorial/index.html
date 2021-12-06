@@ -172,8 +172,9 @@ viewbuilder는 return이 필요없는듯. </p>
 }
 
 @State private var book = Book(title: &quot;The Adventures of Smudge&quot;, identifier: 19237)
+
+// $book.identifier는 Binding&lt;Int&gt;
 </code></pre>
-<p>$book.identifier는 Binding<Int></p>
 <h2>Managing State and Life Cycle</h2>
 <p>ZStack overlays views back to front</p>
 <p>.previewLayout(.sizeThatFits)</p>
@@ -213,6 +214,9 @@ private var minutesRemainingMetric: String {
 <p>왜 weak self를 썼는지도 알아보자,,, <a href="https://seolhee2750.tistory.com/117">클로저</a>도 공부하기!!</p>
 <p>SwiftUI provides life cycle methods to trigger events when a view appears and disappears.</p>
 <p>The timer stops each time an <strong>instance of MeetingView</strong> leaves the screen, indicating that a meeting has ended.</p>
+<p>오 dropLast 메소드 기억해두기!</p>
+<p>타이머에서 스킵이 즉 scrumTimer에서의 스킵이지만 논리 분리?를 위해 패러미터로 따로 받는 것 인상깊음. </p>
+<h2>Updating App Data</h2>
             <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
                 crossorigin="anonymous" async></script>
         </div>
