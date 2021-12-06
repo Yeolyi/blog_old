@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>YeolYi</title>
+    <link rel="stylesheet" href="/css/googlecode.min.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
+    crossorigin="anonymous"></script>
+</script>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="yeolyi-logo">YeolYi</a>
+        <nav>
+            <a href="/dev" class="nav__button">Dev</a>
+            <a href="/dict" class="nav__button">Dict</a>
+            <a href="/stories" class="nav__button">Stories</a>
+        </nav>
+    </header>
+    <section id="container">
+        <div id="post-header">
+            <h2>백준에서 사용한 Swift 함수와 구문들</h2>
+            <h3>2021-11-01</h3>
+        </div>
+        <div id="post-content">
+            <pre><code class="language-swift">print(#&quot;&quot;&quot;
+\    /\
+ )  ( ')
+(  /  )
+ \(__)|
+&quot;&quot;&quot;#)
+</code></pre>
+<p><em>탈출문자 포함된 여러줄 문자열 출력하기</em></p>
+<pre><code class="language-swift">Character(&quot;a&quot;).asciiValue!
+</code></pre>
+<p><em>특정 문자의 아스키 값 알기.</em></p>
+<p>문자열로 시도하면 Character 초기화 중 에러 발생, 이모티콘 같이 아스키 코드 없는 값으로 시도하면 nil 반환. </p>
+<pre><code class="language-swift">String(repeating: &quot;*&quot;, count: i)
+</code></pre>
+<p><em>반복되는 문자열 출력하기.</em></p>
+<pre><code class="language-swift">while let input = readLine()?.split(separator: &quot; &quot;).map({ Int($0)! }) {
+    print(input[0]+input[1])
+}
+</code></pre>
+<p><em>EOF까지 입력 받기.</em></p>
+<pre><code class="language-swift">let str = &quot;Hello&quot;
+print(str.utf8) 
+// Hello
+print(Array(str.utf8)) 
+// [72, 101, 108, 108, 111]
+print(Array(str.unicodeScalars).map(\.value)) 
+// [72, 101, 108, 108, 111]
+</code></pre>
+<p><em>String을 아스키 배열로 표현하기</em></p>
+<p>사실 utf8이든 utf16이든 뭐든 아스키 부분은 일치하는지 코테볼 때는 괜찮겠지만 <a href="https://shyi0200.tistory.com/m/28">자세한 사항</a>도 알아보면 좋을 듯!</p>
+<pre><code class="language-swift">// typealias UnicodeScalar = Unicode.Scalar
+Character(UnicodeScalar(72))
+</code></pre>
+<p><em>아스키에서 char로 변환하기</em> </p>
+<p>Unicode.Scalar는 UInt8의 이니셜라이져와 다르게 Int의 이니셜라이져는 실패 가능하다는 점 주의! 문자열 관련 문제 풀 떄 이게 왜 되지? 궁금해했는데 알고보니 다른 문자열 내장 함수가 UInt8을 뱉어서 이니셜라이져 실패 안하고 문제 없이 넘어간 것이었다,,,ㅎ</p>
+<pre><code class="language-swift">import Foundation
+print(String(format: &quot;%d%02d&quot;, hh, ww))
+</code></pre>
+<p><em>C-style 문자열 포맷팅. import Foundation 잊지 말기!!!</em></p>
+<pre><code class="language-swift">for radians in stride(from: 0.0, to: .pi * 2 by: .pi / 2) {
+    let degrees = Int(radians * 180 / .pi)
+    print(&quot;Degrees: \(degrees), radians: \(radians)&quot;)
+}
+</code></pre>
+<p><em>stride(from:to:by:)</em></p>
+<p>stride 함수가 있다는 것을 자꾸 까먹어서 기록! 그런데 <a href="https://www.acmicpc.net/problem/1929">이 문제</a> 풀어보니까 stride 함수가 느린 것 같기도 하다. 속도가 중요하면 수학적으로 좀 더 생각해서 for 문 쓰는게 나을지도?</p>
+            <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
+                crossorigin="anonymous" async></script>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -217,6 +217,64 @@ private var minutesRemainingMetric: String {
 <p>오 dropLast 메소드 기억해두기!</p>
 <p>타이머에서 스킵이 즉 scrumTimer에서의 스킵이지만 논리 분리?를 위해 패러미터로 따로 받는 것 인상깊음. </p>
 <h2>Updating App Data</h2>
+<h2>Persisting Data</h2>
+<p>In this tutorial, you’ll update Scrumdinger to support persistence, an essential feature of most apps. You’ll add Codable conformance for the app’s models and write methods to load and save scrums.</p>
+<p>Codable is a type alias that combines the Encodable and Decodable protocols. When you implement these protocols on your types, you can use the Codable API to easily serialize data to and from JSON.</p>
+<p>Color 구조체 Codable하게 만드는 코드가 있음!</p>
+<p>An ObservableObject includes an objectWillChange publisher that emits when one of its @Published properties is about to change. Any view observing an instance of ScrumData will re-render when the scrums value changes. Observe라는게 특별한 뜻이 또 있는거 아닐까?!</p>
+<p>Dispatch queues are first in, first out (FIFO) queues to which your application can submit tasks. Background tasks have the lowest priority of all tasks.</p>
+<p>Self vs self</p>
+<p>FileManager, DispatchQueue... JSONDecoder...</p>
+<pre><code>import Foundation
+
+class ScrumData: ObservableObject {
+    private static var documentsFolder: URL {
+        do {
+            return try FileManager.default.url(for: .documentDirectory,
+                                               in: .userDomainMask,
+                                               appropriateFor: nil,
+                                               create: false)
+        } catch {
+            fatalError(&quot;Can't find documents directory.&quot;)
+        }
+    }
+    private static var fileURL: URL {
+        return documentsFolder.appendingPathComponent(&quot;scrums.data&quot;)
+    }
+    @Published var scrums: [DailyScrum] = []
+
+    func load() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let data = try? Data(contentsOf: Self.fileURL) else {
+                #if DEBUG
+                DispatchQueue.main.async {
+                    self?.scrums = DailyScrum.data
+                }
+                #endif
+                return
+            }
+            guard let dailyScrums = try? JSONDecoder().decode([DailyScrum].self, from: data) else {
+                fatalError(&quot;Can't decode saved scrum data.&quot;)
+            }
+            DispatchQueue.main.async {
+                self?.scrums = dailyScrums
+            }
+        }
+    }
+    func save() {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            guard let scrums = self?.scrums else { fatalError(&quot;Self out of scope&quot;) }
+            guard let data = try? JSONEncoder().encode(scrums) else { fatalError(&quot;Error encoding data&quot;) }
+            do {
+                let outfile = Self.fileURL
+                try data.write(to: outfile)
+            } catch {
+                fatalError(&quot;Can't write to file&quot;)
+            }
+        }
+    }
+}
+</code></pre>
             <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
                 crossorigin="anonymous" async></script>
         </div>
