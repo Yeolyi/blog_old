@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>YeolYi</title>
+    <link rel="stylesheet" href="/css/googlecode.min.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="yeolyi-logo">YeolYi</a>
+        <nav>
+            <a href="/dev" class="nav__button">Dev</a>
+            <a href="/dict" class="nav__button">Dict</a>
+            <a href="/stories" class="nav__button">Stories</a>
+        </nav>
+    </header>
+    <section id="container">
+        <div id="post-header">
+            <h2>양방향 연결 리스트</h2>
+        </div>
+        <div id="post-content">
+            <p>더미 노드를 헤드에만 붙였는데, 두 개를 붙이면 LInsert 함수가 좀 더 간단해질 것 같다. </p>
+<pre><code class="language-c">typedef struct _Node
+{
+    LData data;
+    struct _Node *next;
+    struct _Node *prev;
+} Node;
+
+typedef struct _DBLinkedList
+{
+    Node *head;
+    Node *cur;
+    int size;
+} DBLinkedList;
+
+typedef DBLinkedList List;
+
+void LInit(List *plist)
+{
+    plist-&gt;head = malloc(sizeof(Node));
+    plist-&gt;head-&gt;next = NULL;
+    plist-&gt;head-&gt;prev = NULL;
+    plist-&gt;size = 0;
+}
+
+void LInsert(List *plist, LData data)
+{
+    Node *node = malloc(sizeof(Node));
+    node-&gt;data = data;
+    node-&gt;next = plist-&gt;head-&gt;next;
+    node-&gt;prev = plist-&gt;head;
+    if (plist-&gt;head-&gt;next)
+        plist-&gt;head-&gt;next-&gt;prev = node;
+    plist-&gt;head-&gt;next = node;
+    (plist-&gt;size)++;
+}
+
+bool LFirst(List *plist, LData *data)
+{
+    if (!(plist-&gt;head-&gt;next))
+        return false;
+    plist-&gt;cur = plist-&gt;head-&gt;next;
+    if (data)
+        *data = plist-&gt;cur-&gt;data;
+    return true;
+}
+
+bool LNext(List *plist, LData *data)
+{
+    if (!(plist-&gt;cur-&gt;next))
+        return false;
+    plist-&gt;cur = plist-&gt;cur-&gt;next;
+    if (data)
+        *data = plist-&gt;cur-&gt;data;
+    return true;
+}
+
+bool LPrev(List *plist, LData *data)
+{
+    if (plist-&gt;cur-&gt;prev == plist-&gt;head)
+        return false;
+    plist-&gt;cur = plist-&gt;cur-&gt;prev;
+    if (data)
+        *data = plist-&gt;cur-&gt;data;
+    return true;
+}
+
+int main()
+{
+    List list;
+    Point data;
+    LInit(&amp;list);
+
+    for (int i = 1; i &lt; 8; i++)
+    {
+        data.x = i;
+        data.y = i;
+        data.level = i;
+        LInsert(&amp;list, data);
+    }
+    if (LFirst(&amp;list, &amp;data))
+    {
+        PrintPoint(&amp;data);
+        while (LNext(&amp;list, &amp;data))
+            PrintPoint(&amp;data);
+        while (LPrev(&amp;list, &amp;data))
+            PrintPoint(&amp;data);
+    }
+    return 0;
+}
+</code></pre>
+            <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
+                crossorigin="anonymous" async></script>
+        </div>
+    </section>
+</body>
+
+</html>

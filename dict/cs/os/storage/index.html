@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>YeolYi</title>
+    <link rel="stylesheet" href="/css/googlecode.min.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="yeolyi-logo">YeolYi</a>
+        <nav>
+            <a href="/dev" class="nav__button">Dev</a>
+            <a href="/dict" class="nav__button">Dict</a>
+            <a href="/stories" class="nav__button">Stories</a>
+        </nav>
+    </header>
+    <section id="container">
+        <div id="post-header">
+            <h2>스토리지와 입출력</h2>
+        </div>
+        <div id="post-content">
+            <p>Mass-Storage. </p>
+<p>nonvolatile한 애들은 어떻게 할까?</p>
+<p>하드디스크도 스케줄링해야된다. </p>
+<ul>
+<li>Access time을 줄이기</li>
+<li>Data transfer bandwidth 늘이기</li>
+</ul>
+<p>seek time: 헤드를 움직여 섹터를 찾아갈 때까지 걸리는 시간. </p>
+<p>FIFO 스케줄링. SCAN 스케줄링. C-SCAN. </p>
+<p>Boot Block. 전원이 인가되었을 떄 컴퓨터를 구동시키기 위한 프로그램(bootstrap)을 로딩. </p>
+<p>RAID: Redundant Arrays of Independent Disks. 데이터의 읽고 쓰기를 병렬적으로 하기 위해. 저장 매체의 신뢰도를 높이기 위해. 
+Reliability는 redunduncy로 높일 수 있다. 
+Performance는 parallelism으로 높일 수 있다. 드라이버간 데이터를 strip. 
+parity bit -&gt; checksum -&gt; CRC
+RAID level: 비용-성능 트레이드오프</p>
+<h2>I/O</h2>
+<p>컴퓨터는 I/O와 computing을 한다. 오히려 I/O가 더 중요하기도 함!</p>
+<p>운영체제는 I/O를 manage/control. 운영체제 개발할 때도 커널보다는 device driver 만드는 것을 더 함. </p>
+<p>Memory-Mapped I/O. 메모리에 명령을 줘서 control register 역할. </p>
+<p>I/O의 세가지 종류</p>
+<ul>
+<li>Polling(busy-waiting): 상태 레지스터를 계-속 읽음. </li>
+<li>interrupt: 인터럽트가 생기면 그에 해당하는 ISR(Interrupt Service Routine)으로 점프. </li>
+<li>DMA(Direct Memory Access): </li>
+</ul>
+<p>Blocking I/O vs Non-blocking I/O
+blocking은 쓰레드가 멈춰서 running에서 waiting queue로 감. 
+non-blocking은 바로 return을 한다?
+Asynchronous system call. 실행을 계속 해나간다. non-blocking read는 즉시 return을 하고 async는 요청을 하고 자기 할 일을 한다. </p>
+<h2>File System</h2>
+<p>file / directory</p>
+<p>sequential access. 옛날 테이프. 감아서 돌려야되니까. 
+direct access(random access)</p>
+<p>Directory Structure. 항목을 하위 경로에 넣을 수 없대. </p>
+<p><img alt="" src="layered_file_system.png" /></p>
+<p>logical file system부터는 라이브러리 형태로. </p>
+<p>Allocation Method. 파일 시스템에서 파일을 어떻게 locate할 것인가. </p>
+<ul>
+<li>Contiguous Allocation. External fragmentation, need for compaction. </li>
+<li>Linked Allocation. </li>
+</ul>
+<p>FAT: File Allocation Table
+Linked는 sequential할때만 괜찮다! file allocation table을 사용하자. 
+일반화시키면 Indexed Allocation. 자세한건 리눅스의 ELF file format?</p>
+<p>Free-Space Management. 안쓰는 섹터도 알아야한다. </p>
+<p>4 3 4 3 2</p>
+            <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
+                crossorigin="anonymous" async></script>
+        </div>
+    </section>
+</body>
+
+</html>

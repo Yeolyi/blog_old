@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/ui.css">
+    <title>YeolYi</title>
+    <link rel="stylesheet" href="/css/googlecode.min.css">
+    <script src="/js/highlight.min.js"></script>
+    <script>
+        hljs.highlightAll();
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4395679975264140"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <header>
+        <a href="/" id="yeolyi-logo">YeolYi</a>
+        <nav>
+            <a href="/dev" class="nav__button">Dev</a>
+            <a href="/dict" class="nav__button">Dict</a>
+            <a href="/stories" class="nav__button">Stories</a>
+        </nav>
+    </header>
+    <section id="container">
+        <div id="post-header">
+            <h2>스택</h2>
+        </div>
+        <div id="post-content">
+            <blockquote>
+<p>In computer science, a stack is an abstract data type that serves as a collection of elements, with two main principal operations:</p>
+<ul>
+<li>Push, which adds an element to the collection, and</li>
+<li>Pop, which removes the most recently added element that was not yet removed.</li>
+</ul>
+<p>-wikipedia</p>
+</blockquote>
+<p><strong>LIFO (last in, first out)</strong></p>
+<h2>ADT</h2>
+<pre><code class="language-c">void StackInit(Stack *pstack);
+
+bool SIsEmpty(Stack *pstack);
+
+void SPush(Stack *pstack, Data data);
+
+Data SPop(Stack *pstack);
+// 데이터가 하나 이상 존재함이 보장되어야 한다. 
+
+Data SPeek(Stack *pstack);
+// 데이터가 하나 이상 존재함이 보장되어야 한다. 
+</code></pre>
+<p>배열 기반이면 몰라도 연결리스트 기반 스택이면 size 변수가 굳이 필요하지 않음. </p>
+<p>exit 함수의 사용도 눈여겨보자. </p>
+<p>중위연산자 변환 문제 풀어보기,,,</p>
+<h2>연결 리스트 기반 스택 구현</h2>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;stdbool.h&gt;
+
+typedef int LData;
+
+typedef struct _Node
+{
+    struct _Node *next;
+    LData data;
+} Node;
+
+typedef struct _Stack
+{
+    Node *head;
+} Stack;
+
+void StackInit(Stack *pstack)
+{
+    pstack-&gt;head = malloc(sizeof(Node));
+    pstack-&gt;head-&gt;next = NULL;
+}
+
+bool SIsEmpty(Stack *pstack)
+{
+    return !(pstack-&gt;head-&gt;next);
+}
+
+void SPush(Stack *pstack, LData data)
+{
+    Node *node = malloc(sizeof(Node));
+    node-&gt;data = data;
+    node-&gt;next = pstack-&gt;head-&gt;next;
+    pstack-&gt;head-&gt;next = node;
+}
+
+LData SPop(Stack *pstack)
+{
+    if (!(pstack-&gt;head-&gt;next))
+    {
+        printf(&quot;Stack Memory Error&quot;);
+        exit(-1);
+    }
+    Node *toRemove = pstack-&gt;head-&gt;next;
+    pstack-&gt;head-&gt;next = pstack-&gt;head-&gt;next-&gt;next;
+    LData ret = toRemove-&gt;data;
+    free(toRemove);
+    return ret;
+}
+
+int main()
+{
+    Stack stack;
+    LData data;
+    StackInit(&amp;stack);
+    for (int i = 0; i &lt; 10; i++)
+        SPush(&amp;stack, i);
+    while (!SIsEmpty(&amp;stack))
+        printf(&quot;%d &quot;, SPop(&amp;stack));
+    return 0;
+}
+</code></pre>
+            <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
+                crossorigin="anonymous" async></script>
+        </div>
+    </section>
+</body>
+
+</html>
