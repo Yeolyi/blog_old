@@ -339,6 +339,18 @@ import java.io.*;
 public class DateServer {
     public static void main(String[] args) throws Exception {
         ServerSocket server = new ServerSocket(6013);
+
+        // 서버 안닫았다고 warning떠서 내가 추가한 구문
+        Runtime.getRuntime().addShutdownHook(new Thread() {
+            public void run() {
+                try {
+                    server.close();
+                    System.out.println(&quot;The server is shut down!&quot;);
+                } catch (IOException e) {
+                    /* failed */ }
+            }
+        });
+
         // now listen for connections
         while (true) {
             Socket client = server.accept();

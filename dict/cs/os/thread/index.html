@@ -29,18 +29,20 @@
             <h2>쓰레드</h2>
         </div>
         <div id="post-content">
-            <p>지금까지는 single thread of control인 프로세스들을 살펴봄. 하지만 multiple threads of control을 가질 수 있다. PC를 잘 바꾸면 같은 프로그램 내에서도 여러 context의 코드를 실행할 수 있다. </p>
+            <p>지금까지는 single thread of control인 프로세스들을 살펴봤지만 multiple threads of control을 가질 수도 있다. Program Counter만 잘 바꾸면 같은 프로그램 내에서도 여러 context의 코드를 실행할 수 있다. </p>
+<h2>쓰레드란?</h2>
 <p>A thread is a lightweight process(LWP). A basic unit of CPU utilization. </p>
+<p><strong>쓰레드의 구성요소</strong></p>
 <ul>
 <li>thread ID</li>
 <li>program counter</li>
 <li>register set</li>
 <li>stack</li>
 </ul>
-<p>으로 구성된다. </p>
 <p><img alt="" src="multithreaded.png" /></p>
 <h2>Multithreading의 장점</h2>
-<p>client-server 시스템에서 여러 request를 함께 처리할 수 있다. </p>
+<p>client-server 시스템을 예로 들자면, 줄을 세우는 기존 방법과 달리 client마다 쓰레드를 생성해 여러 request들을 함께 처리할 수 있다. </p>
+<p><strong>멀티쓰레드 프로그래밍의 장점</strong> </p>
 <ul>
 <li>Responsiveness: may allow continued execution</li>
 <li>Resource Sharing: threads share resources of process(code와 data 영역을 공유함)</li>
@@ -49,9 +51,15 @@
 </ul>
 <p>자바에서 쓰레드는 프로그램 실행의 기본적인 모델이다. 쓰레드 생성과 관리를 위한 많은 기능들이 있음. </p>
 <h2>자바에서의 쓰레드 사용</h2>
-<p>Inheritance from the Thread class
-- 다른 클래스 상속이 안되는 문제. 다른 방법 쓰기</p>
-<pre><code>public class MyThread1 extends Thread {
+<p>자바에는 명시적인 쓰레드 생성을 위한 세가지 테크닉이 있다. </p>
+<p><strong>Inheritance from the Thread class</strong></p>
+<ul>
+<li>다른 클래스 상속이 안되는 문제가 있어 다른 방법을 권유.</li>
+<li>Thread 클래스에서 derive된 클래스를 만들고 run 메소드를 오버라이드한다. </li>
+</ul>
+<pre><code>package dict.cs.os.thread;
+
+public class MyThread1 extends Thread {
     public void run() {
         try {
             while (true) {
@@ -59,22 +67,31 @@
                 Thread.sleep(500);
             }
         } catch (InterruptedException ie) {
-            System.out.println(&quot;I'm interuppted&quot;);
+            System.out.println(&quot;I'm interrupted&quot;);
         }
     }
 }
 
-public class testcode {
+</code></pre>
+<pre><code>package dict.cs.os.thread;
+
+public class MyThread1TestCode {
     public static final void main(String[] args) {
         MyThread1 thread = new MyThread1();
         thread.start();
-        System.out.print(&quot;Hello, My Child!&quot;);
+        System.out.println(&quot;Hello, My Child!&quot;);
     }
 }
+
 </code></pre>
-<p>Implementing the Runnable interface
-- 제일 많이 씀. </p>
-<pre><code>public class MyThread2 implements Runnable {
+<p><strong>Implementing the Runnable interface</strong></p>
+<ul>
+<li>제일 많이 쓴다. </li>
+<li>Runnable 인터페이스를 충족시키는 새로운 클래스를 정의하고 마찬가지로 run 메소드를 오버라이드한다. </li>
+</ul>
+<pre><code>package dict.cs.os.thread;
+
+public class MyThread2 implements Runnable {
     public void run() {
         try {
             while (true) {
@@ -87,18 +104,26 @@ public class testcode {
     }
 }
 
-public class testcode {
+</code></pre>
+<pre><code>package dict.cs.os.thread;
+
+public class MyThread2TestCode {
     public static final void main(String[] args) {
         Thread thread = new Thread(new MyThread2());
         thread.start();
-        System.out.print(&quot;Hello, My Runnable Child!&quot;);
+        System.out.println(&quot;Hello, My Runnable Child!&quot;);
     }
 }
+
 </code></pre>
-<p>Using the Lambda expressing(1.8~)
-- 새로운 클래스도 귀찮고, 람다로 구현</p>
-<pre><code>public class testcode {
-    public static final void main(String[] args) {
+<p><strong>Using the Lambda expressing</strong>(Java 1.8~)</p>
+<ul>
+<li>새로운 클래스도 귀찮고, 람다 표현식으로 구현하자!</li>
+</ul>
+<pre><code>package dict.cs.os.thread;
+
+public class MyThread3TestCode {
+    public static void main(String[] args) {
         Runnable task = () -&gt; {
             try {
                 while (true) {
@@ -114,9 +139,12 @@ public class testcode {
         System.out.println(&quot;Hello, My Lambda Child!&quot;);
     }
 }
+
 </code></pre>
-<p>부모 쓰레드의 대기: Join</p>
-<pre><code>public class testcode {
+<p>부모 쓰레드의 대기는 자바에서 wait가 아닌 join을 사용한다.</p>
+<pre><code>package dict.cs.os.thread;
+
+public class JoinExample {
     public static final void main(String[] args) {
         Runnable task = () -&gt; {
             for (int i = 0; i &lt; 5; i++) {
@@ -133,9 +161,12 @@ public class testcode {
         System.out.println(&quot;Hello, My Joined Child!&quot;);
     }
 }
+
 </code></pre>
-<p>쓰레드의 종료: interrupt</p>
-<pre><code>public class testcode {
+<p>쓰레드의 종료는 interrupt를 사용한다.</p>
+<pre><code>package dict.cs.os.thread;
+
+public class InterruptExample {
     public static final void main(String[] args) throws InterruptedException {
         Runnable task = () -&gt; {
             try {
@@ -149,45 +180,80 @@ public class testcode {
         };
         Thread thread = new Thread(task);
         thread.start();
-        Thread.sleep(500);
+        Thread.sleep(500); // 이거 주석처리하면 부모 다음 자식 실행됨!!
         thread.interrupt();
         System.out.println(&quot;Hello, My Interrupted Child!&quot;);
     }
 }
+
 </code></pre>
 <p>프로그램은 짤 줄은 몰라도 6, 7장 동기화 부분에서 자바로 설명하니까 코드는 얼추 알아두기~</p>
 <h2>멀티코어 시스템에서의 멀티쓰레딩</h2>
-<p>More efficient use of multiple cores for improved concurrency</p>
-<p>싱글코어에서는 사이사이 interleaved되겠지만, 멀티코어에서는 몇몇 쓰레드들은 parallel하게 작동할 수 있다. </p>
-<p>Programming Challenge</p>
+<p>향상된 동시성을 위해 멀티쓰레딩으로 멀티코어를 더 효과적으로 사용할 수 있다. 싱글코어에서는 사이사이 interleaved되겠지만, 멀티코어에서는 몇몇 쓰레드들은 parallel하게 작동할 수 있다. 4개의 쓰레드로 구성된 어플리케이션을 생각해보면 싱글코어에서는 쓰레드가 시간에 따라 나뉘어 실행되겠지만 멀티코어에서는 parallel하게 실행될 수 있다. </p>
+<p>Interleave를 사전에 찾아봤는데 다음과 같다. </p>
+<blockquote>
+<p>인터리브: 기억 장치를 여러 부분으로 나누고, 그 동작 주기를 조금씩 늦추어서 등가적으로 고속화하는 일.</p>
+</blockquote>
+<p><strong>멀티코어 시스템에서의 프로그래밍 관문들</strong></p>
 <ul>
 <li>Identifying tasks: 여러 문제로 나눌 수 있는 부분이 어디인가?</li>
-<li>Balance: 각 task가 같은 양의 일을 할 수 있도록</li>
-<li>Data splitting</li>
-<li>Data dependency</li>
-<li>Testing and debugging</li>
+<li>Balance: 각 task가 같은 양의 일을 할 수 있도록 해야한다.</li>
+<li>Data splitting: 데이터 또한 각 코어에 나뉘어야한다. </li>
+<li>Data dependency: ensure that the execution of tasks is synchronized to accommodate the data dependency.</li>
+<li>Testing and debugging: 단일 쓰레드보다 어렵다. </li>
+</ul>
+<p>병렬(parallelism)은 Data parallelism과 task parallelism으로 나뉜다. <a href="https://www.tutorialspoint.com/data-parallelism-vs-task-parallelism">출처</a></p>
+<ul>
+<li>Data Parallelism means concurrent execution of the same task on each multiple computing core.</li>
+<li>Task Parallelism means concurrent execution of the different task on multiple computing cores.</li>
 </ul>
 <h2>암달의 법칙</h2>
+<blockquote>
+<p>암달의 법칙(Amdahl's law)은 컴퓨터 시스템의 일부를 개선할 때 전체적으로 얼마만큼의 최대 성능 향상이 있는지 계산하는 데 사용된다.</p>
+</blockquote>
+<p>문제는 풀 수 있는데 식으로 보면 헷갈린다 ^^,,, 지금 멀티코어 프로그래밍에 대해 살펴보고있으니 S를 시스템에서 serial하게 실행되야되는 부분의 비율, N을 코어의 개수라고 해보자. </p>
+<p>싱글코어에서의 실행 시간을 1이라고 하면 이중 S만큼은 serial하게 실행되어야하고 (1-S)만큼은 병렬적으로 실행할 수 있다. 따라서 (1-S)는 멀티코어시스템에서 (1-S)/N 으로 줄어들고 멀티코어에서의 전체 시간은 S + (1-S) / N이 된다. 여기서 다음 식이 도출된다.  </p>
+<p><img alt="" src="amdahl_wiki.png" /></p>
+<p>위키피디아 출처인데, 여기서는 변수들이 보다 일반적이다. </p>
 <p><img alt="" src="amdahl.png" /></p>
-<hr />
+<p>병렬처리가 가능한 부분이 적을수록 성능 향상폭이 확연히 감소한다. </p>
 <h2>멀티쓰레딩 모델</h2>
-<p>user thread / kernel thread</p>
-<p>이 둘의 관계</p>
+<p><img alt="" src="threads.jpeg" /></p>
+<p><strong>두 종류의 쓰레드</strong></p>
+<p>User threads may be executed by kernel threads in various ways (one-to-one, many-to-one, many-to-many). </p>
+<p><a href="https://www.geeksforgeeks.org/why-must-user-threads-be-mapped-to-a-kernel-thread/">Why must user threads be mapped to a kernel thread</a></p>
+<p><a href="https://stackoverflow.com/questions/57160637/difference-between-kernel-kernel-thread-and-user-thread">Difference between Kernel, Kernel-Thread and User-Thread</a></p>
 <ul>
-<li>Many-to-One Model. 가장 기본적. 유저 쓰레드가 많아지면 감당 못함. </li>
-<li>One_to_One Model. </li>
+<li>user thread <ul>
+<li>supported above the kernel, and are manaaged without kernel support. </li>
+<li>User threads are the threads created by the user with help from a user library and are visible just to the creating process and it’s run time environment (the kernel has no idea about the creation of these threads). User threads just stay in the address space of the creating process and are run and managed by the creating process without kernel intervention i.e., any problems with the execution of these threads are not kernel’s headache.</li>
+<li>커널이 서포트하는데 서포트 없이 관리된다고?? 뭔소린가 싶어서 찾아봤다. <a href="https://gamedevlog.tistory.com/76">참고</a>, <a href="https://stackoverflow.com/questions/14791278/threads-why-must-all-user-threads-be-mapped-to-a-kernel-thread">참고</a></li>
+<li>커널은 사용자 스레드의 존재를 인식하지 못한다. </li>
+<li>사용자 스레드가 커널 스레드를 이용하려면 시스템 호출로 커널 기능을 이용해야 한다.</li>
+<li>사용자 영역에서 생성 및 관리되므로 속도가 빠르지만 커널이 스레드가 하나라고 인식하기 때문에 하나의 스레드가 중단되면 다른 모든 것들도 중단된다. </li>
+</ul>
+</li>
+<li>kernel thread  <ul>
+<li>Kernel threads on the other hand are created by the kernel and are visible to it. A user process with the help of a provided library asks kernel to create an executable thread for that process and the kernel in turn creates the thread on behalf of the process, and puts it onto it’s list of the available executable threads present. Here the creation, execution and management of the thread is taken care of by the kernel.</li>
+<li>커널이 직접 생성하고 관리하는 스레드</li>
+</ul>
+</li>
+</ul>
+<p>메모: IPC에서는 동기화 문제가 없나?</p>
+<p><strong>유저 쓰레드와 커널 쓰레드의 관계</strong></p>
+<p>Kernel thread is the entity that CPU scheduler considers for assignment hence user threads must be mapped to corresponding kernel threads (if you want CPU to execute them).</p>
+<ul>
+<li>Many-to-One Model(user-level threading). 왼쪽이 유저, 오른쪽이 커널. 가장 기본적. 유저 쓰레드가 많아지면 감당 못함. </li>
+<li>One_to_One Model(kernel-level threading). Linux the GNU C Library implements this approach (via the NPTL or older LinuxThreads). This approach is also used by Solaris, NetBSD, FreeBSD, macOS, and iOS. </li>
 <li>Many-to-Many Model</li>
 </ul>
-<p>쓰레드 라이브러리는 쓰레드를 만들고 관리하는 API이다. </p>
-<blockquote>
-<p>An application programming interface (API) is a connection between computers or between computer programs. It is a type of software interface, offering a service to other pieces of software.</p>
-<p>The interface to a software library is one type of API. The API describes and prescribes the "expected behavior" (a specification) while the library is an "actual implementation" of this set of rules.</p>
-<p>In computing, an interface is a shared boundary across which two or more separate components of a computer system exchange information.</p>
-</blockquote>
-<p>POSIX Pthreads, Windows thread, Java thread(얘네는 운영체제꺼 끌어다? 씀)</p>
+<p><strong>쓰레드 라이브러리</strong>는 쓰레드를 만들고 관리하는 API이다. POSIX Pthreads, Windows thread, Java thread(얘네는 운영체제꺼 끌어다? 씀)등등이 있다. </p>
+<p><a href="https://stackoverflow.com/questions/8639150/is-pthread-library-actually-a-user-thread-solution">Is Pthread library actually a user thread solution?</a></p>
 <pre><code>#include &lt;stdio.h&gt;
 #include &lt;stdlib.h&gt;
 #include &lt;pthread.h&gt;
+
+// 컴파일때? -pthread 옵션 안줘도 작동하긴 함
 
 // data shared by the threads
 int sum;
@@ -215,8 +281,41 @@ void *runner(void *param)
     pthread_exit(0);
 }
 </code></pre>
-<p><em>-pthread 옵션 안줘도 작동하긴 함</em></p>
-<p>main thread는 기본으로 있는듯!</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;unistd.h&gt;
+
+void *runner(void *param);
+
+int main(int argc, char *argv[])
+{
+    pid_t pid;
+    pthread_t tid;
+    pthread_attr_t attr;
+
+    pid = fork();
+    if (pid == 0)
+    {
+        fork();
+        pthread_attr_init(&amp;attr);
+        pthread_create(&amp;tid, &amp;attr, runner, NULL);
+        pthread_join(tid, NULL);
+    }
+    fork();
+    if (pid &gt; 0)
+        wait(NULL);
+    printf(&quot;Process Ended\n&quot;);
+    return 0;
+}
+
+void *runner(void *param)
+{
+    printf(&quot;I am thread\n&quot;);
+    pthread_exit(0);
+}
+</code></pre>
+<p>프로세스와 쓰레드 몇 개씩 생성될까~?</p>
 <h2>The Strategy of Implicit Threading</h2>
 <p>알아서 쓰레딩 해줘~</p>
 <p>The design of concurrent and parallel applications</p>
