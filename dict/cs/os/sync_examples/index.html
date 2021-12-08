@@ -370,7 +370,140 @@ public class SharedDB {
 <p><strong>데드락 해결법</strong></p>
 <ul>
 <li>Allow at most four philosophers to be sitting simultaneously at the table?</li>
-<li>양쪽이 모두 가능할 때만 집게 하기.</li>
+<li>양쪽이 모두 가능할 때만 집게 하기. </li>
+<li>비대칭적인 해결책<ul>
+<li>홀수는 왼쪽 먼저 집고, 짝수는 오른쪽을 먼저 집기. </li>
+<li>둘 중 하나는 무조건 밥을 먹을 수 있음. </li>
+</ul>
+</li>
+</ul>
+<p>하지만 이 방법들은 기아까지 해결해주지는 못한다. 사실 데드락을 방지하는 비용은 어마어마해서 발생하면 해결하는 느낌으로 가는 중. </p>
+<p><strong>Moniter Solution</strong></p>
+<p>양쪽 젓가락이 가능할 때만 집자. 철학자들의 상태를 thinking, hungry, eating으로 나눠보자. 철학자들은 양쪽 이웃이 eating하지 않을때만 스스로의 상태를 eating으로 바꿀 수 있다. Conditional variable은 hungry할 때 대기하는 도구로 사용하자. </p>
+<blockquote>
+<p>A <strong>conditional variable</strong> in operating system programming is a special kind of variable that is used to determine if a certain condition has been met or not. It is used to communicate between threads when certain conditions become true.</p>
+<p>A conditional variable is like a queue. A thread stops its execution and enters the queue if the specified condition is not met. Once another thread makes that condition true, it sends a signal to the leading thread in the queue to continue its execution.</p>
+</blockquote>
+<p>Atomic 변수와의 차이점. </p>
+<blockquote>
+<p>The difference is that a condition variable doesn't consume CPU cycles while another thread is waiting for it. If you use an atomic variable for synchronization you have to keep checking its value in a loop.</p>
+</blockquote>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;unistd.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;stdbool.h&gt;
+
+#define NUM_PHILS 5
+
+enum
+{
+    THINKING,
+    HUNGRY,
+    EATING
+} state[NUM_PHILS];
+
+pthread_mutex_t mutex_lock;
+pthread_cond_t cond_vars[NUM_PHILS]; // 조건변수에 대한 접근은 항상 동기화된다
+
+void init()
+{
+    for (int i = 0; i &lt; NUM_PHILS; i++)
+    {
+        state[i] = THINKING;
+        pthread_cond_init(&amp;cond_vars[i], NULL);
+    }
+    pthread_mutex_init(&amp;mutex_lock, NULL);
+    srand(time(0));
+}
+
+int leftOf(int i)
+{
+    return (i + NUM_PHILS - 1) % NUM_PHILS;
+}
+
+int rightOf(int i)
+{
+    return (i + 1) % NUM_PHILS;
+}
+
+void think(int id)
+{
+    printf(&quot;%d: THINKING\n&quot;, id);
+    usleep((1 + rand() % 50) * 10000);
+}
+
+void eat(int id)
+{
+    printf(&quot;%d: EATING\n&quot;, id);
+    usleep((1 + rand() % 50) * 10000);
+}
+
+void test(int i)
+{
+    if (state[i] == HUNGRY &amp;&amp; state[leftOf(i)] != EATING &amp;&amp; state[rightOf(i)] != EATING)
+    {
+        state[i] = EATING;
+        pthread_cond_signal(&amp;cond_vars[i]);
+    }
+}
+
+void pickup(int i)
+{
+    pthread_mutex_lock(&amp;mutex_lock);
+    // critical section
+    state[i] = HUNGRY;
+    test(i);
+    while (state[i] != EATING)
+        pthread_cond_wait(&amp;cond_vars[i], &amp;mutex_lock);
+    pthread_mutex_unlock(&amp;mutex_lock);
+}
+
+void putdown(int i)
+{
+    pthread_mutex_lock(&amp;mutex_lock);
+
+    state[i] = THINKING;
+    test(leftOf(i));
+    test(rightOf(i));
+
+    pthread_mutex_unlock(&amp;mutex_lock);
+}
+
+void *philosopher(void *param)
+{
+    int id = *((int *)param);
+    printf(&quot;%d: CREATED\n&quot;, id);
+    for (int i = 0; i &lt; 3; i++)
+    {
+        think(id);
+        pickup(id);
+        eat(id);
+        putdown(id);
+    }
+    pthread_exit(0);
+}
+
+int main()
+{
+    int ids[] = {0, 1, 2, 3, 4};
+    pthread_t tid[NUM_PHILS];
+    init();
+    for (int i = 0; i &lt; NUM_PHILS; i++)
+        pthread_create(&amp;tid[i], NULL, philosopher, (void *)&amp;ids[i]);
+    for (int i = 0; i &lt; NUM_PHILS; i++)
+        pthread_join(tid[i], NULL);
+    return 0;
+}
+</code></pre>
+<p>pthread_create가 비동기적으로 되나?? id값을 따로 안빼주면 중복되고 난리도 아니네 ㅠ</p>
+<h2>Thread-Safe한 동시성 어플리케이션</h2>
+<p>동시성 어플리케이션은 멀티코어 시스템에서 좋은 성능을 보이지만 race condition이나 데드락과 같은 liveness hazard의 위험성이 있다. </p>
+<p>Thread-safe한 개발을 위해 다양한 접근법이 있다. </p>
+<ul>
+<li>Transational Memory: Transactional memory attempts to simplify concurrent programming by allowing a group of load and store instructions to execute in an atomic way.</li>
+<li>OpenMP: 앞에서 써봄. </li>
+<li>Functional Programming Language</li>
 </ul>
             <script src="https://utteranc.es/client.js" repo="yeolyi/blog" issue-term="pathname" theme="github-light"
                 crossorigin="anonymous" async></script>
